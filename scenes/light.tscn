@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1s40kc1n7wlc"]
+
+[ext_resource type="Script" uid="uid://dv38n10ps4xp5" path="res://scripts/light.gd" id="1_24oxn"]
+
+[sub_resource type="Gradient" id="Gradient_cur4t"]
+offsets = PackedFloat32Array(0, 0.747573)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_24oxn"]
+gradient = SubResource("Gradient_cur4t")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Light" type="PointLight2D"]
+position = Vector2(127, 127)
+scale = Vector2(3.92188, 3.92188)
+texture = SubResource("GradientTexture2D_24oxn")
+script = ExtResource("1_24oxn")

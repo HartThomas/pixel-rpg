@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c044v515k678n"]
+
+[ext_resource type="Script" uid="uid://dsth2afje2gfl" path="res://scripts/adventure.gd" id="1_ndsq8"]
+[ext_resource type="PackedScene" uid="uid://b3rccb8jjuwwm" path="res://scenes/background.tscn" id="2_8junk"]
+
+[node name="Adventure" type="Node2D"]
+script = ExtResource("1_ndsq8")
+
+[node name="Background" parent="." instance=ExtResource("2_8junk")]

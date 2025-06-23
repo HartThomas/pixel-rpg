@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://thb6lpyjliri"]
+
+[ext_resource type="Script" uid="uid://ccfma1bg2adpx" path="res://scripts/grid.gd" id="1_sle3t"]
+[ext_resource type="Script" uid="uid://bqdv2577h0krk" path="res://scripts/rock.gd" id="3_05i0m"]
+[ext_resource type="Texture2D" uid="uid://b1qspqqcsvfyy" path="res://art/sprites/signpost.png" id="3_g2qvd"]
+[ext_resource type="PackedScene" uid="uid://bp0egslx25lyq" path="res://scenes/sprite.tscn" id="6_05i0m"]
+[ext_resource type="Shader" uid="uid://domgyyb6o7cq2" path="res://shaders/shade.gdshader" id="6_g2qvd"]
+[ext_resource type="Texture2D" uid="uid://dli3koxprs00w" path="res://art/sprites/signpost_shadow.png" id="6_r8ukp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_05i0m"]
+shader = ExtResource("6_g2qvd")
+shader_parameter/color = Color(0, 0, 0, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_bghhw"]
+offsets = PackedFloat32Array(0.0974026, 0.654412)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fqc2p"]
+gradient = SubResource("Gradient_bghhw")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_sle3t")
+sprite = ExtResource("6_05i0m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.374139, 0.374139, 0.374139, 1)
+
+[node name="Rock" type="Sprite2D" parent="."]
+position = Vector2(526, 97)
+texture = ExtResource("3_g2qvd")
+script = ExtResource("3_05i0m")
+
+[node name="Shadow" type="Sprite2D" parent="Rock"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_05i0m")
+position = Vector2(0, 11)
+texture = ExtResource("6_r8ukp")
+offset = Vector2(0, -11)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(314.5, 269.5)
+scale = Vector2(5.85938, 5.85938)
+texture = SubResource("GradientTexture2D_fqc2p")
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(208, 94)
+scale = Vector2(5.85938, 5.85938)
+texture = SubResource("GradientTexture2D_fqc2p")

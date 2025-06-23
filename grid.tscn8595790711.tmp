@@ -1,0 +1,60 @@
+[gd_scene load_steps=12 format=3 uid="uid://thb6lpyjliri"]
+
+[ext_resource type="Script" uid="uid://ccfma1bg2adpx" path="res://grid.gd" id="1_sle3t"]
+[ext_resource type="Script" uid="uid://bqdv2577h0krk" path="res://rock.gd" id="3_05i0m"]
+[ext_resource type="Texture2D" uid="uid://dx8sv2pgex5uj" path="res://art/sprites/tree.png" id="5_05i0m"]
+[ext_resource type="Texture2D" uid="uid://cmvygcublooeo" path="res://art/sprites/rock.png" id="5_g2qvd"]
+[ext_resource type="Shader" uid="uid://domgyyb6o7cq2" path="res://shade.gdshader" id="6_g2qvd"]
+[ext_resource type="Texture2D" uid="uid://8y5hc68p4ghw" path="res://art/sprites/tree_shadow.png" id="6_r8ukp"]
+[ext_resource type="Texture2D" uid="uid://b0upbd800eoqt" path="res://art/sprites/rock_shadow.png" id="7_05i0m"]
+[ext_resource type="Script" uid="uid://tt24qnd5u05f" path="res://tree.gd" id="7_r8ukp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_05i0m"]
+shader = ExtResource("6_g2qvd")
+shader_parameter/color = Color(0, 0, 0, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_bghhw"]
+offsets = PackedFloat32Array(0.0974026, 0.753247)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fqc2p"]
+gradient = SubResource("Gradient_bghhw")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Grid" type="Node2D"]
+script = ExtResource("1_sle3t")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.374139, 0.374139, 0.374139, 1)
+
+[node name="Rock" type="Sprite2D" parent="."]
+position = Vector2(526, 97)
+texture = ExtResource("5_g2qvd")
+script = ExtResource("3_05i0m")
+
+[node name="Shadow" type="Sprite2D" parent="Rock"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_05i0m")
+position = Vector2(0, 21)
+texture = ExtResource("7_05i0m")
+offset = Vector2(0, -21)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(380, 105)
+texture = ExtResource("5_05i0m")
+script = ExtResource("7_r8ukp")
+
+[node name="Shadow" type="Sprite2D" parent="Sprite"]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_05i0m")
+position = Vector2(0, 21)
+texture = ExtResource("6_r8ukp")
+offset = Vector2(0, -21)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(314.5, 269.5)
+scale = Vector2(5.85938, 5.85938)
+texture = SubResource("GradientTexture2D_fqc2p")
