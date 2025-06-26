@@ -31,22 +31,17 @@ func _ready():
 	_generate_level_from_data()
 
 func _generate_level_from_data():
-	#$SceneryLayer.clear_children()
-
 	for y in level_data.size():
 		for x in level_data[y].size():
 			var id = level_data[y][x]
 			if id <= 0 or not tile_defs.has(id) or id == 4:
 				continue
-
 			var tile_data = tile_defs[id]
 			var instance = GENERIC_SCENERY_SCENE.instantiate()
-
 			instance.position = Vector2(x, y) * CELL_SIZE
 			instance.sprite_name = tile_data["type"] 
 			for i in lights.size():
 				instance.point_lights.append(lights[i])
-
 			add_child(instance)
 
 func can_place_tile(id: int, x: int, y: int, occupied: Array) -> bool:
@@ -89,7 +84,7 @@ func generate_level_data():
 				row.append(id)
 				mark_occupied(id, x, y, occupied)
 			else:
-				row.append(0)  # fallback to empty
+				row.append(0)  
 		level_data.append(row)
 
 func _pick_random_tile_id() -> int:

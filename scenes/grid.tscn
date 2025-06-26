@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://ccfma1bg2adpx" path="res://scripts/grid.gd" id="1_sle3t"]
 [ext_resource type="Script" uid="uid://bqdv2577h0krk" path="res://scripts/rock.gd" id="3_05i0m"]
-[ext_resource type="Texture2D" uid="uid://b1qspqqcsvfyy" path="res://art/sprites/signpost.png" id="3_g2qvd"]
+[ext_resource type="Texture2D" uid="uid://b4yefqpc1dceo" path="res://art/sprites/player.png" id="3_726jt"]
 [ext_resource type="PackedScene" uid="uid://bp0egslx25lyq" path="res://scenes/sprite.tscn" id="6_05i0m"]
+[ext_resource type="Texture2D" uid="uid://cbqj0c2ll6j3c" path="res://art/sprites/player_shadow.png" id="6_d4ula"]
 [ext_resource type="Shader" uid="uid://domgyyb6o7cq2" path="res://shaders/shade.gdshader" id="6_g2qvd"]
-[ext_resource type="Texture2D" uid="uid://dli3koxprs00w" path="res://art/sprites/signpost_shadow.png" id="6_r8ukp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_05i0m"]
 shader = ExtResource("6_g2qvd")
@@ -31,14 +31,14 @@ color = Color(0.374139, 0.374139, 0.374139, 1)
 
 [node name="Rock" type="Sprite2D" parent="."]
 position = Vector2(526, 97)
-texture = ExtResource("3_g2qvd")
+texture = ExtResource("3_726jt")
 script = ExtResource("3_05i0m")
 
 [node name="Shadow" type="Sprite2D" parent="Rock"]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_05i0m")
 position = Vector2(0, 11)
-texture = ExtResource("6_r8ukp")
+texture = ExtResource("6_d4ula")
 offset = Vector2(0, -11)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
