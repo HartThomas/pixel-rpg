@@ -18,9 +18,9 @@ func _process(delta: float) -> void:
 	position = light_position
 
 
-@export_range(0.5, 2.0, 0.01) var min_energy := 0.8
-@export_range(0.5, 2.0, 0.01) var max_energy := 1.2
-@export var flicker_speed := 0.05  # how fast it updates (in seconds)
+@export_range(0.5, 2.0, 0.01) var min_energy = 0.8
+@export_range(0.5, 2.0, 0.01) var max_energy = 1.2
+@export var flicker_speed = 0.05 
 
 func _ready():
 	flicker()

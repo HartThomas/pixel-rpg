@@ -1,0 +1,78 @@
+[gd_scene load_steps=13 format=3 uid="uid://c2asl6nrtmy6c"]
+
+[ext_resource type="Texture2D" uid="uid://ba53lf43w3b7o" path="res://art/sprites/player_positions.png" id="1_dp4fn"]
+[ext_resource type="Script" uid="uid://c8venspi5fnav" path="res://scripts/animatable_sprite.gd" id="2_dp4fn"]
+[ext_resource type="Shader" uid="uid://domgyyb6o7cq2" path="res://shaders/shade.gdshader" id="3_ubu22"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlo60"]
+atlas = ExtResource("1_dp4fn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss7m4"]
+atlas = ExtResource("1_dp4fn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubu22"]
+atlas = ExtResource("1_dp4fn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ggr4v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlo60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss7m4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubu22")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_05i0m"]
+shader = ExtResource("3_ubu22")
+shader_parameter/color = Color(0, 0, 0, 0.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtkho"]
+atlas = ExtResource("1_dp4fn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwkjw"]
+atlas = ExtResource("1_dp4fn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi51b"]
+atlas = ExtResource("1_dp4fn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8wbye"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtkho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwkjw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pi51b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatableSprite" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ggr4v")
+script = ExtResource("2_dp4fn")
+
+[node name="Shadow" type="AnimatedSprite2D" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_05i0m")
+position = Vector2(0, 21)
+sprite_frames = SubResource("SpriteFrames_8wbye")
+offset = Vector2(0, -21)
