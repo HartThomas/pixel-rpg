@@ -5,7 +5,7 @@ extends Sprite2D
 var sprite_name: String
 var shadow_instances : Array[Sprite2D] = []
 
-var shadow_offset_dictionary : Dictionary = {tree= Vector2(0.0,-21.0), bush= Vector2(0.0, -1.0), rock=Vector2(0.0,-21.0), small_bush=Vector2(0.0,-11.0), signpost=Vector2(0.0,-11.0)}
+var shadow_offset_dictionary : Dictionary = {tree= Vector2(0.0,-21.0), bush= Vector2(0.0, -1.0), rock=Vector2(0.0,-21.0), small_bush=Vector2(0.0,-11.0), signpost=Vector2(0.0,-11.0), ruin=Vector2(0.0,-9.0)}
 
 func _process(delta: float) -> void:
 	for i in point_lights.size():
