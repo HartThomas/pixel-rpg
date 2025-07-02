@@ -3,6 +3,7 @@ extends Node2D
 @export var player_scene : PackedScene
 @onready var background: Node2D = $Background
 @onready var camera_2d: Camera2D = $Camera2D
+@onready var highlight_cell: Sprite2D = $HighlightCell
 
 const generic_scenery_scene = preload("res://scenes/sprite.tscn")
 var light_source = preload("res://scenes/light.tscn")
@@ -40,7 +41,7 @@ func _ready():
 	background.width = width
 	background.height = height
 	background.resize()
-	background.map_clicked.connect(move_player)
+	background.map_clicked.connect(cell_clicked)
 	create_player()
 
 func _generate_level_from_data():
@@ -146,7 +147,7 @@ func get_straight_line_path(start: Vector2i, end: Vector2i) -> Array[Vector2i]:
 	while true:
 		var current = Vector2i(x0, y0)
 		if current != start:
-			print({current= current,start=start},tile_defs[level_data[current.y][current.x]].type)
+			#print({current= current,start=start},tile_defs[level_data[current.y][current.x]].type)
 			if can_player_move_here(current):
 				line.append(current)
 			else:
@@ -170,10 +171,15 @@ var move_speed := 5.0  # tiles per second
 var move_timer := 0.0
 var move_delay := 1.0 / move_speed
 
+func cell_clicked(target: Vector2i):
+	if Input.is_action_pressed('shift'):
+		pass
+	else:
+		move_player(target)
+
 func move_player(target: Vector2i):
 	var current_grid = (player_node.position / cell_size).floor()
 	path = get_straight_line_path(current_grid, target)
-	print(path)
 	queue_redraw()
 
 func _draw():
@@ -182,9 +188,33 @@ func _draw():
 		draw_rect(rect, Color(0, 1, 0, 0.3))
 	var player_tile = (player_node.position / cell_size).floor()
 	var rect = Rect2(player_tile * cell_size, Vector2(cell_size, cell_size))
-	draw_rect(rect, Color(1, 0, 0, 0.3))  # Red for player tile
+	draw_rect(rect, Color(1, 0, 0, 0.3))
+
+var coords_array = [
+	Vector2(1,0),Vector2(1,1),Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1),Vector2(0,-1),Vector2(1,-1),
+]
+
+func highlight_best_cell():
+	var player_world_position = player_node.position
+	var mouse_world_position = get_viewport().get_mouse_position()
+	var player_to_mouse_angle = (mouse_world_position - player_world_position).angle()
+	var best_offset = Vector2.ZERO
+	var smallest_angle_diff = INF
+	for offset in coords_array:
+		var offset_angle = offset.angle()
+		var angle_diff = abs(wrapf(player_to_mouse_angle - offset_angle, -PI, PI))
+		if angle_diff < smallest_angle_diff:
+			smallest_angle_diff = angle_diff
+			best_offset = offset
+	var target_cell = player_world_position + (best_offset * 32)
+	highlight_cell.global_position = target_cell 
+	highlight_cell.visible = true
 
 func _process(delta):
+	if Input.is_action_pressed("shift"):
+		highlight_best_cell()
+	else:
+		highlight_cell.visible = false
 	if path.size() > 0:
 		move_timer += delta
 		if move_timer >= move_delay:
