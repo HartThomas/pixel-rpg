@@ -5,6 +5,9 @@ extends Node2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var highlight_cell: Sprite2D = $HighlightCell
 
+var weapon = 'hammer'
+@onready var weapon_scene :PackedScene = preload("res://scenes/hammer.tscn")
+
 const generic_scenery_scene = preload("res://scenes/sprite.tscn")
 var light_source = preload("res://scenes/light.tscn")
 
@@ -167,15 +170,30 @@ func get_straight_line_path(start: Vector2i, end: Vector2i) -> Array[Vector2i]:
 	return line
 
 var path: Array[Vector2i] = []
-var move_speed := 5.0  # tiles per second
-var move_timer := 0.0
-var move_delay := 1.0 / move_speed
+var move_speed = 5.0 
+var move_timer = 0.0
+var move_delay = 1.0 / move_speed
 
 func cell_clicked(target: Vector2i):
 	if Input.is_action_pressed('shift'):
-		pass
+		var attack_instance = weapon_scene.instantiate()
+		var target_cell = find_first_cell_toward_mouse_click()
+		attack_instance.player_cell = player_node.position/32
+		attack_instance.target_cell = target_cell / 32
+		var affected_cells = attack_instance.execute()
+		for cell in affected_cells:
+			var new_animated_sprite = player_scene.instantiate()
+			new_animated_sprite.sprite_name = weapon
+			new_animated_sprite.position =( cell * 32) + Vector2i(16.0,16.0)
+			for i in lights:
+				new_animated_sprite.point_lights.append(i)
+			add_child(new_animated_sprite)
+		call(weapon)
 	else:
 		move_player(target)
+
+func hammer(text = 'test'):
+	print(text)
 
 func move_player(target: Vector2i):
 	var current_grid = (player_node.position / cell_size).floor()
@@ -191,10 +209,15 @@ func _draw():
 	draw_rect(rect, Color(1, 0, 0, 0.3))
 
 var coords_array = [
-	Vector2(1,0),Vector2(1,1),Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1),Vector2(0,-1),Vector2(1,-1),
+	Vector2(1,0),Vector2(1,1),Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1),Vector2(0,-1),Vector2(1,-1)
 ]
 
 func highlight_best_cell():
+	var target_cell = find_first_cell_toward_mouse_click()
+	highlight_cell.global_position = target_cell 
+	highlight_cell.visible = true
+
+func find_first_cell_toward_mouse_click():
 	var player_world_position = player_node.position
 	var mouse_world_position = get_viewport().get_mouse_position()
 	var player_to_mouse_angle = (mouse_world_position - player_world_position).angle()
@@ -206,9 +229,7 @@ func highlight_best_cell():
 		if angle_diff < smallest_angle_diff:
 			smallest_angle_diff = angle_diff
 			best_offset = offset
-	var target_cell = player_world_position + (best_offset * 32)
-	highlight_cell.global_position = target_cell 
-	highlight_cell.visible = true
+	return player_world_position + (best_offset * 32)
 
 func _process(delta):
 	if Input.is_action_pressed("shift"):

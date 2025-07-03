@@ -3,17 +3,18 @@ extends Attack
 
 func get_affected_cells() -> Array[Vector2i]:
 	var center = target_cell
-	var offsets = [
-		Vector2i(0, 0), # the main hit
+	var offsets: Array[Vector2i] = [
+		Vector2i(0, 0),
 		Vector2i(1, 0),
 		Vector2i(-1, 0),
 		Vector2i(0, 1),
 		Vector2i(0, -1)
 	]
-	return offsets.map(func(offset): return center + offset)
+	var affected:  Array[Vector2i] = []
+	for offset in offsets:
+		affected.append(center + offset)
+	return affected
 
 func execute():
-	for cell in get_affected_cells():
-		var world_pos = cell
-		# spawn animation or effect at world_pos
-		print("Hammer hits: ", cell)
+	var affected_cells = get_affected_cells()
+	return affected_cells

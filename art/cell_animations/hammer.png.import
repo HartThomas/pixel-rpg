@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba53lf43w3b7o"
-path="res://.godot/imported/player_positions.png-7254ea4cdcdf795991fc208097335ad2.ctex"
+uid="uid://bvn7mrg5gn3e7"
+path="res://.godot/imported/hammer.png-0a7e48d29ece23dabd8ec15a8e83b439.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/sprites/player_positions.png"
-dest_files=["res://.godot/imported/player_positions.png-7254ea4cdcdf795991fc208097335ad2.ctex"]
+source_file="res://art/cell_animations/hammer.png"
+dest_files=["res://.godot/imported/hammer.png-0a7e48d29ece23dabd8ec15a8e83b439.ctex"]
 
 [params]
 

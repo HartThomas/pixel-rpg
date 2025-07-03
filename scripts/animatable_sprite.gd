@@ -5,7 +5,11 @@ extends AnimatedSprite2D
 var sprite_name: String
 var shadow_instances : Array[AnimatedSprite2D] = []
 
-var shadow_offset_dictionary : Dictionary = {tree= Vector2(0.0,-21.0), bush= Vector2(0.0, -1.0), rock=Vector2(0.0,-21.0), small_bush=Vector2(0.0,-11.0), signpost=Vector2(0.0,-11.0), player=Vector2(0.0,-11.0)}
+var animation_dictionary : Dictionary = {
+	player={ offset=Vector2(0.0,-11.0), columns= 3, rows = 1, used_columns = 1, loop = true, despawn = false }, 
+	hammer= { offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true }
+}
+
 
 func _process(delta: float) -> void:
 	for i in point_lights.size():
@@ -29,19 +33,41 @@ func _process(delta: float) -> void:
 		self.modulate = Color(brightness, brightness, brightness, 1.0)
 
 func _ready() -> void:
-	#texture = load("res://art/sprites/%s.png" % [sprite_name.to_lower()])
-	#var shadow_texture = load("res://art/sprites/%s_shadow.png" % [sprite_name.to_lower()])
+	var sprite_sheet = load("res://art/cell_animations/%s.png" % [sprite_name])
+	var frame_width = 32
+	var frame_height = 32
+	var frames = SpriteFrames.new()
+
+	frames.add_animation(sprite_name)
+	frames.set_animation_loop(sprite_name, animation_dictionary[sprite_name].loop)
+	if animation_dictionary[sprite_name].despawn:
+		animation_finished.connect(_on_animation_finished)
+	var image = sprite_sheet.get_image()
+	for y in range(animation_dictionary[sprite_name].rows):
+		for x in range(animation_dictionary[sprite_name].used_columns):
+			var rect = Rect2(x * frame_width, y * frame_height, frame_width, frame_height)
+			var frame_image = image.get_region(rect)
+			var frame_tex = ImageTexture.create_from_image(frame_image)
+			frames.add_frame(sprite_name, frame_tex)
+	sprite_frames = frames
+	animation = sprite_name
+	play()
 	for light in point_lights:
 		var shadow_instance = shadow.duplicate() as AnimatedSprite2D
 		var base_material = shadow.material
-
 		var new_material = base_material.duplicate() as ShaderMaterial
 		shadow_instance.material = new_material
 		shadow_instance.visible = true
-		#shadow_instance.texture = shadow_texture
 		shadow_instance.centered = true
-		shadow_instance.offset = shadow_offset_dictionary[sprite_name]
-		shadow_instance.position = Vector2(shadow_offset_dictionary[sprite_name].x, -shadow_offset_dictionary[sprite_name].y)
+		shadow_instance.sprite_frames = frames
+		shadow_instance.animation = sprite_name
+		shadow_instance.play()
+		shadow_instance.animation_finished.connect(_on_animation_finished)
+		shadow_instance.offset = animation_dictionary[sprite_name].offset
+		shadow_instance.position = Vector2(animation_dictionary[sprite_name].offset.x, -animation_dictionary[sprite_name].offset.y)
 		add_child(shadow_instance)
 		shadow_instances.append(shadow_instance)
 	shadow.visible = false
+
+func _on_animation_finished():
+	queue_free()

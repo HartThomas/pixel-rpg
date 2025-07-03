@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs8dl725qwow5"]
+
+[ext_resource type="Script" uid="uid://bi2td08rx7ch2" path="res://scripts/attacks/hammer.gd" id="1_s5ltg"]
+
+[node name="Hammer" type="Node2D"]
+script = ExtResource("1_s5ltg")
