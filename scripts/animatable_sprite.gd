@@ -4,12 +4,15 @@ extends AnimatedSprite2D
 @onready var point_lights: Array[PointLight2D]
 var sprite_name: String
 var shadow_instances : Array[AnimatedSprite2D] = []
+@export var frame_width = 32
+@export var frame_height = 32
 
 var animation_dictionary : Dictionary = {
 	player={ offset=Vector2(0.0,-11.0), columns= 3, rows = 1, used_columns = 1, loop = true, despawn = false }, 
-	hammer= { offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true }
+	hammer= { offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true },
+	sword_corner= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true},
+	sword_parallel= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true}
 }
-
 
 func _process(delta: float) -> void:
 	for i in point_lights.size():
@@ -34,8 +37,7 @@ func _process(delta: float) -> void:
 
 func _ready() -> void:
 	var sprite_sheet = load("res://art/cell_animations/%s.png" % [sprite_name])
-	var frame_width = 32
-	var frame_height = 32
+
 	var frames = SpriteFrames.new()
 
 	frames.add_animation(sprite_name)

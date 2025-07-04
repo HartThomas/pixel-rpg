@@ -8,7 +8,7 @@ uniform vec4 shadow_color : source_color = vec4(0.0, 0.0, 0.0, 0.4);
 void fragment() {
     // Original texture color
     vec4 tex_color = texture(TEXTURE, UV);
-    
+
     // Shadow offset
     vec2 shadow_offset = normalize(light_dir) * shadow_height * TEXTURE_PIXEL_SIZE;
 

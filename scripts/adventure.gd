@@ -4,9 +4,10 @@ extends Node2D
 @onready var background: Node2D = $Background
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var highlight_cell: Sprite2D = $HighlightCell
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
-var weapon = 'hammer'
-@onready var weapon_scene :PackedScene = preload("res://scenes/hammer.tscn")
+var weapon = 'sword'
+@onready var weapon_scene :PackedScene = load("res://scenes/%s.tscn" % [weapon])
 
 const generic_scenery_scene = preload("res://scenes/sprite.tscn")
 var light_source = preload("res://scenes/light.tscn")
@@ -176,24 +177,57 @@ var move_delay = 1.0 / move_speed
 
 func cell_clicked(target: Vector2i):
 	if Input.is_action_pressed('shift'):
-		var attack_instance = weapon_scene.instantiate()
-		var target_cell = find_first_cell_toward_mouse_click()
-		attack_instance.player_cell = player_node.position/32
-		attack_instance.target_cell = target_cell / 32
-		var affected_cells = attack_instance.execute()
-		for cell in affected_cells:
-			var new_animated_sprite = player_scene.instantiate()
-			new_animated_sprite.sprite_name = weapon
-			new_animated_sprite.position =( cell * 32) + Vector2i(16.0,16.0)
-			for i in lights:
-				new_animated_sprite.point_lights.append(i)
-			add_child(new_animated_sprite)
-		call(weapon)
+		call(weapon, target)
 	else:
 		move_player(target)
 
-func hammer(text = 'test'):
-	print(text)
+func hammer(target: Vector2i):
+	var attack_instance = weapon_scene.instantiate()
+	var target_cell = find_first_cell_toward_mouse_click()
+	attack_instance.player_cell = player_node.position/32
+	attack_instance.target_cell = target_cell / 32
+	var affected_cells = attack_instance.execute()
+	for cell in affected_cells:
+		var new_animated_sprite = player_scene.instantiate()
+		new_animated_sprite.sprite_name = weapon
+		new_animated_sprite.position = ( cell * 32) + Vector2i(16.0,16.0)
+		for i in lights:
+			new_animated_sprite.point_lights.append(i)
+		add_child(new_animated_sprite)
+
+func sword(target: Vector2i):
+	var attack_instance = weapon_scene.instantiate()
+	var target_cell = find_first_cell_toward_mouse_click()
+	attack_instance.player_cell = player_node.position/32
+	attack_instance.target_cell = target_cell / 32
+	var offset : Vector2 =  attack_instance.target_cell - attack_instance.player_cell
+	var is_corner = abs(offset.x) == 1 and abs(offset.y) == 1
+	var affected_cells = attack_instance.execute()
+	var new_animated_sprite = player_scene.instantiate()
+	if is_corner:
+		new_animated_sprite.sprite_name = 'sword_corner'
+		new_animated_sprite.frame_width = 64
+		new_animated_sprite.frame_height = 64
+		new_animated_sprite.centered = false
+		var base_dir = Vector2(1, 1).normalized()
+		var current_dir = offset.normalized()
+		var angle_difference = current_dir.angle_to(base_dir)
+		new_animated_sprite.rotation = -angle_difference
+		
+		var new_offset = Vector2(16,16).rotated(-angle_difference)
+		new_animated_sprite.position = player_node.position - new_offset
+		add_child(new_animated_sprite)
+		audio_stream_player.pitch_scale = randf_range(0.85,1.15)
+		audio_stream_player.play()
+	else:
+		new_animated_sprite.sprite_name = 'sword_parallel'
+		new_animated_sprite.position = target_cell
+		new_animated_sprite.frame_width = 32
+		new_animated_sprite.frame_height = 96
+		new_animated_sprite.rotation = offset.angle()
+		add_child(new_animated_sprite)
+		audio_stream_player.pitch_scale = randf_range(0.85,1.15)
+		audio_stream_player.play()
 
 func move_player(target: Vector2i):
 	var current_grid = (player_node.position / cell_size).floor()

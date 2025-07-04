@@ -12,7 +12,7 @@ var directions = [
 	]
 
 func get_affected_cells() -> Array[Vector2i]:
-	var cells = []
+	var cells :  Array[Vector2i] = []
 	var start = directions.find(target_cell)
 	for i in range(3):
 		var index = (start + i) % directions.size()
@@ -21,6 +21,5 @@ func get_affected_cells() -> Array[Vector2i]:
 	return cells
 
 func execute():
-	for cell in get_affected_cells():
-		
-		print("Sword hits: ", cell)
+	var affected_cells = get_affected_cells()
+	return affected_cells

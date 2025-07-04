@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c044v515k678n"]
+[gd_scene load_steps=7 format=3 uid="uid://c044v515k678n"]
 
 [ext_resource type="Script" uid="uid://dsth2afje2gfl" path="res://scripts/adventure.gd" id="1_ndsq8"]
 [ext_resource type="PackedScene" uid="uid://b3rccb8jjuwwm" path="res://scenes/background.tscn" id="2_8junk"]
 [ext_resource type="PackedScene" uid="uid://c2asl6nrtmy6c" path="res://scenes/animatable_sprite.tscn" id="2_d6sop"]
 [ext_resource type="Script" uid="uid://bwdue35d0uf80" path="res://scripts/camera_2d.gd" id="4_d6sop"]
 [ext_resource type="PackedScene" uid="uid://d3yp0qlxtr5pk" path="res://scenes/highlight_cell.tscn" id="5_aavcp"]
+[ext_resource type="AudioStream" uid="uid://bxa1ormqssq83" path="res://art/sounds/shwick.ogg" id="6_ibhji"]
 
 [node name="Adventure" type="Node2D"]
 script = ExtResource("1_ndsq8")
@@ -18,3 +19,6 @@ z_index = 1
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(320, 180)
 script = ExtResource("4_d6sop")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ibhji")
