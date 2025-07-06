@@ -6,8 +6,7 @@ var transparency = 0.5
 var weapon : String = 'hammer'
 
 func _ready() -> void:
-	var attack_texture = load("res://art/sprites/%s_attack.png" % [weapon])
-	attack.texture = attack_texture
+	load_texture()
 
 func _process(delta: float) -> void:
 	if transparency > 0.9:
@@ -20,3 +19,7 @@ func _process(delta: float) -> void:
 	else:
 		transparency -= 1 * delta
 	self_modulate.a = transparency
+
+func load_texture() :
+	var attack_texture = load("res://art/sprites/%s_attack.png" % [weapon])
+	attack.texture = attack_texture

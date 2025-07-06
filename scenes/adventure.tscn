@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c044v515k678n"]
+[gd_scene load_steps=8 format=3 uid="uid://c044v515k678n"]
 
 [ext_resource type="Script" uid="uid://dsth2afje2gfl" path="res://scripts/adventure.gd" id="1_ndsq8"]
 [ext_resource type="PackedScene" uid="uid://b3rccb8jjuwwm" path="res://scenes/background.tscn" id="2_8junk"]
 [ext_resource type="PackedScene" uid="uid://c2asl6nrtmy6c" path="res://scenes/animatable_sprite.tscn" id="2_d6sop"]
+[ext_resource type="PackedScene" uid="uid://dl7ty3ssb2ypi" path="res://scenes/arrow.tscn" id="3_resr8"]
 [ext_resource type="Script" uid="uid://bwdue35d0uf80" path="res://scripts/camera_2d.gd" id="4_d6sop"]
 [ext_resource type="PackedScene" uid="uid://d3yp0qlxtr5pk" path="res://scenes/highlight_cell.tscn" id="5_aavcp"]
 [ext_resource type="AudioStream" uid="uid://bxa1ormqssq83" path="res://art/sounds/shwick.ogg" id="6_ibhji"]
@@ -10,6 +11,7 @@
 [node name="Adventure" type="Node2D"]
 script = ExtResource("1_ndsq8")
 player_scene = ExtResource("2_d6sop")
+projectile_scene = ExtResource("3_resr8")
 
 [node name="Background" parent="." instance=ExtResource("2_8junk")]
 

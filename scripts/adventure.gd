@@ -1,12 +1,13 @@
 extends Node2D
 
 @export var player_scene : PackedScene
+@export var projectile_scene : PackedScene
 @onready var background: Node2D = $Background
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var highlight_cell: Sprite2D = $HighlightCell
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
-var weapon = 'sword'
+var weapon = 'bow'
 @onready var weapon_scene :PackedScene = load("res://scenes/%s.tscn" % [weapon])
 
 const generic_scenery_scene = preload("res://scenes/sprite.tscn")
@@ -46,6 +47,8 @@ func _ready():
 	background.height = height
 	background.resize()
 	background.map_clicked.connect(cell_clicked)
+	highlight_cell.weapon = weapon
+	highlight_cell.load_texture()
 	create_player()
 
 func _generate_level_from_data():
@@ -213,12 +216,9 @@ func sword(target: Vector2i):
 		var current_dir = offset.normalized()
 		var angle_difference = current_dir.angle_to(base_dir)
 		new_animated_sprite.rotation = -angle_difference
-		
 		var new_offset = Vector2(16,16).rotated(-angle_difference)
 		new_animated_sprite.position = player_node.position - new_offset
 		add_child(new_animated_sprite)
-		audio_stream_player.pitch_scale = randf_range(0.85,1.15)
-		audio_stream_player.play()
 	else:
 		new_animated_sprite.sprite_name = 'sword_parallel'
 		new_animated_sprite.position = target_cell
@@ -226,8 +226,20 @@ func sword(target: Vector2i):
 		new_animated_sprite.frame_height = 96
 		new_animated_sprite.rotation = offset.angle()
 		add_child(new_animated_sprite)
-		audio_stream_player.pitch_scale = randf_range(0.85,1.15)
-		audio_stream_player.play()
+	audio_stream_player.pitch_scale = randf_range(0.85,1.15)
+	audio_stream_player.play()
+
+func bow(target: Vector2i):
+	var mouse_pos = camera_2d.get_global_mouse_position()
+	var target_cell = Vector2(
+		floor(mouse_pos.x / 32.0) * 32.0 + 16,
+		floor(mouse_pos.y / 32.0) * 32.0 + 16
+	)
+	var new_projectile = projectile_scene.instantiate()
+	new_projectile.target_cell = target_cell
+	new_projectile.projectile_name = 'arrow'
+	new_projectile.position = player_node.position
+	add_child(new_projectile)
 
 func move_player(target: Vector2i):
 	var current_grid = (player_node.position / cell_size).floor()
@@ -247,13 +259,21 @@ var coords_array = [
 ]
 
 func highlight_best_cell():
-	var target_cell = find_first_cell_toward_mouse_click()
-	highlight_cell.global_position = target_cell 
+	var target_cell :Vector2i
+	if weapon == 'bow':
+		var mouse_pos = camera_2d.get_global_mouse_position()
+		target_cell = Vector2(
+			floor(mouse_pos.x / 32.0) * 32.0 + 16,
+			floor(mouse_pos.y / 32.0) * 32.0 + 16
+		)
+	else:
+		target_cell = find_first_cell_toward_mouse_click()
+	highlight_cell.global_position = target_cell
 	highlight_cell.visible = true
 
 func find_first_cell_toward_mouse_click():
 	var player_world_position = player_node.position
-	var mouse_world_position = get_viewport().get_mouse_position()
+	var mouse_world_position = camera_2d.get_global_mouse_position()
 	var player_to_mouse_angle = (mouse_world_position - player_world_position).angle()
 	var best_offset = Vector2.ZERO
 	var smallest_angle_diff = INF
