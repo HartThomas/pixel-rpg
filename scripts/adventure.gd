@@ -19,7 +19,6 @@ var tile_defs = {
 	3: { "type": "signpost", "size": Vector2i(1, 1) },
 	4: { type= 'nothing', size= Vector2i(1, 1)},
 	5: { type= 'ruin', size= Vector2i(1, 1)},
-	-1: {type= 'blah', size= Vector2i(1, 1)}
 }
 
 var tile_weights = {
@@ -50,6 +49,7 @@ func _ready():
 	highlight_cell.weapon = weapon
 	highlight_cell.load_texture()
 	create_player()
+	EnemyManager.create_enemies(1)
 
 func _generate_level_from_data():
 	for y in level_data.size():
@@ -296,3 +296,6 @@ func _process(delta):
 			move_timer = 0.0
 			var next_tile = path.pop_front()
 			player_node.position = next_tile * cell_size + Vector2i(16,16)
+
+func move_enemy():
+	EnemyManager.move_enemy(0, Vector2(1,1))

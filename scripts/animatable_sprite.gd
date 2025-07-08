@@ -11,7 +11,8 @@ var animation_dictionary : Dictionary = {
 	player={ offset=Vector2(0.0,-11.0), columns= 3, rows = 1, used_columns = 1, loop = true, despawn = false }, 
 	hammer= { offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true },
 	sword_corner= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true},
-	sword_parallel= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true}
+	sword_parallel= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true},
+	bogman= {offset = Vector2(0.0,-11.0),columns= 1, rows = 1, used_columns = 1, loop=false, despawn = false},
 }
 
 func _process(delta: float) -> void:
@@ -39,7 +40,7 @@ func _ready() -> void:
 	var sprite_sheet = load("res://art/cell_animations/%s.png" % [sprite_name])
 
 	var frames = SpriteFrames.new()
-
+	print(sprite_name, 'haha')
 	frames.add_animation(sprite_name)
 	frames.set_animation_loop(sprite_name, animation_dictionary[sprite_name].loop)
 	if animation_dictionary[sprite_name].despawn:
