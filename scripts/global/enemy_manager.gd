@@ -8,6 +8,8 @@ func create_enemies(amount:int, enemy_name:String = 'bogman'):
 		var enemy = load('res://resources/enemies/%s.tres' % [enemy_name])
 		var new_enemy = enemy_scene.instantiate()
 		new_enemy.enemy_data = enemy
+		for j in get_tree().current_scene.lights.size():
+			new_enemy.point_lights.append(get_tree().current_scene.lights[j])
 		enemies.append(new_enemy)
 		get_tree().current_scene.add_child(new_enemy)
 

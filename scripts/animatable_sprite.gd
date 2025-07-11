@@ -34,13 +34,11 @@ func _process(delta: float) -> void:
 		var up_vector = Vector2(0, 1)
 		var above_factor = clamp(up_vector.dot(light_dir), 0.0, 1.0)
 		var brightness = lerp(1.0, 0.7, above_factor)
-		self.modulate = Color(brightness, brightness, brightness, 1.0)
+		modulate = Color(brightness, brightness, brightness, 1.0)
 
 func _ready() -> void:
 	var sprite_sheet = load("res://art/cell_animations/%s.png" % [sprite_name])
-
 	var frames = SpriteFrames.new()
-	print(sprite_name, 'haha')
 	frames.add_animation(sprite_name)
 	frames.set_animation_loop(sprite_name, animation_dictionary[sprite_name].loop)
 	if animation_dictionary[sprite_name].despawn:
@@ -65,7 +63,7 @@ func _ready() -> void:
 		shadow_instance.sprite_frames = frames
 		shadow_instance.animation = sprite_name
 		shadow_instance.play()
-		shadow_instance.animation_finished.connect(_on_animation_finished)
+		#shadow_instance.animation_finished.connect(_on_animation_finished)
 		shadow_instance.offset = animation_dictionary[sprite_name].offset
 		shadow_instance.position = Vector2(animation_dictionary[sprite_name].offset.x, -animation_dictionary[sprite_name].offset.y)
 		add_child(shadow_instance)
