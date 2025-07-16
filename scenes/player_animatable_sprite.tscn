@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b10qgd0d0ycwd"]
+
+[ext_resource type="PackedScene" uid="uid://c2asl6nrtmy6c" path="res://scenes/animatable_sprite.tscn" id="1_2v05s"]
+[ext_resource type="Script" uid="uid://cd1f3i7it4q0r" path="res://scripts/player_animatable_sprite.gd" id="2_dvfdq"]
+
+[node name="AnimatableSprite" instance=ExtResource("1_2v05s")]
+script = ExtResource("2_dvfdq")

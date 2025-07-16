@@ -32,7 +32,7 @@ func _ready():
 	highlight_cell.weapon = weapon
 	highlight_cell.load_texture()
 	create_player()
-	EnemyManager.create_enemies(1)
+	EnemyManager.create_enemies(5)
 
 func _generate_level_from_data(level_data):
 	for y in level_data.size():
@@ -57,6 +57,7 @@ func create_player() ->void:
 	add_child(new_player)
 	player_node = new_player
 	GameScript.player_position = player_node.position
+	EnemyManager.player_scene = player_node
 
 var path: Array[Vector2i] = []
 var move_speed = 5.0 
@@ -67,7 +68,7 @@ func cell_clicked(target: Vector2i):
 	if Input.is_action_pressed('shift'):
 		call(weapon, target)
 	else:
-		move_player(target)
+		player_node.move_player(target)
 
 func hammer(target: Vector2i):
 	var attack_instance = weapon_scene.instantiate()
@@ -128,7 +129,7 @@ func bow(target: Vector2i):
 
 func move_player(target: Vector2i):
 	var current_grid = (player_node.position / cell_size).floor()
-	path = GameScript.get_straight_line_path(current_grid, target)
+	path = GameScript.astar_grid.get_id_path(current_grid, target)
 	queue_redraw()
 
 func _draw():
@@ -175,13 +176,18 @@ func _process(delta):
 		highlight_best_cell()
 	else:
 		highlight_cell.visible = false
-	if path.size() > 0:
-		move_timer += delta
-		if move_timer >= move_delay:
-			move_timer = 0.0
-			var next_tile = path.pop_front()
-			player_node.position = next_tile * cell_size + Vector2i(16,16)
-			GameScript.player_position = player_node.position
-
-func move_enemy():
-	EnemyManager.move_enemy(0, Vector2(1,1))
+	#if path.size() > 0:
+		#move_timer += delta
+		#if move_timer >= move_delay:
+			#move_timer = 0.0
+			#var next_tile = path.pop_front()
+			#if GameScript.astar_grid.is_point_solid(next_tile):
+				#if path.size() > 0:
+					#var target = path.pop_back()
+					#path = GameScript.astar_grid.get_id_path((player_node.position / cell_size).floor(), target)
+				#next_tile = path.pop_front()
+			#if next_tile:
+				#player_node.position = next_tile * cell_size + Vector2i(16,16)
+				#GameScript.astar_grid.set_point_solid(GameScript.player_position, false)
+				#GameScript.player_position = player_node.position
+				#GameScript.astar_grid.set_point_solid(GameScript.player_position, true)

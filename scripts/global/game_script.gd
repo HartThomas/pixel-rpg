@@ -71,13 +71,14 @@ func generate_level_data():
 		rows_top_down.append(row)
 	level_data = rows_top_down
 	var astar = AStarGrid2D.new()
-	print(width, height, 'wolololo')
 	astar.region = Rect2i(0, 0, width, height)
 	astar.cell_size = Vector2(1, 1)
 	astar.update()
 	for y in range(height):
 		for x in range(width):
 			var solid = not can_player_move_here(Vector2i(x, y))
+			if y == player_position.y and x == player_position.x:
+				solid = true
 			astar.set_point_solid(Vector2i(x, y), solid)
 	astar_grid = astar
 

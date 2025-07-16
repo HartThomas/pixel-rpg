@@ -1,93 +1,16 @@
-[gd_scene load_steps=20 format=3 uid="uid://c044v515k678n"]
+[gd_scene load_steps=8 format=3 uid="uid://c044v515k678n"]
 
 [ext_resource type="Script" uid="uid://dsth2afje2gfl" path="res://scripts/adventure.gd" id="1_ndsq8"]
 [ext_resource type="PackedScene" uid="uid://b3rccb8jjuwwm" path="res://scenes/background.tscn" id="2_8junk"]
-[ext_resource type="Texture2D" uid="uid://ba53lf43w3b7o" path="res://art/cell_animations/player.png" id="2_18mqq"]
-[ext_resource type="Script" uid="uid://c8venspi5fnav" path="res://scripts/animatable_sprite.gd" id="3_e77xe"]
+[ext_resource type="PackedScene" uid="uid://b10qgd0d0ycwd" path="res://scenes/player_animatable_sprite.tscn" id="2_resr8"]
 [ext_resource type="PackedScene" uid="uid://dl7ty3ssb2ypi" path="res://scenes/arrow.tscn" id="3_resr8"]
 [ext_resource type="Script" uid="uid://bwdue35d0uf80" path="res://scripts/camera_2d.gd" id="4_d6sop"]
-[ext_resource type="Shader" uid="uid://domgyyb6o7cq2" path="res://shaders/shade.gdshader" id="4_u0dqm"]
 [ext_resource type="PackedScene" uid="uid://d3yp0qlxtr5pk" path="res://scenes/highlight_cell.tscn" id="5_aavcp"]
 [ext_resource type="AudioStream" uid="uid://bxa1ormqssq83" path="res://art/sounds/shwick.ogg" id="6_ibhji"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jlo60"]
-atlas = ExtResource("2_18mqq")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ss7m4"]
-atlas = ExtResource("2_18mqq")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ubu22"]
-atlas = ExtResource("2_18mqq")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ggr4v"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jlo60")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ss7m4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ubu22")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_05i0m"]
-shader = ExtResource("4_u0dqm")
-shader_parameter/color = Color(0, 0, 0, 0.5)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qtkho"]
-atlas = ExtResource("2_18mqq")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bwkjw"]
-atlas = ExtResource("2_18mqq")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pi51b"]
-atlas = ExtResource("2_18mqq")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_8wbye"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qtkho")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bwkjw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pi51b")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="PackedScene" id="PackedScene_i13t4"]
-_bundled = {
-"conn_count": 0,
-"conns": PackedInt32Array(),
-"editable_instances": [],
-"names": PackedStringArray("AnimatableSprite", "sprite_frames", "script", "AnimatedSprite2D", "Shadow", "show_behind_parent", "material", "position", "offset"),
-"node_count": 2,
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 3, 0, -1, 2, 1, 0, 2, 1, 0, 0, 0, 3, 4, -1, 5, 5, 2, 6, 3, 7, 4, 1, 5, 8, 6, 0),
-"variants": [SubResource("SpriteFrames_ggr4v"), ExtResource("3_e77xe"), true, SubResource("ShaderMaterial_05i0m"), Vector2(0, 21), SubResource("SpriteFrames_8wbye"), Vector2(0, -21)],
-"version": 3
-}
-
 [node name="Adventure" type="Node2D"]
 script = ExtResource("1_ndsq8")
-player_scene = SubResource("PackedScene_i13t4")
+player_scene = ExtResource("2_resr8")
 projectile_scene = ExtResource("3_resr8")
 
 [node name="Background" parent="." instance=ExtResource("2_8junk")]

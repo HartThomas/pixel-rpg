@@ -25,40 +25,37 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
-	if position.distance_to(GameScript.player_position) <200:
+	var distance_to_player = position.distance_to(GameScript.player_position)
+	if distance_to_player <= 32:
+		state = ATTACK
+	elif distance_to_player <200:
 		if state != AGGRO:
 			state = AGGRO
 			recalculate_path()
 	else:
-		state = IDLE
+		if state != AGGRO:
+			state = IDLE
 	match state: 
 		AGGRO:
 			recalc_path_timer += delta
-			if recalc_path_timer >= 1.0: # recalc path every second
+			if recalc_path_timer >= 0.5: # recalc path twice every second
 				recalc_path_timer = 0.0
 				recalculate_path()
-			#print(path)
-			#path = GameScript.get_straight_line_path(position / 32, (GameScript.player_position/32) - ((GameScript.player_position/32) - (position / 32)).normalized())
+		ATTACK:
+			pass
+		IDLE:
+			pass
 	if path.size() > 0:
 		move_timer += delta
-		print(path, move_timer)
-		if move_timer >= move_delay:
-			move_timer = 0.0
-			var next_tile = path.pop_front()
-			position = next_tile * cell_size + Vector2i(16,16)
-			print(position, path, next_tile, 'path')
-			recalculate_path()
 
 func recalculate_path():
 	var from = Vector2i(position / 32)
-	var to = Vector2i((GameScript.player_position/32) - ((GameScript.player_position/32) - (position / 32)).normalized())
-	print(from, to, 'fromto')
+	var to = Vector2i(GameScript.player_position/32)
 	if GameScript.astar_grid.is_in_bounds(from.x, from.y) and GameScript.astar_grid.is_in_bounds(to.x, to.y):
 		path = GameScript.astar_grid.get_id_path(from, to)
 		if path.size() > 1 and path[0] == from:
 			path.remove_at(0)
+			path.pop_back()
 	else:
 		print("Missing point in AStar:", from, to)
 		path = []
-	#path = GameScript.get_straight_line_path(position / 32, (GameScript.player_position/32) - ((GameScript.player_position/32) - (position / 32)).normalized())
-	print("Recalculated path:", path)
