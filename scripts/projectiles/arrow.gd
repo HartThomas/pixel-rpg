@@ -17,3 +17,9 @@ func _ready() -> void:
 	texture = new_texture
 	velocity = (target_cell - global_position).normalized() * speed
 	rotation = velocity.angle()
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area and area.get_parent().has_method('take_damage'):
+		area.get_parent().take_damage(5)
+		queue_free()

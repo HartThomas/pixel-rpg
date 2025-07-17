@@ -7,9 +7,6 @@ extends Node2D
 @onready var highlight_cell: Sprite2D = $HighlightCell
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
-var weapon = 'bow'
-@onready var weapon_scene :PackedScene = load("res://scenes/%s.tscn" % [weapon])
-
 const generic_scenery_scene = preload("res://scenes/sprite.tscn")
 var light_source = preload("res://scenes/light.tscn")
 
@@ -29,7 +26,7 @@ func _ready():
 	background.height = height
 	background.resize()
 	background.map_clicked.connect(cell_clicked)
-	highlight_cell.weapon = weapon
+	highlight_cell.weapon = WeaponScript.weapon
 	highlight_cell.load_texture()
 	create_player()
 	EnemyManager.create_enemies(5)
@@ -37,7 +34,7 @@ func _ready():
 func _generate_level_from_data(level_data):
 	for y in level_data.size():
 		for x in level_data[y].size():
-			var id = level_data[y][x]
+			var id = level_data[y][x].terrain
 			if id <= 0 or not GameScript.tile_defs.has(id) or id == 4:
 				continue
 			var tile_data = GameScript.tile_defs[id]
@@ -59,86 +56,11 @@ func create_player() ->void:
 	GameScript.player_position = player_node.position
 	EnemyManager.player_scene = player_node
 
-var path: Array[Vector2i] = []
-var move_speed = 5.0 
-var move_timer = 0.0
-var move_delay = 1.0 / move_speed
-
 func cell_clicked(target: Vector2i):
 	if Input.is_action_pressed('shift'):
-		call(weapon, target)
+		WeaponScript.cell_clicked( target, player_node.position, camera_2d.get_global_mouse_position(), audio_stream_player, lights)
 	else:
 		player_node.move_player(target)
-
-func hammer(target: Vector2i):
-	var attack_instance = weapon_scene.instantiate()
-	var target_cell = find_first_cell_toward_mouse_click()
-	attack_instance.player_cell = player_node.position/32
-	attack_instance.target_cell = target_cell / 32
-	var affected_cells = attack_instance.execute()
-	for cell in affected_cells:
-		var new_animated_sprite = player_scene.instantiate()
-		new_animated_sprite.sprite_name = weapon
-		new_animated_sprite.position = ( cell * 32) + Vector2i(16.0,16.0)
-		for i in lights:
-			new_animated_sprite.point_lights.append(i)
-		add_child(new_animated_sprite)
-
-func sword(target: Vector2i):
-	var attack_instance = weapon_scene.instantiate()
-	var target_cell = find_first_cell_toward_mouse_click()
-	attack_instance.player_cell = player_node.position/32
-	attack_instance.target_cell = target_cell / 32
-	var offset : Vector2 =  attack_instance.target_cell - attack_instance.player_cell
-	var is_corner = abs(offset.x) == 1 and abs(offset.y) == 1
-	var affected_cells = attack_instance.execute()
-	var new_animated_sprite = player_scene.instantiate()
-	if is_corner:
-		new_animated_sprite.sprite_name = 'sword_corner'
-		new_animated_sprite.frame_width = 64
-		new_animated_sprite.frame_height = 64
-		new_animated_sprite.centered = false
-		var base_dir = Vector2(1, 1).normalized()
-		var current_dir = offset.normalized()
-		var angle_difference = current_dir.angle_to(base_dir)
-		new_animated_sprite.rotation = -angle_difference
-		var new_offset = Vector2(16,16).rotated(-angle_difference)
-		new_animated_sprite.position = player_node.position - new_offset
-		add_child(new_animated_sprite)
-	else:
-		new_animated_sprite.sprite_name = 'sword_parallel'
-		new_animated_sprite.position = target_cell
-		new_animated_sprite.frame_width = 32
-		new_animated_sprite.frame_height = 96
-		new_animated_sprite.rotation = offset.angle()
-		add_child(new_animated_sprite)
-	audio_stream_player.pitch_scale = randf_range(0.85,1.15)
-	audio_stream_player.play()
-
-func bow(target: Vector2i):
-	var mouse_pos = camera_2d.get_global_mouse_position()
-	var target_cell = Vector2(
-		floor(mouse_pos.x / 32.0) * 32.0 + 16,
-		floor(mouse_pos.y / 32.0) * 32.0 + 16
-	)
-	var new_projectile = projectile_scene.instantiate()
-	new_projectile.target_cell = target_cell
-	new_projectile.projectile_name = 'arrow'
-	new_projectile.position = player_node.position
-	add_child(new_projectile)
-
-func move_player(target: Vector2i):
-	var current_grid = (player_node.position / cell_size).floor()
-	path = GameScript.astar_grid.get_id_path(current_grid, target)
-	queue_redraw()
-
-func _draw():
-	for tile in path:
-		var rect = Rect2(tile * cell_size, Vector2(cell_size, cell_size))
-		draw_rect(rect, Color(0, 1, 0, 0.3))
-	var player_tile = (player_node.position / cell_size).floor()
-	var rect = Rect2(player_tile * cell_size, Vector2(cell_size, cell_size))
-	draw_rect(rect, Color(1, 0, 0, 0.3))
 
 var coords_array = [
 	Vector2(1,0),Vector2(1,1),Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1),Vector2(0,-1),Vector2(1,-1)
@@ -146,7 +68,7 @@ var coords_array = [
 
 func highlight_best_cell():
 	var target_cell :Vector2i
-	if weapon == 'bow':
+	if WeaponScript.weapon == 'bow':
 		var mouse_pos = camera_2d.get_global_mouse_position()
 		target_cell = Vector2(
 			floor(mouse_pos.x / 32.0) * 32.0 + 16,
@@ -176,18 +98,3 @@ func _process(delta):
 		highlight_best_cell()
 	else:
 		highlight_cell.visible = false
-	#if path.size() > 0:
-		#move_timer += delta
-		#if move_timer >= move_delay:
-			#move_timer = 0.0
-			#var next_tile = path.pop_front()
-			#if GameScript.astar_grid.is_point_solid(next_tile):
-				#if path.size() > 0:
-					#var target = path.pop_back()
-					#path = GameScript.astar_grid.get_id_path((player_node.position / cell_size).floor(), target)
-				#next_tile = path.pop_front()
-			#if next_tile:
-				#player_node.position = next_tile * cell_size + Vector2i(16,16)
-				#GameScript.astar_grid.set_point_solid(GameScript.player_position, false)
-				#GameScript.player_position = player_node.position
-				#GameScript.astar_grid.set_point_solid(GameScript.player_position, true)

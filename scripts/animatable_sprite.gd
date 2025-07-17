@@ -6,6 +6,7 @@ var sprite_name: String
 var shadow_instances : Array[AnimatedSprite2D] = []
 @export var frame_width = 32
 @export var frame_height = 32
+var affected_cells: Array[Vector2i]= []
 
 var animation_dictionary : Dictionary = {
 	player={ offset=Vector2(0.0,-11.0), columns= 3, rows = 1, used_columns = 1, loop = true, despawn = false }, 
@@ -69,6 +70,9 @@ func _ready() -> void:
 		add_child(shadow_instance)
 		shadow_instances.append(shadow_instance)
 	shadow.visible = false
+	#affected_cells.append(Vector2i(position)/32)
 
 func _on_animation_finished():
+	var weapon = WeaponScript.weapon
+	WeaponScript.on_weapon_animation_finished(affected_cells)
 	queue_free()

@@ -59,3 +59,13 @@ func recalculate_path():
 	else:
 		print("Missing point in AStar:", from, to)
 		path = []
+
+func take_damage(amount:int):
+	enemy_data.health -= amount
+	if enemy_data.health <=0:
+		die()
+
+func die():
+	GameScript.remove_entity_from_cell((position/32).floor())
+	GameScript.astar_grid.set_point_solid((position/32).floor(), false)
+	queue_free()

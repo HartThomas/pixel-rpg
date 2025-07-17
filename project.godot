@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 EnemyManager="*res://scripts/global/enemy_manager.gd"
 GameScript="*res://scripts/global/game_script.gd"
+WeaponScript="*res://scripts/global/weapon_script.gd"
 
 [display]
 

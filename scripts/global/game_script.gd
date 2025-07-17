@@ -56,18 +56,22 @@ func generate_level_data():
 	for y in range(height):
 		var row = []
 		for x in range(width):
+			var tile_id: int
 			if x == 0 or y == 0 or x == width - 1 or y == height - 1:
-				row.append(5) 
-				continue
-			if occupied[y][x]:
-				row.append(4)
-				continue
-			var id = _pick_random_tile_id()
-			if can_place_tile(id, x, y, occupied):
-				row.append(id)
-				mark_occupied(id, x, y, occupied)
+				tile_id = 5  
+			elif occupied[y][x]:
+				tile_id = 4  
 			else:
-				row.append(0) 
+				var id = _pick_random_tile_id()
+				if can_place_tile(id, x, y, occupied):
+					tile_id = id
+					mark_occupied(id, x, y, occupied)
+				else:
+					tile_id = 0 
+			row.append({
+				"terrain": tile_id,
+				"entity": null
+			})
 		rows_top_down.append(row)
 	level_data = rows_top_down
 	var astar = AStarGrid2D.new()
@@ -76,10 +80,12 @@ func generate_level_data():
 	astar.update()
 	for y in range(height):
 		for x in range(width):
-			var solid = not can_player_move_here(Vector2i(x, y))
-			if y == player_position.y and x == player_position.x:
-				solid = true
-			astar.set_point_solid(Vector2i(x, y), solid)
+			var pos = Vector2i(x, y)
+			var cell = level_data[y][x]
+			var solid = not can_player_move_here(pos)
+			#if pos == player_position:
+				#solid = true
+			astar.set_point_solid(pos, solid)
 	astar_grid = astar
 
 func _pick_random_tile_id() -> int:
@@ -130,13 +136,35 @@ func get_straight_line_path(start: Vector2i, end: Vector2i) -> Array[Vector2i]:
 
 func can_player_move_here(coord: Vector2i) -> bool:
 	#print(level_data[coord.x][coord.y], 'canmovehere?')
-	return level_data[coord.y][coord.x] == 3 or level_data[coord.y][coord.x] == 4 or level_data[coord.y][coord.x] == -1
-
-#func can_player_move_here(pos: Vector2i) -> bool:
-	#if pos.x < 0 or pos.x >= width or pos.y < 0 or pos.y >= height:
-		#return false
-	#var tile_id = level_data[pos.y][pos.x]
-	#return tile_defs.get(tile_id, {}).get("walkable", false)
+	return level_data[coord.y][coord.x].terrain == 3 or level_data[coord.y][coord.x].terrain == 4 or level_data[coord.y][coord.x].terrain == -1
 
 func _ready() -> void:
 	generate_level_data()
+
+func update_cells_based_on_player_movement(to: Vector2i, player):
+	astar_grid.set_point_solid(player_position, false)
+	level_data[player_position.y/32][player_position.x/32].entity = null
+	player_position = to
+	astar_grid.set_point_solid(player_position, true)
+	level_data[player_position.y/32][player_position.x/32].entity = player
+
+func update_cells_based_on_entity_movement(from: Vector2i, to: Vector2i, entity):
+	astar_grid.set_point_solid(from, false)
+	level_data[from.y][from.x].entity = null
+	astar_grid.set_point_solid(to, true)
+	level_data[to.y][to.x].entity = entity
+
+func get_entity_from_cell(cell: Vector2i):
+	return level_data[cell.y][cell.x].entity
+
+func add_entity_to_cell(cell: Vector2i, entity):
+	if not level_data[cell.y][cell.x].entity:
+		level_data[cell.y][cell.x].entity = entity
+	else:
+		print('Trying to add ' + entity + 'to ' + str(cell) + 'but it is not empty')
+
+func remove_entity_from_cell(cell: Vector2i):
+	if level_data[cell.y][cell.x].entity:
+		level_data[cell.y][cell.x].entity = null
+	else:
+		print('Trying to remove the entity from ' + str(cell) + 'but it is empty')

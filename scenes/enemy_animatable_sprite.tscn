@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://be63uyyet462r"]
+[gd_scene load_steps=4 format=3 uid="uid://be63uyyet462r"]
 
 [ext_resource type="PackedScene" uid="uid://c2asl6nrtmy6c" path="res://scenes/animatable_sprite.tscn" id="1_2c2xt"]
 [ext_resource type="Script" uid="uid://c2adx0r7ifdw4" path="res://scripts/enemy_animatable_sprite.gd" id="1_nnyk5"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hic8c"]
+size = Vector2(30, 30)
+
 [node name="AnimatableSprite" instance=ExtResource("1_2c2xt")]
 script = ExtResource("1_nnyk5")
+
+[node name="Area2D" type="Area2D" parent="." index="1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_hic8c")
