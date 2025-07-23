@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://2awqxg0db6id"]
+
+[ext_resource type="Script" uid="uid://bki7ak6ecwmx" path="res://scripts/items/ground_item.gd" id="1_oe8gi"]
+[ext_resource type="Texture2D" uid="uid://bl4f0ir1f8cu4" path="res://art/sprites/sword_attack.png" id="1_sxkc3"]
+
+[node name="GroundItem" type="Sprite2D"]
+texture = ExtResource("1_sxkc3")
+script = ExtResource("1_oe8gi")

@@ -6,6 +6,7 @@ extends Node2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var highlight_cell: Sprite2D = $HighlightCell
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var gui: CanvasLayer = $Gui
 
 const generic_scenery_scene = preload("res://scenes/sprite.tscn")
 var light_source = preload("res://scenes/light.tscn")
@@ -98,3 +99,10 @@ func _process(delta):
 		highlight_best_cell()
 	else:
 		highlight_cell.visible = false
+
+func toggle_gui():
+	if not gui.is_shown:
+		gui.show_gui()
+	else:
+		gui.hide_gui()
+	

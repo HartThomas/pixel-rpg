@@ -7,6 +7,7 @@ var shadow_instances : Array[AnimatedSprite2D] = []
 @export var frame_width = 32
 @export var frame_height = 32
 var affected_cells: Array[Vector2i]= []
+var paused : bool = false
 
 var animation_dictionary : Dictionary = {
 	player={ offset=Vector2(0.0,-11.0), columns= 3, rows = 1, used_columns = 1, loop = true, despawn = false }, 
@@ -53,7 +54,8 @@ func _ready() -> void:
 			frames.add_frame(sprite_name, frame_tex)
 	sprite_frames = frames
 	animation = sprite_name
-	play()
+	if not paused:
+		play()
 	for light in point_lights:
 		var shadow_instance = shadow.duplicate() as AnimatedSprite2D
 		var base_material = shadow.material
@@ -63,7 +65,8 @@ func _ready() -> void:
 		shadow_instance.centered = true
 		shadow_instance.sprite_frames = frames
 		shadow_instance.animation = sprite_name
-		shadow_instance.play()
+		if not paused:
+			shadow_instance.play()
 		#shadow_instance.animation_finished.connect(_on_animation_finished)
 		shadow_instance.offset = animation_dictionary[sprite_name].offset
 		shadow_instance.position = Vector2(animation_dictionary[sprite_name].offset.x, -animation_dictionary[sprite_name].offset.y)
@@ -75,4 +78,15 @@ func _ready() -> void:
 func _on_animation_finished():
 	var weapon = WeaponScript.weapon
 	WeaponScript.on_weapon_animation_finished(affected_cells)
+	WeaponScript.current_attack.erase(self)
 	queue_free()
+
+func pause_animation():
+	if is_playing():
+		pause()
+		for shadow in shadow_instances:
+			shadow.pause()
+	else:
+		play()
+		for shadow in shadow_instances:
+			shadow.play()

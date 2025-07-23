@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2st0v65jr2n6"]
+
+[ext_resource type="Texture2D" uid="uid://cq20vsmtp7b7s" path="res://art/sprites/healthbar_over.png" id="1_jbthi"]
+[ext_resource type="Script" uid="uid://cbo1u2c457dwp" path="res://scripts/gui.gd" id="1_tqy5q"]
+[ext_resource type="Texture2D" uid="uid://doj8f7ashijww" path="res://art/sprites/healthbar_under.png" id="1_womn8"]
+[ext_resource type="Texture2D" uid="uid://bhtxdono6b6v6" path="res://art/sprites/healthbar_progress.png" id="3_shsct"]
+[ext_resource type="Texture2D" uid="uid://byh71nkaxkp2g" path="res://art/sprites/gui_items.png" id="5_hywd1"]
+
+[node name="Gui" type="CanvasLayer"]
+script = ExtResource("1_tqy5q")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 70.0
+offset_right = 40.0
+offset_bottom = 320.0
+grow_vertical = 0
+value = 75.0
+fill_mode = 3
+texture_under = ExtResource("1_womn8")
+texture_over = ExtResource("1_jbthi")
+texture_progress = ExtResource("3_shsct")
+
+[node name="Container" type="Control" parent="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -200.0
+offset_bottom = 360.0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Container"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 360.0
+texture = ExtResource("5_hywd1")
+
+[node name="GridContainer" type="GridContainer" parent="Control/Container"]
+layout_mode = 2
+offset_top = 234.0
+offset_right = 200.0
+offset_bottom = 360.0
+
+[node name="ItemList" type="GridContainer" parent="Control/Container"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 232.0

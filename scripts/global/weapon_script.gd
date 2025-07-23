@@ -1,8 +1,13 @@
 extends Node
-var weapon: String = 'bow'
+var weapon: String = 'sword'
 @onready var weapon_scene :PackedScene = load("res://scenes/%s.tscn" % [weapon])
 @onready var projectile_scene : PackedScene = load("res://scenes/arrow.tscn")
 @onready var animatable_sprite_scene :PackedScene = load("res://scenes/animatable_sprite.tscn")
+
+var paused : bool = false
+
+var current_attack: Array = []
+var projectiles = []
 
 func hammer(target: Vector2i, player_world_position, mouse_world_position,audio_stream_player, lights):
 	var attack_instance = weapon_scene.instantiate()
@@ -17,6 +22,9 @@ func hammer(target: Vector2i, player_world_position, mouse_world_position,audio_
 		for i in lights:
 			new_animated_sprite.point_lights.append(i)
 		new_animated_sprite.affected_cells.append(cell)
+		if paused:
+			new_animated_sprite.paused = true
+		current_attack.append(new_animated_sprite)
 		get_tree().current_scene.add_child(new_animated_sprite)
 
 func sword(target: Vector2i,player_world_position, mouse_world_position, audio_stream_player, lights):
@@ -40,6 +48,9 @@ func sword(target: Vector2i,player_world_position, mouse_world_position, audio_s
 		var new_offset = Vector2(16,16).rotated(-angle_difference)
 		new_animated_sprite.position = player_world_position - new_offset
 		new_animated_sprite.affected_cells = get_sword_affected_cells(Vector2i(player_world_position)/32, Vector2i(sign(offset.x), sign(offset.y)))
+		if paused:
+			new_animated_sprite.paused = true
+		current_attack.append(new_animated_sprite)
 		get_tree().current_scene.add_child(new_animated_sprite)
 	else:
 		new_animated_sprite.sprite_name = 'sword_parallel'
@@ -48,6 +59,9 @@ func sword(target: Vector2i,player_world_position, mouse_world_position, audio_s
 		new_animated_sprite.frame_height = 96
 		new_animated_sprite.rotation = offset.angle()
 		new_animated_sprite.affected_cells = get_sword_affected_cells(Vector2i(player_world_position)/32, Vector2i(sign(offset.x), sign(offset.y)))
+		if paused:
+			new_animated_sprite.paused = true
+		current_attack.append(new_animated_sprite)
 		get_tree().current_scene.add_child(new_animated_sprite)
 	audio_stream_player.pitch_scale = randf_range(0.85,1.15)
 	audio_stream_player.play()
@@ -62,6 +76,7 @@ func bow(target: Vector2i, player_world_position, mouse_world_position, audio_st
 	new_projectile.target_cell = target_cell
 	new_projectile.projectile_name = 'arrow'
 	new_projectile.position = player_world_position
+	projectiles.append(new_projectile)
 	get_tree().current_scene.add_child(new_projectile)
 
 var coords_array = [
@@ -109,3 +124,20 @@ func get_sword_affected_cells(player_cell: Vector2i, direction: Vector2i) -> Arr
 		affected.append(side1)
 		affected.append(side2)
 	return affected
+
+func paused_button_pressed():
+	paused = !paused
+	for i in current_attack:
+		i.pause_animation()
+
+func _process(delta: float) -> void:
+	if not paused:
+		for projectile in projectiles:
+			var distance_to_target = projectile.global_position.distance_to(projectile.target_cell)
+			var step = projectile.speed * delta
+			if step >= distance_to_target:
+				projectile.global_position = projectile.target_cell
+				projectiles.erase(projectile)
+				projectile.queue_free()
+			else:
+				projectile.global_position += projectile.velocity * delta

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqaakmcuxnt6s"]
+
+[ext_resource type="PackedScene" uid="uid://c044v515k678n" path="res://scenes/adventure.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://d2st0v65jr2n6" path="res://scenes/GUI.tscn" id="2_h2yge"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="Adventure" parent="." instance=ExtResource("1_0xm2m")]
+
+[node name="Gui" parent="." instance=ExtResource("2_h2yge")]

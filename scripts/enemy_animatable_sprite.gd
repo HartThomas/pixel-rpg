@@ -68,4 +68,6 @@ func take_damage(amount:int):
 func die():
 	GameScript.remove_entity_from_cell((position/32).floor())
 	GameScript.astar_grid.set_point_solid((position/32).floor(), false)
+	EnemyManager.enemies.erase(self)
+	ItemManager.create_item(ItemManager.WeaponType.sword, position)
 	queue_free()
