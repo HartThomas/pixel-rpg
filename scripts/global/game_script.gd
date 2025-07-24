@@ -173,5 +173,6 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and Input.is_action_pressed('pause'):
 		EnemyManager.paused_button_pressed()
 		WeaponScript.paused_button_pressed()
+		ItemManager.paused_button_pressed()
 		if get_tree().current_scene.has_method('toggle_gui'):
 			get_tree().current_scene.toggle_gui()

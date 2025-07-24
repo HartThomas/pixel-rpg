@@ -1,8 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://2awqxg0db6id"]
+[gd_scene load_steps=5 format=3 uid="uid://2awqxg0db6id"]
 
 [ext_resource type="Script" uid="uid://bki7ak6ecwmx" path="res://scripts/items/ground_item.gd" id="1_oe8gi"]
-[ext_resource type="Texture2D" uid="uid://bl4f0ir1f8cu4" path="res://art/sprites/sword_attack.png" id="1_sxkc3"]
+[ext_resource type="Resource" uid="uid://ftins3j5xo8h" path="res://resources/items/sword.tres" id="3_dy2gb"]
+[ext_resource type="PackedScene" uid="uid://c7ryjibtmjkhv" path="res://scenes/tooltip.tscn" id="3_m7nn2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dy2gb"]
 
 [node name="GroundItem" type="Sprite2D"]
-texture = ExtResource("1_sxkc3")
 script = ExtResource("1_oe8gi")
+item_info = ExtResource("3_dy2gb")
+tooltip_scene = ExtResource("3_m7nn2")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_dy2gb")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

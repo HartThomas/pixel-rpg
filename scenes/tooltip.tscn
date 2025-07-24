@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7ryjibtmjkhv"]
+
+[ext_resource type="Texture2D" uid="uid://ltmlxi86wmp0" path="res://art/sprites/ground_item_tooltip.png" id="1_75wrl"]
+[ext_resource type="Script" uid="uid://bknxw3x2papqa" path="res://scripts/tooltip.gd" id="2_vy6iq"]
+
+[node name="Tooltip" type="NinePatchRect"]
+texture_filter = 1
+offset_right = 26.0
+offset_bottom = 23.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+mouse_filter = 1
+texture = ExtResource("1_75wrl")
+patch_margin_left = 19
+patch_margin_top = 12
+patch_margin_right = 7
+patch_margin_bottom = 11
+script = ExtResource("2_vy6iq")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
