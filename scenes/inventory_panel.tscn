@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b30707dotlvhu"]
+
+[ext_resource type="Script" uid="uid://48ippw8d6icm" path="res://scripts/items/inventory_panel.gd" id="1_v4pxl"]
+[ext_resource type="PackedScene" uid="uid://c7ryjibtmjkhv" path="res://scenes/tooltip.tscn" id="2_u4feb"]
+
+[node name="InventoryPanel" type="Panel"]
+custom_minimum_size = Vector2(16, 16)
+offset_left = 127.0
+offset_top = 58.0
+offset_right = 143.0
+offset_bottom = 74.0
+script = ExtResource("1_v4pxl")
+tooltip_scene = ExtResource("2_u4feb")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
