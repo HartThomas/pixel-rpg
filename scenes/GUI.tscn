@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2st0v65jr2n6"]
+[gd_scene load_steps=7 format=3 uid="uid://d2st0v65jr2n6"]
 
 [ext_resource type="Texture2D" uid="uid://cq20vsmtp7b7s" path="res://art/sprites/healthbar_over.png" id="1_jbthi"]
 [ext_resource type="Script" uid="uid://cbo1u2c457dwp" path="res://scripts/gui.gd" id="1_tqy5q"]
 [ext_resource type="Texture2D" uid="uid://doj8f7ashijww" path="res://art/sprites/healthbar_under.png" id="1_womn8"]
 [ext_resource type="Texture2D" uid="uid://bhtxdono6b6v6" path="res://art/sprites/healthbar_progress.png" id="3_shsct"]
 [ext_resource type="Texture2D" uid="uid://byh71nkaxkp2g" path="res://art/sprites/gui_items.png" id="5_hywd1"]
+[ext_resource type="PackedScene" uid="uid://b30707dotlvhu" path="res://scenes/inventory_panel.tscn" id="6_hywd1"]
 
 [node name="Gui" type="CanvasLayer"]
 script = ExtResource("1_tqy5q")
@@ -45,9 +46,107 @@ texture = ExtResource("5_hywd1")
 
 [node name="GridContainer" type="GridContainer" parent="Control/Container"]
 layout_mode = 2
-offset_top = 234.0
-offset_right = 200.0
-offset_bottom = 360.0
+offset_left = 37.0
+offset_top = 265.0
+offset_right = 193.0
+offset_bottom = 341.0
+columns = 8
+
+[node name="InventoryPanel" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel4" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel5" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel6" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel7" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel8" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel9" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel10" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel11" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel12" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel13" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel14" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel15" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel16" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel17" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel18" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel19" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel20" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel21" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel22" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel23" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel24" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel25" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel26" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel27" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel28" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel29" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel30" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel31" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel32" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel2" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+
+[node name="InventoryPanel3" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
 
 [node name="ItemList" type="GridContainer" parent="Control/Container"]
 layout_mode = 0

@@ -90,6 +90,12 @@ func pick_up():
 	if paused and not picked_up:
 		picked_up = true
 		skew = 0
+		var canvas_layer = get_tree().current_scene.get_node('Gui')
+		reparent(canvas_layer)
+
+func drop():
+	var current = get_tree().current_scene
+	reparent(current)
 
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:

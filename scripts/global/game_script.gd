@@ -8,6 +8,8 @@ var tile_defs = {
 	5: { type= 'ruin', size= Vector2i(1, 1), "walkable"= false},
 }
 
+var paused: bool = false
+
 var tile_weights = {
 	1: 5,  # common
 	2: 2,  # uncommon
@@ -176,3 +178,4 @@ func _input(event: InputEvent) -> void:
 		ItemManager.paused_button_pressed()
 		if get_tree().current_scene.has_method('toggle_gui'):
 			get_tree().current_scene.toggle_gui()
+		paused = true

@@ -12,5 +12,6 @@ offset_bottom = 74.0
 script = ExtResource("1_v4pxl")
 tooltip_scene = ExtResource("2_u4feb")
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
