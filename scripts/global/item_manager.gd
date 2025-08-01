@@ -27,7 +27,7 @@ func _input(event: InputEvent) -> void:
 		for item in created_items:
 			if item.item:
 				item.item._on_area_2d_mouse_exited()
-
+ 
 func paused_button_pressed():
 	for item in created_items:
 		if item.item:
@@ -39,6 +39,9 @@ func add_tooltip_to_list(item, tooltip):
 
 func clear_tooltip_list(item):
 	var index = created_items.find_custom(func(index):return index.item == item)
+	for tooltip in created_items[index].tooltip_array:
+		if tooltip:
+			tooltip.queue_free()
 	created_items[index].tooltip_array.clear()
 
 func tooltip_clicked(tooltip):
@@ -47,6 +50,7 @@ func tooltip_clicked(tooltip):
 		if not created_items[index].item.picked_up:
 			created_items[index].item.pick_up()
 			holding_item = created_items[index].item
+			clear_tooltip_list(created_items[index].item)
 		else:
 			created_items[index].item.picked_up = false
 			created_items[index].item.drop_in_world(GameScript.player_position)
@@ -60,6 +64,7 @@ func item_clicked(item):
 	if not created_items[index].item.picked_up:
 		created_items[index].item.pick_up()
 		holding_item = created_items[index].item
+		clear_tooltip_list(item)
 	else:
 		created_items[index].item.picked_up = false
 		created_items[index].item.drop_in_world(GameScript.player_position)

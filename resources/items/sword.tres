@@ -8,4 +8,5 @@ resource_local_to_scene = true
 script = ExtResource("1_h0edt")
 texture = ExtResource("2_otrck")
 item_name = "sword"
+type = "weapon"
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

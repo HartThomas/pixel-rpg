@@ -6,6 +6,7 @@ var tooltip_array = []
 var tooltip_showing: bool = false
 var sprite2
 var hovering : bool = false
+@export var unnacceptable_item_types_for_this_slot = []
 
 func insert_item(new_item):
 	item = new_item
@@ -26,9 +27,11 @@ func _on_mouse_entered() -> void:
 		tooltip.position = global_position + Vector2(8,-25)
 		tooltip.parent_item = self
 		tooltip_array.append(tooltip)
-		#ItemManager.add_tooltip_to_list(self, tooltip)
 		tooltip_showing = true
 		get_tree().current_scene.get_node('Gui').add_child(tooltip)
+	if ItemManager.holding_item and unnacceptable_item_types_for_this_slot.has(ItemManager.holding_item.item_info.type):
+		print(modulate)
+		modulate = Color.RED
 
 func _on_mouse_exited() -> void:
 	hovering=false
@@ -36,12 +39,13 @@ func _on_mouse_exited() -> void:
 		for tooltip in tooltip_array:
 			tooltip.queue_free()
 		tooltip_array.clear()
+	modulate = Color(1,1,1,1)
 
 var click_cooldown : bool = false
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if ItemManager.holding_item:
+		if ItemManager.holding_item and not unnacceptable_item_types_for_this_slot.has(ItemManager.holding_item.item_info.type):
 			click_cooldown = true
 			insert_item(ItemManager.holding_item.item_info)
 			ItemManager.remove_item_from_created_items_array(item)

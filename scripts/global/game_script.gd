@@ -178,4 +178,4 @@ func _input(event: InputEvent) -> void:
 		ItemManager.paused_button_pressed()
 		if get_tree().current_scene.has_method('toggle_gui'):
 			get_tree().current_scene.toggle_gui()
-		paused = true
+		paused = !paused

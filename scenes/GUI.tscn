@@ -44,7 +44,7 @@ offset_right = 200.0
 offset_bottom = 360.0
 texture = ExtResource("5_hywd1")
 
-[node name="GridContainer" type="GridContainer" parent="Control/Container"]
+[node name="Inventory" type="GridContainer" parent="Control/Container"]
 layout_mode = 2
 offset_left = 37.0
 offset_top = 265.0
@@ -52,103 +52,281 @@ offset_right = 193.0
 offset_bottom = 341.0
 columns = 8
 
-[node name="InventoryPanel" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel4" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel4" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel5" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel5" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel6" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel6" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel7" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel7" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel8" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel8" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel9" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel9" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel10" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel10" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel11" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel11" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel12" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel12" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel13" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel13" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel14" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel14" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel15" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel15" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel16" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel16" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel17" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel17" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel18" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel18" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel19" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel19" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel20" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel20" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel21" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel21" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel22" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel22" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel23" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel23" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel24" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel24" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel25" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel25" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel26" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel26" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel27" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel27" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel28" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel28" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel29" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel29" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel30" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel30" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel31" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel31" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel32" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel32" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel2" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel2" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="InventoryPanel3" parent="Control/Container/GridContainer" instance=ExtResource("6_hywd1")]
+[node name="InventoryPanel3" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 
-[node name="ItemList" type="GridContainer" parent="Control/Container"]
+[node name="Equipment" type="GridContainer" parent="Control/Container"]
 layout_mode = 0
-offset_right = 200.0
-offset_bottom = 232.0
+offset_left = 97.0
+offset_top = 29.0
+offset_right = 196.0
+offset_bottom = 223.0
+theme_override_constants/h_separation = 41
+columns = 2
+
+[node name="GridContainer" type="GridContainer" parent="Control/Container/Equipment"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Control/Container/Equipment/GridContainer"]
+custom_minimum_size = Vector2(16, 9)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Container/Equipment/GridContainer/Control"]
+texture_filter = 1
+layout_mode = 2
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 16.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 150
+text = "Head"
+
+[node name="InventoryPanel" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+size_flags_horizontal = 4
+unnacceptable_item_types_for_this_slot = ["weapon"]
+
+[node name="Control2" type="Control" parent="Control/Container/Equipment/GridContainer"]
+custom_minimum_size = Vector2(16, 9)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Container/Equipment/GridContainer/Control2"]
+texture_filter = 1
+layout_mode = 2
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 16.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 150
+text = "Shoulders"
+
+[node name="InventoryPanel2" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+size_flags_horizontal = 4
+unnacceptable_item_types_for_this_slot = ["weapon"]
+
+[node name="Control3" type="Control" parent="Control/Container/Equipment/GridContainer"]
+custom_minimum_size = Vector2(16, 9)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Container/Equipment/GridContainer/Control3"]
+texture_filter = 1
+layout_mode = 2
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 16.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 150
+text = "Torso"
+
+[node name="InventoryPanel3" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+size_flags_horizontal = 4
+unnacceptable_item_types_for_this_slot = ["weapon"]
+
+[node name="Control4" type="Control" parent="Control/Container/Equipment/GridContainer"]
+custom_minimum_size = Vector2(16, 9)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Container/Equipment/GridContainer/Control4"]
+texture_filter = 1
+layout_mode = 2
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 16.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 150
+text = "Hands"
+
+[node name="InventoryPanel4" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+size_flags_horizontal = 4
+unnacceptable_item_types_for_this_slot = ["weapon"]
+
+[node name="Control5" type="Control" parent="Control/Container/Equipment/GridContainer"]
+custom_minimum_size = Vector2(16, 9)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Container/Equipment/GridContainer/Control5"]
+texture_filter = 1
+layout_mode = 2
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 16.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 150
+text = "Legs"
+
+[node name="InventoryPanel5" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+size_flags_horizontal = 4
+unnacceptable_item_types_for_this_slot = ["weapon"]
+
+[node name="Control6" type="Control" parent="Control/Container/Equipment/GridContainer"]
+custom_minimum_size = Vector2(16, 9)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Container/Equipment/GridContainer/Control6"]
+texture_filter = 1
+layout_mode = 2
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 16.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 150
+text = "Feet"
+
+[node name="InventoryPanel6" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+size_flags_horizontal = 4
+unnacceptable_item_types_for_this_slot = ["weapon"]
+
+[node name="GridContainer2" type="GridContainer" parent="Control/Container/Equipment"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="Control/Container/Equipment/GridContainer2"]
+custom_minimum_size = Vector2(16, 9)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Container/Equipment/GridContainer2/Control"]
+texture_filter = 1
+layout_mode = 2
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 16.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 150
+text = "Jewelry"
+
+[node name="InventoryPanel" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+size_flags_horizontal = 4
+unnacceptable_item_types_for_this_slot = ["weapon"]
+
+[node name="InventoryPanel2" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+size_flags_horizontal = 4
+unnacceptable_item_types_for_this_slot = ["weapon"]
+
+[node name="Control2" type="Control" parent="Control/Container/Equipment/GridContainer2"]
+custom_minimum_size = Vector2(16, 9)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Container/Equipment/GridContainer2/Control2"]
+texture_filter = 1
+layout_mode = 2
+offset_top = 4.0
+offset_right = 21.0
+offset_bottom = 16.0
+scale = Vector2(0.05, 0.05)
+theme_override_colors/font_color = Color(0.270588, 0.156863, 0.235294, 1)
+theme_override_font_sizes/font_size = 150
+text = "Weapons"
+
+[node name="InventoryPanel3" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="InventoryPanel4" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
+layout_mode = 2
+size_flags_horizontal = 4

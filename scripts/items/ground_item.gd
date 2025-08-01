@@ -74,7 +74,8 @@ func _on_area_2d_mouse_entered() -> void:
 func _on_area_2d_mouse_exited() -> void:
 	if not ItemManager.alt_pressed:
 		for tt in tooltip_array:
-			tt.queue_free()
+			if tt:
+				tt.queue_free()
 		tooltip_array.clear()
 		ItemManager.clear_tooltip_list(self)
 		tooltip_showing = false
