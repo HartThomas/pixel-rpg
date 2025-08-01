@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://beumy7iayrlx0"]
+
+[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_usf5b"]
+[ext_resource type="Texture2D" uid="uid://c5jjwkb1on8qs" path="res://art/sprites/plate_mail.png" id="2_mtpwv"]
+
+[resource]
+script = ExtResource("1_usf5b")
+texture = ExtResource("2_mtpwv")
+item_name = "plate mail"
+type = "torso"
+metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

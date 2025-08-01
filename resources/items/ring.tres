@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://ryg28p1p3xrb"]
+
+[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_c6a7i"]
+[ext_resource type="Texture2D" uid="uid://cia04q47s2jyb" path="res://art/sprites/ring.png" id="2_fpx3g"]
+
+[resource]
+script = ExtResource("1_c6a7i")
+texture = ExtResource("2_fpx3g")
+item_name = "ring"
+type = "jewelry"
+metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

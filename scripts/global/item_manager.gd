@@ -1,14 +1,20 @@
 extends Node
 
-enum WeaponType {bow, sword, hammer}
+const item_types = [
+	"sword", "cap", "cape", "plate_mail",
+	"ring", "mittens", "boots", "pantaloons"
+]
 var created_items = []
 var item_scene :PackedScene = load("res://scenes/ground_item.tscn")
 var holding_item 
 var alt_pressed: bool = false
 
-func create_item(type :WeaponType, position: Vector2):
+func generate_item():
+	return item_types.pick_random()
+
+func create_item(type, position: Vector2):
 	var new_item = item_scene.instantiate()
-	var item_info = load("res://resources/items/sword.tres").duplicate()
+	var item_info = load("res://resources/items/%s.tres" % [type])
 	new_item.cell = position
 	new_item.item_info = item_info
 	if GameScript.paused:

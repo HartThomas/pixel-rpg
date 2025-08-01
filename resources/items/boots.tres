@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://bul4coobk7lrr"]
+
+[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_qi7fi"]
+[ext_resource type="Texture2D" uid="uid://bofdhh0cs7bog" path="res://art/sprites/boots.png" id="2_tywqi"]
+
+[resource]
+script = ExtResource("1_qi7fi")
+texture = ExtResource("2_tywqi")
+item_name = "boots"
+type = "feet"
+metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

@@ -178,7 +178,7 @@ text = "Head"
 [node name="InventoryPanel" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types_for_this_slot = ["weapon"]
+unnacceptable_item_types = ["weapon", "shoulders", "torso", "hands", "legs", "feet", "jewelry"]
 
 [node name="Control2" type="Control" parent="Control/Container/Equipment/GridContainer"]
 custom_minimum_size = Vector2(16, 9)
@@ -198,7 +198,7 @@ text = "Shoulders"
 [node name="InventoryPanel2" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types_for_this_slot = ["weapon"]
+unnacceptable_item_types = ["weapon", "head", "torso", "hands", "legs", "feet", "jewelry"]
 
 [node name="Control3" type="Control" parent="Control/Container/Equipment/GridContainer"]
 custom_minimum_size = Vector2(16, 9)
@@ -218,7 +218,7 @@ text = "Torso"
 [node name="InventoryPanel3" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types_for_this_slot = ["weapon"]
+unnacceptable_item_types = ["weapon", "head", "shoulders", "hands", "legs", "feet", "jewelry"]
 
 [node name="Control4" type="Control" parent="Control/Container/Equipment/GridContainer"]
 custom_minimum_size = Vector2(16, 9)
@@ -238,7 +238,7 @@ text = "Hands"
 [node name="InventoryPanel4" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types_for_this_slot = ["weapon"]
+unnacceptable_item_types = ["weapon", "head", "shoulders", "torso", "legs", "feet", "jewelry"]
 
 [node name="Control5" type="Control" parent="Control/Container/Equipment/GridContainer"]
 custom_minimum_size = Vector2(16, 9)
@@ -258,7 +258,7 @@ text = "Legs"
 [node name="InventoryPanel5" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types_for_this_slot = ["weapon"]
+unnacceptable_item_types = ["weapon", "head", "shoulders", "torso", "hands", "feet", "jewelry"]
 
 [node name="Control6" type="Control" parent="Control/Container/Equipment/GridContainer"]
 custom_minimum_size = Vector2(16, 9)
@@ -278,7 +278,7 @@ text = "Feet"
 [node name="InventoryPanel6" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types_for_this_slot = ["weapon"]
+unnacceptable_item_types = ["weapon", "head", "shoulders", "torso", "hands", "legs", "jewelry"]
 
 [node name="GridContainer2" type="GridContainer" parent="Control/Container/Equipment"]
 layout_mode = 2
@@ -301,12 +301,12 @@ text = "Jewelry"
 [node name="InventoryPanel" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types_for_this_slot = ["weapon"]
+unnacceptable_item_types = ["weapon", "head", "shoulders", "torso", "hands", "legs", "feet"]
 
 [node name="InventoryPanel2" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types_for_this_slot = ["weapon"]
+unnacceptable_item_types = ["weapon", "head", "shoulders", "torso", "hands", "legs", "feet"]
 
 [node name="Control2" type="Control" parent="Control/Container/Equipment/GridContainer2"]
 custom_minimum_size = Vector2(16, 9)
@@ -326,7 +326,9 @@ text = "Weapons"
 [node name="InventoryPanel3" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
+unnacceptable_item_types = ["head", "shoulders", "torso", "hands", "legs", "feet", "jewelry"]
 
 [node name="InventoryPanel4" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
+unnacceptable_item_types = ["head", "shoulders", "torso", "hands", "legs", "feet", "jewelry"]

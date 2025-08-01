@@ -6,7 +6,7 @@ var tooltip_array = []
 var tooltip_showing: bool = false
 var sprite2
 var hovering : bool = false
-@export var unnacceptable_item_types_for_this_slot = []
+@export var unnacceptable_item_types = []
 
 func insert_item(new_item):
 	item = new_item
@@ -29,8 +29,7 @@ func _on_mouse_entered() -> void:
 		tooltip_array.append(tooltip)
 		tooltip_showing = true
 		get_tree().current_scene.get_node('Gui').add_child(tooltip)
-	if ItemManager.holding_item and unnacceptable_item_types_for_this_slot.has(ItemManager.holding_item.item_info.type):
-		print(modulate)
+	if ItemManager.holding_item and unnacceptable_item_types.has(ItemManager.holding_item.item_info.type):
 		modulate = Color.RED
 
 func _on_mouse_exited() -> void:
@@ -45,14 +44,14 @@ var click_cooldown : bool = false
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if ItemManager.holding_item and not unnacceptable_item_types_for_this_slot.has(ItemManager.holding_item.item_info.type):
+		if ItemManager.holding_item and not unnacceptable_item_types.has(ItemManager.holding_item.item_info.type):
 			click_cooldown = true
 			insert_item(ItemManager.holding_item.item_info)
 			ItemManager.remove_item_from_created_items_array(item)
 			ItemManager.holding_item.queue_free()
 			ItemManager.holding_item = null
 		elif item:
-			ItemManager.create_item(ItemManager.WeaponType.sword, get_global_mouse_position())
+			ItemManager.create_item(item.item_name, get_global_mouse_position())
 			ItemManager.item_clicked(ItemManager.created_items[ItemManager.created_items.size() - 1].item)
 			_on_mouse_exited()
 			item = null

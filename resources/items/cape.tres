@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://r35smygqg3vn"]
+
+[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_uae5w"]
+[ext_resource type="Texture2D" uid="uid://baujslj1h4va" path="res://art/sprites/cape.png" id="2_lpphj"]
+
+[resource]
+script = ExtResource("1_uae5w")
+texture = ExtResource("2_lpphj")
+item_name = "cape"
+type = "shoulders"
+metadata/_custom_type_script = "uid://bmnsjevp0nwsv"
