@@ -9,15 +9,37 @@ var hovering : bool = false
 @export var unnacceptable_item_types = []
 
 func insert_item(new_item):
-	item = new_item
-	var texture = load("res://art/sprites/%s.png" % [new_item.item_name])
-	var sprite = TextureRect.new()
-	sprite.texture = texture
-	sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	sprite.stretch_mode = TextureRect.STRETCH_SCALE
-	sprite.size = Vector2(16, 16)
-	add_child(sprite)
-	sprite2 = sprite
+	if item:
+		ItemManager.remove_item_from_created_items_array(item)
+		ItemManager.holding_item.queue_free()
+		ItemManager.holding_item = null
+		var item_in_inventory = item.duplicate()
+		ItemManager.create_item(item_in_inventory.item_name.replace(' ', '_'), get_global_mouse_position())
+		item = new_item
+		var texture = load("res://art/sprites/%s.png" % [new_item.item_name.replace(' ', '_')])
+		for child in get_children():
+			child.queue_free()
+		var sprite = TextureRect.new()
+		sprite.texture = texture
+		sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		sprite.stretch_mode = TextureRect.STRETCH_SCALE
+		sprite.size = Vector2(16, 16)
+		add_child(sprite)
+		ItemManager.item_clicked(ItemManager.created_items[ItemManager.created_items.size() - 1].item)
+		_on_mouse_exited()
+	else:
+		item = new_item
+		var texture = load("res://art/sprites/%s.png" % [new_item.item_name.replace(' ', '_')])
+		var sprite = TextureRect.new()
+		sprite.texture = texture
+		sprite.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		sprite.stretch_mode = TextureRect.STRETCH_SCALE
+		sprite.size = Vector2(16, 16)
+		add_child(sprite)
+		sprite2 = sprite
+		ItemManager.remove_item_from_created_items_array(item)
+		ItemManager.holding_item.queue_free()
+		ItemManager.holding_item = null
 
 func _on_mouse_entered() -> void:
 	hovering = true
@@ -47,11 +69,8 @@ func _on_gui_input(event: InputEvent) -> void:
 		if ItemManager.holding_item and not unnacceptable_item_types.has(ItemManager.holding_item.item_info.type):
 			click_cooldown = true
 			insert_item(ItemManager.holding_item.item_info)
-			ItemManager.remove_item_from_created_items_array(item)
-			ItemManager.holding_item.queue_free()
-			ItemManager.holding_item = null
 		elif item:
-			ItemManager.create_item(item.item_name, get_global_mouse_position())
+			ItemManager.create_item(item.item_name.replace(' ', '_'), get_global_mouse_position())
 			ItemManager.item_clicked(ItemManager.created_items[ItemManager.created_items.size() - 1].item)
 			_on_mouse_exited()
 			item = null
