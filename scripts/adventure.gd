@@ -27,7 +27,6 @@ func _ready():
 	background.height = height
 	background.resize()
 	background.map_clicked.connect(cell_clicked)
-	highlight_cell.weapon = WeaponScript.weapon
 	highlight_cell.load_texture()
 	create_player()
 	EnemyManager.create_enemies(5)
@@ -69,7 +68,7 @@ var coords_array = [
 
 func highlight_best_cell():
 	var target_cell :Vector2i
-	if WeaponScript.weapon == 'bow':
+	if InventoryManager.equipped[8].value.item_name == 'bow':
 		var mouse_pos = camera_2d.get_global_mouse_position()
 		target_cell = Vector2(
 			floor(mouse_pos.x / 32.0) * 32.0 + 16,
@@ -78,6 +77,7 @@ func highlight_best_cell():
 	else:
 		target_cell = find_first_cell_toward_mouse_click()
 	highlight_cell.global_position = target_cell
+	highlight_cell.load_texture()
 	highlight_cell.visible = true
 
 func find_first_cell_toward_mouse_click():

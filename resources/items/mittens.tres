@@ -8,4 +8,5 @@ script = ExtResource("1_holkc")
 texture = ExtResource("2_n680m")
 item_name = "mittens"
 type = "hands"
+input_slots = Array[String](["hands"])
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

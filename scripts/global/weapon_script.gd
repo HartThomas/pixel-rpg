@@ -1,6 +1,4 @@
 extends Node
-var weapon: String = 'sword'
-@onready var weapon_scene :PackedScene = load("res://scenes/%s.tscn" % [weapon])
 @onready var projectile_scene : PackedScene = load("res://scenes/arrow.tscn")
 @onready var animatable_sprite_scene :PackedScene = load("res://scenes/animatable_sprite.tscn")
 
@@ -10,14 +8,15 @@ var current_attack: Array = []
 var projectiles = []
 
 func hammer(target: Vector2i, player_world_position, mouse_world_position,audio_stream_player, lights):
-	var attack_instance = weapon_scene.instantiate()
+	var hammer_scene = load("res://scenes/hammer.tscn") as PackedScene
+	var attack_instance = hammer_scene.instantiate()
 	var target_cell = find_first_cell_toward_mouse_click(player_world_position, mouse_world_position)
 	attack_instance.player_cell = player_world_position/32
 	attack_instance.target_cell = target_cell / 32
 	var affected_cells = attack_instance.execute()
 	for cell in affected_cells:
 		var new_animated_sprite = animatable_sprite_scene.instantiate()
-		new_animated_sprite.sprite_name = weapon
+		new_animated_sprite.sprite_name = InventoryManager.equipped[8].value.item_name
 		new_animated_sprite.position = ( cell * 32) + Vector2i(16.0,16.0)
 		for i in lights:
 			new_animated_sprite.point_lights.append(i)
@@ -28,7 +27,8 @@ func hammer(target: Vector2i, player_world_position, mouse_world_position,audio_
 		get_tree().current_scene.add_child(new_animated_sprite)
 
 func sword(target: Vector2i,player_world_position, mouse_world_position, audio_stream_player, lights):
-	var attack_instance = weapon_scene.instantiate()
+	var sword_scene = load("res://scenes/sword.tscn") as PackedScene
+	var attack_instance = sword_scene.instantiate()
 	var target_cell = find_first_cell_toward_mouse_click(player_world_position, mouse_world_position)
 	attack_instance.player_cell = player_world_position/32
 	attack_instance.target_cell = target_cell / 32
@@ -96,7 +96,7 @@ func find_first_cell_toward_mouse_click(player_world_position, mouse_world_posit
 	return player_world_position + (best_offset * 32)
 
 func cell_clicked(target, player_node, camera_2d, audio_stream_player, lights):
-	call(weapon, target, player_node, camera_2d, audio_stream_player, lights)
+	call(InventoryManager.equipped[8].value.item_name, target, player_node, camera_2d, audio_stream_player, lights)
 
 func on_weapon_animation_finished(cells: Array[Vector2i]):
 	for cell in cells:

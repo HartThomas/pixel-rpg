@@ -8,4 +8,5 @@ script = ExtResource("1_kxkum")
 texture = ExtResource("2_fjj7t")
 item_name = "pantaloons"
 type = "legs"
+input_slots = Array[String](["legs"])
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

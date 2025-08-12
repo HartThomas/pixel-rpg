@@ -2,14 +2,16 @@ extends Node
 
 const item_types = [
 	"sword", "cap", "cape", "plate_mail",
-	"ring", "mittens", "boots", "pantaloons"
+	"ring", "mittens", "boots", "pantaloons", 
+	"hammer", "bow"
 ]
+
 var created_items = []
 var item_scene :PackedScene = load("res://scenes/ground_item.tscn")
 var holding_item 
 var alt_pressed: bool = false
 
-func generate_item():
+func generate_item() -> String:
 	return item_types.pick_random()
 
 func create_item(type, position: Vector2):
@@ -51,7 +53,7 @@ func clear_tooltip_list(item):
 	created_items[index].tooltip_array.clear()
 
 func tooltip_clicked(tooltip):
-	var index = created_items.find_custom(func(index): return index.tooltip_array.find(tooltip))
+	var index = created_items.find_custom(func(index): return index.tooltip_array.find(tooltip) != -1)
 	if created_items[index].item:
 		if not created_items[index].item.picked_up:
 			created_items[index].item.pick_up()

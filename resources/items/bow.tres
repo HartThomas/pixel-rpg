@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dh452t53c5j5g"]
+
+[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_keg3j"]
+[ext_resource type="Texture2D" uid="uid://u5mdy45cm4al" path="res://art/sprites/bow_attack.png" id="2_nbp8g"]
+
+[resource]
+script = ExtResource("1_keg3j")
+texture = ExtResource("2_nbp8g")
+item_name = "bow"
+type = "weapon"
+input_slots = Array[String](["left_hand", "right_hand"])
+metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

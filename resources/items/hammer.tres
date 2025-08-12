@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dk6hcl4qkedu2"]
+
+[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_yji5g"]
+[ext_resource type="Texture2D" uid="uid://dwipmfieaa1j" path="res://art/sprites/hammer.png" id="2_7khx6"]
+
+[resource]
+script = ExtResource("1_yji5g")
+texture = ExtResource("2_7khx6")
+item_name = "hammer"
+type = "weapon"
+input_slots = Array[String](["left_hand", "right_hand"])
+metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

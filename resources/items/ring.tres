@@ -8,4 +8,5 @@ script = ExtResource("1_c6a7i")
 texture = ExtResource("2_fpx3g")
 item_name = "ring"
 type = "jewelry"
+input_slots = Array[String](["left_jewelry", "right_jewelry"])
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

@@ -21,6 +21,7 @@ EnemyManager="*res://scripts/global/enemy_manager.gd"
 GameScript="*res://scripts/global/game_script.gd"
 WeaponScript="*res://scripts/global/weapon_script.gd"
 ItemManager="*res://scripts/global/item_manager.gd"
+InventoryManager="*res://scripts/global/inventory_manager.gd"
 
 [display]
 

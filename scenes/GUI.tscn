@@ -54,99 +54,131 @@ columns = 8
 
 [node name="InventoryPanel" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 10
 
 [node name="InventoryPanel4" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 11
 
 [node name="InventoryPanel5" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 12
 
 [node name="InventoryPanel6" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 13
 
 [node name="InventoryPanel7" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 14
 
 [node name="InventoryPanel8" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 15
 
 [node name="InventoryPanel9" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 16
 
 [node name="InventoryPanel10" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 17
 
 [node name="InventoryPanel11" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 18
 
 [node name="InventoryPanel12" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 19
 
 [node name="InventoryPanel13" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 20
 
 [node name="InventoryPanel14" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 21
 
 [node name="InventoryPanel15" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 22
 
 [node name="InventoryPanel16" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 23
 
 [node name="InventoryPanel17" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 24
 
 [node name="InventoryPanel18" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 25
 
 [node name="InventoryPanel19" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 26
 
 [node name="InventoryPanel20" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 27
 
 [node name="InventoryPanel21" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 28
 
 [node name="InventoryPanel22" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 29
 
 [node name="InventoryPanel23" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 30
 
 [node name="InventoryPanel24" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 31
 
 [node name="InventoryPanel25" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 32
 
 [node name="InventoryPanel26" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 33
 
 [node name="InventoryPanel27" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 34
 
 [node name="InventoryPanel28" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 35
 
 [node name="InventoryPanel29" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 36
 
 [node name="InventoryPanel30" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 37
 
 [node name="InventoryPanel31" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 38
 
 [node name="InventoryPanel32" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 39
 
 [node name="InventoryPanel2" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 40
 
 [node name="InventoryPanel3" parent="Control/Container/Inventory" instance=ExtResource("6_hywd1")]
 layout_mode = 2
+inventory_ref = 41
 
 [node name="Equipment" type="GridContainer" parent="Control/Container"]
 layout_mode = 0
@@ -178,7 +210,6 @@ text = "Head"
 [node name="InventoryPanel" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types = ["weapon", "shoulders", "torso", "hands", "legs", "feet", "jewelry"]
 
 [node name="Control2" type="Control" parent="Control/Container/Equipment/GridContainer"]
 custom_minimum_size = Vector2(16, 9)
@@ -198,7 +229,7 @@ text = "Shoulders"
 [node name="InventoryPanel2" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types = ["weapon", "head", "torso", "hands", "legs", "feet", "jewelry"]
+inventory_ref = 1
 
 [node name="Control3" type="Control" parent="Control/Container/Equipment/GridContainer"]
 custom_minimum_size = Vector2(16, 9)
@@ -218,7 +249,7 @@ text = "Torso"
 [node name="InventoryPanel3" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types = ["weapon", "head", "shoulders", "hands", "legs", "feet", "jewelry"]
+inventory_ref = 2
 
 [node name="Control4" type="Control" parent="Control/Container/Equipment/GridContainer"]
 custom_minimum_size = Vector2(16, 9)
@@ -238,7 +269,7 @@ text = "Hands"
 [node name="InventoryPanel4" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types = ["weapon", "head", "shoulders", "torso", "legs", "feet", "jewelry"]
+inventory_ref = 3
 
 [node name="Control5" type="Control" parent="Control/Container/Equipment/GridContainer"]
 custom_minimum_size = Vector2(16, 9)
@@ -258,7 +289,7 @@ text = "Legs"
 [node name="InventoryPanel5" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types = ["weapon", "head", "shoulders", "torso", "hands", "feet", "jewelry"]
+inventory_ref = 4
 
 [node name="Control6" type="Control" parent="Control/Container/Equipment/GridContainer"]
 custom_minimum_size = Vector2(16, 9)
@@ -278,7 +309,7 @@ text = "Feet"
 [node name="InventoryPanel6" parent="Control/Container/Equipment/GridContainer" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types = ["weapon", "head", "shoulders", "torso", "hands", "legs", "jewelry"]
+inventory_ref = 5
 
 [node name="GridContainer2" type="GridContainer" parent="Control/Container/Equipment"]
 layout_mode = 2
@@ -301,12 +332,12 @@ text = "Jewelry"
 [node name="InventoryPanel" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types = ["weapon", "head", "shoulders", "torso", "hands", "legs", "feet"]
+inventory_ref = 6
 
 [node name="InventoryPanel2" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types = ["weapon", "head", "shoulders", "torso", "hands", "legs", "feet"]
+inventory_ref = 7
 
 [node name="Control2" type="Control" parent="Control/Container/Equipment/GridContainer2"]
 custom_minimum_size = Vector2(16, 9)
@@ -326,9 +357,9 @@ text = "Weapons"
 [node name="InventoryPanel3" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types = ["head", "shoulders", "torso", "hands", "legs", "feet", "jewelry"]
+inventory_ref = 8
 
 [node name="InventoryPanel4" parent="Control/Container/Equipment/GridContainer2" instance=ExtResource("6_hywd1")]
 layout_mode = 2
 size_flags_horizontal = 4
-unnacceptable_item_types = ["head", "shoulders", "torso", "hands", "legs", "feet", "jewelry"]
+inventory_ref = 9

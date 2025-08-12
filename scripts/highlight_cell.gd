@@ -3,7 +3,6 @@ extends Sprite2D
 
 var fluctuating_up = true
 var transparency = 0.5
-var weapon : String = 'hammer'
 
 func _ready() -> void:
 	load_texture()
@@ -21,5 +20,5 @@ func _process(delta: float) -> void:
 	self_modulate.a = transparency
 
 func load_texture() :
-	var attack_texture = load("res://art/sprites/%s_attack.png" % [weapon])
+	var attack_texture = load("res://art/sprites/%s_attack.png" % [InventoryManager.equipped[8].value.item_name])
 	attack.texture = attack_texture

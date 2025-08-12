@@ -5,6 +5,7 @@ class_name Item
 @export var texture: Texture2D
 @export var item_name: String
 @export var type: String
+@export var input_slots: Array[String] = []
 
 #func _init(name, tex):
 	#texture = tex

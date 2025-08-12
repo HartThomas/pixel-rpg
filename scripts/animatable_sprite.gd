@@ -76,7 +76,7 @@ func _ready() -> void:
 	#affected_cells.append(Vector2i(position)/32)
 
 func _on_animation_finished():
-	var weapon = WeaponScript.weapon
+	var weapon = InventoryManager.equipped[8].value.item_name
 	WeaponScript.on_weapon_animation_finished(affected_cells)
 	WeaponScript.current_attack.erase(self)
 	queue_free()

@@ -6,7 +6,11 @@ var tooltip_array = []
 var tooltip_showing: bool = false
 var sprite2
 var hovering : bool = false
-@export var unnacceptable_item_types = []
+@export var inventory_ref : int
+
+func _ready() -> void:
+	if InventoryManager.equipped[inventory_ref].value:
+		insert_item(InventoryManager.equipped[inventory_ref].value)
 
 func insert_item(new_item):
 	if item:
@@ -16,6 +20,7 @@ func insert_item(new_item):
 		var item_in_inventory = item.duplicate()
 		ItemManager.create_item(item_in_inventory.item_name.replace(' ', '_'), get_global_mouse_position())
 		item = new_item
+		InventoryManager.equipped[inventory_ref].value = new_item
 		var texture = load("res://art/sprites/%s.png" % [new_item.item_name.replace(' ', '_')])
 		for child in get_children():
 			child.queue_free()
@@ -29,6 +34,7 @@ func insert_item(new_item):
 		_on_mouse_exited()
 	else:
 		item = new_item
+		InventoryManager.equipped[inventory_ref].value = new_item
 		var texture = load("res://art/sprites/%s.png" % [new_item.item_name.replace(' ', '_')])
 		var sprite = TextureRect.new()
 		sprite.texture = texture
@@ -38,7 +44,8 @@ func insert_item(new_item):
 		add_child(sprite)
 		sprite2 = sprite
 		ItemManager.remove_item_from_created_items_array(item)
-		ItemManager.holding_item.queue_free()
+		if ItemManager.holding_item:
+			ItemManager.holding_item.queue_free()
 		ItemManager.holding_item = null
 
 func _on_mouse_entered() -> void:
@@ -51,7 +58,7 @@ func _on_mouse_entered() -> void:
 		tooltip_array.append(tooltip)
 		tooltip_showing = true
 		get_tree().current_scene.get_node('Gui').add_child(tooltip)
-	if ItemManager.holding_item and unnacceptable_item_types.has(ItemManager.holding_item.item_info.type):
+	if ItemManager.holding_item and inventory_ref < 10 and not ItemManager.holding_item.item_info.input_slots.has(InventoryManager.equipped[inventory_ref].name):
 		modulate = Color.RED
 
 func _on_mouse_exited() -> void:
@@ -62,19 +69,23 @@ func _on_mouse_exited() -> void:
 		tooltip_array.clear()
 	modulate = Color(1,1,1,1)
 
-var click_cooldown : bool = false
+#var click_cooldown : bool = false
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if ItemManager.holding_item and not unnacceptable_item_types.has(ItemManager.holding_item.item_info.type):
-			click_cooldown = true
-			insert_item(ItemManager.holding_item.item_info)
+		if ItemManager.holding_item:
+			if inventory_ref >= 10 or ItemManager.holding_item.item_info.input_slots.has(InventoryManager.equipped[inventory_ref].name):
+				insert_item(ItemManager.holding_item.item_info)
+		elif ItemManager.holding_item:
+			if inventory_ref >= 10 and not ItemManager.holding_item.item_info.input_slots.has(InventoryManager.equipped[inventory_ref].name):
+				pass
 		elif item:
 			ItemManager.create_item(item.item_name.replace(' ', '_'), get_global_mouse_position())
 			ItemManager.item_clicked(ItemManager.created_items[ItemManager.created_items.size() - 1].item)
 			_on_mouse_exited()
 			item = null
+			InventoryManager.equipped[inventory_ref].value = null
 			for child in get_children():
 				child.queue_free()
-	elif event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		click_cooldown = false
+	#elif event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		#click_cooldown = false

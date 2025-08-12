@@ -8,4 +8,5 @@ script = ExtResource("1_usf5b")
 texture = ExtResource("2_mtpwv")
 item_name = "plate mail"
 type = "torso"
+input_slots = Array[String](["torso"])
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

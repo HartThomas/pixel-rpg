@@ -13,8 +13,8 @@ var click_cooldown : bool = false
 @export var rise_height := 32.0
 @export var arc_duration := 0.4
 @export var arc_horizontal_offset := Vector2(12, 0)
-
 @export var tooltip_scene :PackedScene
+
 var tooltip_showing : bool = false
 var tooltip_array = []
 var tween = create_tween()
