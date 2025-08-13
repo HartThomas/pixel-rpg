@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://ftins3j5xo8h"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://ftins3j5xo8h"]
 
 [ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_5eq2r"]
-[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_h0edt"]
+[ext_resource type="Script" uid="uid://d1yfffylnx8y4" path="res://scripts/classnames/weapon.gd" id="2_5eq2r"]
 [ext_resource type="Texture2D" uid="uid://bqs75kn1x2stn" path="res://art/sprites/sword.png" id="2_otrck"]
 
 [resource]
 resource_local_to_scene = true
-script = ExtResource("1_h0edt")
+script = ExtResource("2_5eq2r")
+base_damage = 10
 texture = ExtResource("2_otrck")
 item_name = "sword"
 type = "weapon"

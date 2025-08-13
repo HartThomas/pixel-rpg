@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dk6hcl4qkedu2"]
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dk6hcl4qkedu2"]
 
-[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_yji5g"]
+[ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_f063l"]
 [ext_resource type="Texture2D" uid="uid://dwipmfieaa1j" path="res://art/sprites/hammer.png" id="2_7khx6"]
+[ext_resource type="Script" uid="uid://d1yfffylnx8y4" path="res://scripts/classnames/weapon.gd" id="2_uvpse"]
 
 [resource]
-script = ExtResource("1_yji5g")
+script = ExtResource("2_uvpse")
+base_damage = 10
 texture = ExtResource("2_7khx6")
 item_name = "hammer"
 type = "weapon"
 input_slots = Array[String](["left_hand", "right_hand"])
+abilities = Array[ExtResource("1_f063l")]([])
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

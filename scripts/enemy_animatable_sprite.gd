@@ -78,4 +78,6 @@ func generate_loot() -> Item:
 	print("Loot dropped: %s" % loot.item_name)
 	for ability in loot.abilities:
 		print("- Ability: %s" % ability.name + ' - ' + ability.description)
+	if loot is Weapon:
+		loot.apply_modifiers()
 	return loot 

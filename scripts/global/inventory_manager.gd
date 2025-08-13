@@ -17,4 +17,5 @@ func _ready() -> void:
 	for i in range(32):
 		equipped.append({name= 'slot%s' % [i],value=null})
 	var sword_resource = load("res://resources/items/sword.tres")
-	equipped[8].value = sword_resource
+	sword_resource.apply_modifiers()
+	equipped[8].value = sword_resource 

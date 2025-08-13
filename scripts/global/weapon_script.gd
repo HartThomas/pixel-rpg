@@ -76,6 +76,8 @@ func bow(target: Vector2i, player_world_position, mouse_world_position, audio_st
 	new_projectile.target_cell = target_cell
 	new_projectile.projectile_name = 'arrow'
 	new_projectile.position = player_world_position
+	var weapon : Weapon = InventoryManager.equipped[8].value
+	new_projectile.damage = weapon.final_damage
 	projectiles.append(new_projectile)
 	get_tree().current_scene.add_child(new_projectile)
 
@@ -102,7 +104,8 @@ func on_weapon_animation_finished(cells: Array[Vector2i]):
 	for cell in cells:
 		var entity = GameScript.get_entity_from_cell(cell)
 		if entity and entity.has_method('take_damage'):
-			entity.take_damage(10)
+			var weapon: Weapon = InventoryManager.equipped[8].value
+			entity.take_damage(weapon.final_damage)
 
 func get_sword_affected_cells(player_cell: Vector2i, direction: Vector2i) -> Array[Vector2i]:
 	var affected : Array[Vector2i] = []
