@@ -69,5 +69,13 @@ func die():
 	GameScript.remove_entity_from_cell((position/32).floor())
 	GameScript.astar_grid.set_point_solid((position/32).floor(), false)
 	EnemyManager.enemies.erase(self)
-	ItemManager.create_item(ItemManager.generate_item(), position)
+	ItemManager.create_item(generate_loot(), position)
 	queue_free()
+
+func generate_loot() -> Item:
+	var loot_gen = LootGenerator.new()
+	var loot = loot_gen.generate_loot(enemy_data.loot_table)
+	print("Loot dropped: %s" % loot.item_name)
+	for ability in loot.abilities:
+		print("- Ability: %s" % ability.name + ' - ' + ability.description)
+	return loot 

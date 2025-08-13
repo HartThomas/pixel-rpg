@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="LootTable" load_steps=12 format=3 uid="uid://dnl4tbw6pp5xt"]
+
+[ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_ohjdv"]
+[ext_resource type="Resource" uid="uid://dn7mfsnq3y3gb" path="res://resources/abilities/heavy.tres" id="2_66cnp"]
+[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="2_bk718"]
+[ext_resource type="Script" uid="uid://nrvpdo0v0rin" path="res://scripts/classnames/loot_table.gd" id="3_nregt"]
+[ext_resource type="Resource" uid="uid://utk1aiwenf57" path="res://resources/abilities/sharp.tres" id="3_rk755"]
+[ext_resource type="Resource" uid="uid://bul4coobk7lrr" path="res://resources/items/boots.tres" id="3_w4m3v"]
+[ext_resource type="Resource" uid="uid://dd0vx7kos2o37" path="res://resources/items/cap.tres" id="4_662ml"]
+[ext_resource type="Resource" uid="uid://dh452t53c5j5g" path="res://resources/items/bow.tres" id="5_66cnp"]
+[ext_resource type="Resource" uid="uid://r35smygqg3vn" path="res://resources/items/cape.tres" id="6_rk755"]
+[ext_resource type="Resource" uid="uid://c43esnpqse78w" path="res://resources/items/mittens.tres" id="7_0c6f8"]
+[ext_resource type="Resource" uid="uid://dmyj7olrh2x7" path="res://resources/items/pantaloons.tres" id="8_65hty"]
+
+[resource]
+script = ExtResource("3_nregt")
+base_items = Array[ExtResource("2_bk718")]([ExtResource("3_w4m3v"), ExtResource("4_662ml"), ExtResource("5_66cnp"), ExtResource("6_rk755"), ExtResource("7_0c6f8"), ExtResource("8_65hty")])
+ability_pool = Array[ExtResource("1_ohjdv")]([ExtResource("2_66cnp"), ExtResource("3_rk755")])
+min_abilities = 0
+max_abilities = 2
+metadata/_custom_type_script = "uid://nrvpdo0v0rin"

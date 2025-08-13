@@ -7,3 +7,4 @@ class_name Enemy
 @export var texture :Texture2D
 @export var position : Vector2i = Vector2i(6,6)
 @export var speed: float = 5.0
+@export var loot_table : LootTable

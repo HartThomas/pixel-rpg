@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dd0vx7kos2o37"]
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dd0vx7kos2o37"]
 
+[ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_0j4wk"]
 [ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_qphsf"]
 [ext_resource type="Texture2D" uid="uid://rorocd4avu71" path="res://art/sprites/cap.png" id="2_kwuxw"]
 
@@ -9,4 +10,5 @@ texture = ExtResource("2_kwuxw")
 item_name = "cap"
 type = "head"
 input_slots = Array[String](["head"])
+abilities = Array[ExtResource("1_0j4wk")]([])
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

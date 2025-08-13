@@ -14,9 +14,8 @@ var alt_pressed: bool = false
 func generate_item() -> String:
 	return item_types.pick_random()
 
-func create_item(type, position: Vector2):
+func create_item(item_info, position: Vector2):
 	var new_item = item_scene.instantiate()
-	var item_info = load("res://resources/items/%s.tres" % [type])
 	new_item.cell = position
 	new_item.item_info = item_info
 	if GameScript.paused:

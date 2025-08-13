@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://utk1aiwenf57"]
+
+[ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_ns2od"]
+
+[resource]
+script = ExtResource("1_ns2od")
+name = "Sharp"
+description = "Adds 2 extra damage"
+special_effect = ""
+damage_bonus = 1
+attack_speed_bonus = 0.0
+metadata/_custom_type_script = "uid://ba3mc6fdm3aqu"

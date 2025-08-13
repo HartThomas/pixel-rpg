@@ -18,7 +18,7 @@ func insert_item(new_item):
 		ItemManager.holding_item.queue_free()
 		ItemManager.holding_item = null
 		var item_in_inventory = item.duplicate()
-		ItemManager.create_item(item_in_inventory.item_name.replace(' ', '_'), get_global_mouse_position())
+		ItemManager.create_item(item_in_inventory, get_global_mouse_position())
 		item = new_item
 		InventoryManager.equipped[inventory_ref].value = new_item
 		var texture = load("res://art/sprites/%s.png" % [new_item.item_name.replace(' ', '_')])
@@ -80,7 +80,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			if inventory_ref >= 10 and not ItemManager.holding_item.item_info.input_slots.has(InventoryManager.equipped[inventory_ref].name):
 				pass
 		elif item:
-			ItemManager.create_item(item.item_name.replace(' ', '_'), get_global_mouse_position())
+			ItemManager.create_item(item, get_global_mouse_position())
 			ItemManager.item_clicked(ItemManager.created_items[ItemManager.created_items.size() - 1].item)
 			_on_mouse_exited()
 			item = null
