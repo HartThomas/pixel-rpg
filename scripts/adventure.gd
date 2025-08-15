@@ -105,4 +105,3 @@ func toggle_gui():
 		gui.show_gui()
 	else:
 		gui.hide_gui()
-	

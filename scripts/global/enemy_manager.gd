@@ -45,28 +45,48 @@ func move_enemy(entity, direction: Vector2, current: Vector2):
 			#GameScript.astar_grid.set_point_solid((current/32).floor(), false)
 			##GameScript.astar_grid.set_point_solid((direction/32).floor(), true)
 
+func move_player() -> void:
+		if player_scene.path.size() > 0:
+			var next_tile = player_scene.path.pop_front()
+			#move_enemy(player_scene,next_tile* 32 + Vector2i(16,16),player_scene.position)
+			if next_tile in claimed_tiles:
+				return # This blocks a move, perhaps there should be something that happens to the player when they get blocked
+			if GameScript.astar_grid.is_point_solid(next_tile):
+				if player_scene.path.size() > 0:
+					var target = player_scene.path.pop_back()
+					player_scene.path = GameScript.astar_grid.get_id_path((player_scene.position / 32).floor(), target)
+					if player_scene.path.size() > 0:
+						next_tile = player_scene.path.pop_front() 
+						claimed_tiles[next_tile] = true
+						player_scene.position = next_tile * 32 + Vector2i(16,16)
+						GameScript.update_cells_based_on_player_movement(player_scene.position,player_scene)
+			elif next_tile:
+				claimed_tiles[next_tile] = true
+				player_scene.position = next_tile * 32 + Vector2i(16,16)
+				GameScript.update_cells_based_on_player_movement(player_scene.position,player_scene)
+
 func _process(delta: float) -> void:
 	if not paused:
-		if player_scene.path.size() > 0:
-			if player_scene.move_timer >= player_scene.move_delay:
-				player_scene.move_timer = 0.0
-				var next_tile = player_scene.path.pop_front()
-				#move_enemy(player_scene,next_tile* 32 + Vector2i(16,16),player_scene.position)
-				if next_tile in claimed_tiles:
-					return # This blocks a move, perhaps there should be something that happens to the player when they get blocked
-				if GameScript.astar_grid.is_point_solid(next_tile):
-					if player_scene.path.size() > 0:
-						var target = player_scene.path.pop_back()
-						player_scene.path = GameScript.astar_grid.get_id_path((player_scene.position / 32).floor(), target)
-						if player_scene.path.size() > 0:
-							next_tile = player_scene.path.pop_front() 
-							claimed_tiles[next_tile] = true
-							player_scene.position = next_tile * 32 + Vector2i(16,16)
-							GameScript.update_cells_based_on_player_movement(player_scene.position,player_scene)
-				elif next_tile:
-					claimed_tiles[next_tile] = true
-					player_scene.position = next_tile * 32 + Vector2i(16,16)
-					GameScript.update_cells_based_on_player_movement(player_scene.position,player_scene)
+		#if player_scene.path.size() > 0:
+			#if player_scene.move_timer >= player_scene.move_delay:
+				#player_scene.move_timer = 0.0
+				#var next_tile = player_scene.path.pop_front()
+				##move_enemy(player_scene,next_tile* 32 + Vector2i(16,16),player_scene.position)
+				#if next_tile in claimed_tiles:
+					#return # This blocks a move, perhaps there should be something that happens to the player when they get blocked
+				#if GameScript.astar_grid.is_point_solid(next_tile):
+					#if player_scene.path.size() > 0:
+						#var target = player_scene.path.pop_back()
+						#player_scene.path = GameScript.astar_grid.get_id_path((player_scene.position / 32).floor(), target)
+						#if player_scene.path.size() > 0:
+							#next_tile = player_scene.path.pop_front() 
+							#claimed_tiles[next_tile] = true
+							#player_scene.position = next_tile * 32 + Vector2i(16,16)
+							#GameScript.update_cells_based_on_player_movement(player_scene.position,player_scene)
+				#elif next_tile:
+					#claimed_tiles[next_tile] = true
+					#player_scene.position = next_tile * 32 + Vector2i(16,16)
+					#GameScript.update_cells_based_on_player_movement(player_scene.position,player_scene)
 		for enemy in enemies:
 			if enemy:
 				if enemy.state == 1:
