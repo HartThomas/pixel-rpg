@@ -30,6 +30,7 @@ func _ready():
 	highlight_cell.load_texture()
 	create_player()
 	EnemyManager.create_enemies(5)
+	gui.change_cooldown(InventoryManager.equipped[8].value)
 
 func _generate_level_from_data(level_data):
 	for y in level_data.size():

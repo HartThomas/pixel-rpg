@@ -23,15 +23,6 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	modulate.a = 0.75
 
-#func _input(event: InputEvent) -> void:
-	#if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		#if not click_cooldown:
-			#click_cooldown = true
-			#ItemManager.tooltip_clicked(self)
-	#elif event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			#click_cooldown = false
-
-
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if not click_cooldown:

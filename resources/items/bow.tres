@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_lt2mt")
 base_damage = 5
+cooldown = 0.6
 texture = ExtResource("3_p7rkd")
 item_name = "bow"
 type = "weapon"

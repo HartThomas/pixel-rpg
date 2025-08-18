@@ -8,6 +8,7 @@
 resource_local_to_scene = true
 script = ExtResource("2_5eq2r")
 base_damage = 10
+cooldown = 0.5
 texture = ExtResource("2_otrck")
 item_name = "sword"
 type = "weapon"

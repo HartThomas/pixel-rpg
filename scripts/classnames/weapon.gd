@@ -3,6 +3,7 @@ extends Item
 class_name Weapon
 
 @export var base_damage: int
+@export var cooldown: float
 var final_damage : int
 
 func apply_modifiers():

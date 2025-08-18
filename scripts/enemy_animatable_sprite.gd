@@ -8,6 +8,7 @@ var move_timer = 0.0
 var move_delay: float
 var cell_size: int = 32
 var recalc_path_timer: float = 0.0
+var move_speed := 5.0
 
 enum {
 	IDLE,
@@ -47,6 +48,13 @@ func _process(delta: float) -> void:
 			pass
 	if path.size() > 0:
 		move_timer += delta
+	if path.size() > 0 and not CooldownManager.is_on_cooldown(self, "move"):
+		var next_tile = path.pop_front()
+		if next_tile:
+			EnemyManager.move_enemy(self, next_tile * 32 + Vector2i(16,16),position)
+		# Start cooldown for movement
+		var move_delay = 1.0 / move_speed
+		CooldownManager.start_cooldown(self, "move", move_delay)
 
 func recalculate_path():
 	var from = Vector2i(position / 32)
