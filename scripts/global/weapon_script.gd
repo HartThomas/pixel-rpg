@@ -1,8 +1,9 @@
 extends Node
 @onready var projectile_scene : PackedScene = load("res://scenes/arrow.tscn")
 @onready var animatable_sprite_scene :PackedScene = load("res://scenes/animatable_sprite.tscn")
-
 @onready var tooltip_scene : PackedScene = load("res://scenes/tooltip.tscn")
+
+signal attack_attempt_failed
 
 var error_tooltip_showing: bool = false
 
@@ -104,12 +105,7 @@ func find_first_cell_toward_mouse_click(player_world_position, mouse_world_posit
 func cell_clicked(target, player_node, camera_2d, audio_stream_player, lights):
 	var weapon = InventoryManager.equipped[8].value as Weapon
 	if CooldownManager.is_on_cooldown(weapon, "attack"):
-		var text_rect = TextureRect.new()
-		text_rect.texture = weapon.texture
-		var viewport_size = get_viewport().get_visible_rect().size
-		text_rect.position = Vector2(viewport_size.x - text_rect.size.x - 20, 20)
-		get_tree().current_scene.add_child(text_rect)
-		error_tooltip_showing = true
+		attack_attempt_failed.emit()
 	else:
 		call(weapon.item_name, target, player_node, camera_2d, audio_stream_player, lights)
 		CooldownManager.start_cooldown(weapon, "attack", weapon.cooldown)

@@ -7,6 +7,7 @@ var tooltip_showing: bool = false
 var sprite2
 var hovering : bool = false
 @export var inventory_ref : int
+signal weapon_changed(weapon)
 
 func _ready() -> void:
 	if InventoryManager.equipped[inventory_ref].value:
@@ -47,6 +48,8 @@ func insert_item(new_item):
 		if ItemManager.holding_item:
 			ItemManager.holding_item.queue_free()
 		ItemManager.holding_item = null
+	if new_item is Weapon:
+		weapon_changed.emit(new_item)
 
 func _on_mouse_entered() -> void:
 	hovering = true

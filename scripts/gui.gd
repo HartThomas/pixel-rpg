@@ -5,6 +5,8 @@ extends CanvasLayer
 @onready var control: Control = $Control
 @onready var cooldown_progress: ProgressBar = $CooldownBorder/CooldownProgress
 @onready var cooldown_texture: TextureRect = $CooldownBorder/CooldownTexture
+@onready var inventory_panel_3: Panel = $Control/Container/Equipment/GridContainer2/InventoryPanel3
+@onready var cooldown_error: TextureRect = $CooldownBorder/CooldownError
 
 var cooldown_showing
 
@@ -19,6 +21,9 @@ func _ready():
 	target_position = start_position + Vector2(slide_distance, 0)
 	control.position = start_position
 	cooldown_texture.texture = null
+	inventory_panel_3.connect('weapon_changed', change_cooldown)
+	if InventoryManager.equipped[8].value is Weapon:
+		WeaponScript.connect("attack_attempt_failed", show_cooldown_error)
 
 func show_gui():
 	if is_shown: return
@@ -39,11 +44,35 @@ func change_cooldown(weapon : Weapon):
 	cooldown_progress.max_value = 1.0
 	cooldown_showing = weapon
 
+var grey = Color('#5c5b5c')
+var red = Color('#8d1e1e')
+var green = Color('#738860')
+
 func _process(delta: float) -> void:
 	if cooldown_showing:
-		cooldown_progress.value = CooldownManager.get_cooldown_progress(cooldown_showing, 'attack')
-		var bar = cooldown_progress
-		var progress = 1.0 - CooldownManager.get_cooldown_progress(cooldown_showing, 'attack')
+		var progress = 1.0 - CooldownManager.get_cooldown_progress(cooldown_showing, "attack")
 		var steps = 5
 		var snapped = round(progress * steps) / steps
-		bar.value = snapped * bar.max_value
+		cooldown_progress.value = snapped * cooldown_progress.max_value
+		
+		# Switch color when done
+		if progress >= 1.0:
+			# Cooldown finished → green
+			var style_ready = StyleBoxFlat.new()
+			style_ready.bg_color = green
+			cooldown_progress.add_theme_stylebox_override("fill", style_ready)
+			cooldown_progress.add_theme_stylebox_override("fg", style_ready)
+		else:
+			# Cooldown ticking → red
+			var style_cooldown = StyleBoxFlat.new()
+			style_cooldown.bg_color = red
+			cooldown_progress.add_theme_stylebox_override("fill", style_cooldown)
+
+var cooldown_tween: Tween
+
+func show_cooldown_error():
+	if cooldown_tween and cooldown_tween.is_running():
+		cooldown_tween.kill()
+	cooldown_error.modulate.a = 1
+	cooldown_tween = get_tree().create_tween()
+	cooldown_tween.tween_property(cooldown_error, "modulate:a", 0.0, 0.5)

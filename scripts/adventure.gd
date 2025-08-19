@@ -8,6 +8,8 @@ extends Node2D
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var gui: CanvasLayer = $Gui
 
+signal weapon_change
+
 const generic_scenery_scene = preload("res://scenes/sprite.tscn")
 var light_source = preload("res://scenes/light.tscn")
 

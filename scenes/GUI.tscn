@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2st0v65jr2n6"]
+[gd_scene load_steps=12 format=3 uid="uid://d2st0v65jr2n6"]
 
 [ext_resource type="Texture2D" uid="uid://cq20vsmtp7b7s" path="res://art/sprites/healthbar_over.png" id="1_jbthi"]
 [ext_resource type="Script" uid="uid://cbo1u2c457dwp" path="res://scripts/gui.gd" id="1_tqy5q"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b30707dotlvhu" path="res://scenes/inventory_panel.tscn" id="6_hywd1"]
 [ext_resource type="Texture2D" uid="uid://hr8guxs4vunb" path="res://art/sprites/gui.png" id="7_cws7i"]
 [ext_resource type="Texture2D" uid="uid://5mpyj70ub56w" path="res://art/sprites/bow.png" id="8_u3xxf"]
+[ext_resource type="Texture2D" uid="uid://bh8hbxdkng8iq" path="res://art/sprites/cooldown_error_flash.png" id="9_cekc3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cekc3"]
 bg_color = Color(0.360784, 0.356863, 0.360784, 1)
@@ -397,3 +398,12 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_1i4pd")
 value = 50.0
 fill_mode = 3
 show_percentage = false
+
+[node name="CooldownError" type="TextureRect" parent="CooldownBorder"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 592.0
+offset_top = 16.0
+offset_right = 624.0
+offset_bottom = 48.0
+texture = ExtResource("9_cekc3")
