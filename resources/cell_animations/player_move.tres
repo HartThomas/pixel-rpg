@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CellAnimation" load_steps=3 format=3 uid="uid://dk2errk6v4bxt"]
+
+[ext_resource type="Script" uid="uid://u2cgrgmqpa0e" path="res://scripts/classnames/cell_animation.gd" id="1_72txb"]
+[ext_resource type="Texture2D" uid="uid://cub7bdi0asph3" path="res://art/cell_animations/player_move.png" id="2_72txb"]
+
+[resource]
+script = ExtResource("1_72txb")
+animation_name = "player_move"
+texture = ExtResource("2_72txb")
+offset = Vector2(0, -11)
+columns = 1
+rows = 1
+used_columns = 1
+time_per_frame = Array[float]([])
+loop = true
+despawn = false
+metadata/_custom_type_script = "uid://u2cgrgmqpa0e"

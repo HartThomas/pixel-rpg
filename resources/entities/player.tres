@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Player" load_steps=6 format=3 uid="uid://d0k3yn7dors7k"]
+
+[ext_resource type="Script" uid="uid://u2cgrgmqpa0e" path="res://scripts/classnames/cell_animation.gd" id="1_udmkr"]
+[ext_resource type="Script" uid="uid://cqk40fra5c03l" path="res://scripts/classnames/player.gd" id="2_10qb1"]
+[ext_resource type="Resource" uid="uid://btkh5ek65n1a5" path="res://resources/cell_animations/player_idle.tres" id="2_rpol6"]
+[ext_resource type="Resource" uid="uid://dk2errk6v4bxt" path="res://resources/cell_animations/player_move.tres" id="3_ewc45"]
+[ext_resource type="Resource" uid="uid://dnajcfsg8tosp" path="res://resources/cell_animations/player_attack.tres" id="4_ph7id"]
+
+[resource]
+script = ExtResource("2_10qb1")
+health = 20
+speed = 5.0
+name = "player"
+position = Vector2i(5, 5)
+animations = Dictionary[String, ExtResource("1_udmkr")]({
+"attack": ExtResource("4_ph7id"),
+"idle": ExtResource("2_rpol6"),
+"move": ExtResource("3_ewc45")
+})
+metadata/_custom_type_script = "uid://cqk40fra5c03l"

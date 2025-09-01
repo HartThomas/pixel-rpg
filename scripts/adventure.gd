@@ -51,13 +51,14 @@ func _generate_level_from_data(level_data):
 func create_player() ->void:
 	var new_player = player_scene.instantiate()
 	new_player.position = Vector2i(5, 5) * cell_size + Vector2i(16,16)
-	new_player.sprite_name = "player"
+	new_player.sprite_name = "player_idle"
 	for i in lights.size():
 		new_player.point_lights.append(lights[i])
 	add_child(new_player)
 	player_node = new_player
 	GameScript.player_position = player_node.position
 	EnemyManager.player_scene = player_node
+	WeaponScript.player_node = player_node
 
 func cell_clicked(target: Vector2i):
 	if Input.is_action_pressed('shift'):
@@ -96,6 +97,32 @@ func find_first_cell_toward_mouse_click():
 			smallest_angle_diff = angle_diff
 			best_offset = offset
 	return player_world_position + (best_offset * 32)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var mouse_pos = get_global_mouse_position()
+
+		# Build query
+		var params := PhysicsPointQueryParameters2D.new()
+		params.position = mouse_pos
+		params.collide_with_areas = true
+		params.collide_with_bodies = true
+		# Run query
+		var space_state = get_world_2d().direct_space_state
+		var results = space_state.intersect_point(params, 32)
+		for result in results:
+			
+			print(result['collider'].get_parent())
+		print(results)
+		if results.size() > 1:
+			# Sort so the topmost (highest z_index) gets priority
+			results.sort_custom(func(a, b): return a["collider"].z_index > b["collider"].z_index)
+			for result in results:
+				if result['collider'].get_parent().has_method('on_click') and !result['collider'].name.begins_with('Background'):
+					result['collider'].get_parent().on_click()
+					get_viewport().set_input_as_handled()
+			return
+		cell_clicked((mouse_pos/32).floor())
 
 func _process(delta):
 	if Input.is_action_pressed("shift"):

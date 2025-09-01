@@ -12,6 +12,7 @@ item_info = ExtResource("3_dy2gb")
 tooltip_scene = ExtResource("3_m7nn2")
 
 [node name="Area2D" type="Area2D" parent="."]
+priority = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_dy2gb")

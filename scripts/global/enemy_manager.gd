@@ -9,11 +9,11 @@ var paused: bool = false
 
 func create_enemies(amount:int, enemy_name:String = 'bogman'):
 	for i in range(amount):
-		var enemy = load('res://resources/enemies/%s.tres' % [enemy_name]) as Enemy
+		var enemy = load('res://resources/entities/enemies/%s.tres' % [enemy_name]) as Enemy
 		var enemy_stats = enemy.duplicate()
 		var new_enemy = enemy_scene.instantiate()
 		enemy_stats.position = Vector2i(enemy.position.x+i, enemy.position.y)
-		new_enemy.enemy_data = enemy_stats
+		new_enemy.sprite_data = enemy_stats
 		for j in get_tree().current_scene.lights.size():
 			new_enemy.point_lights.append(get_tree().current_scene.lights[j])
 		enemies.append(new_enemy)
@@ -111,3 +111,5 @@ func recalculate_path(entity, to = Vector2i(GameScript.player_position/32)):
 
 func paused_button_pressed():
 	paused = !paused
+	for enemy in enemies:
+		enemy.pause_animation()

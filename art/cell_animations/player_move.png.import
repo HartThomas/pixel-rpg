@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8p3beh4qxnjf"
-path="res://.godot/imported/bogman.png-e07dbccbd8b5d059396dc045a4c4c55c.ctex"
+uid="uid://cub7bdi0asph3"
+path="res://.godot/imported/player_move.png-2556399a52b4e68013293e1e4c60b4e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/cell_animations/bogman.png"
-dest_files=["res://.godot/imported/bogman.png-e07dbccbd8b5d059396dc045a4c4c55c.ctex"]
+source_file="res://art/cell_animations/player_move.png"
+dest_files=["res://.godot/imported/player_move.png-2556399a52b4e68013293e1e4c60b4e9.ctex"]
 
 [params]
 

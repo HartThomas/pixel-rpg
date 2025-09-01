@@ -8,13 +8,15 @@ var shadow_instances : Array[AnimatedSprite2D] = []
 @export var frame_height = 32
 var affected_cells: Array[Vector2i]= []
 var paused : bool = false
+var sprite_data
 
 var animation_dictionary : Dictionary = {
 	player={ offset=Vector2(0.0,-11.0), columns= 3, rows = 1, used_columns = 1, loop = true, despawn = false }, 
 	hammer= { offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true },
 	sword_corner= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true},
 	sword_parallel= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true},
-	bogman= {offset = Vector2(0.0,-11.0),columns= 1, rows = 1, used_columns = 1, loop=false, despawn = false},
+	bogman= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=true, despawn = false},
+	bogman_attack= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=true, despawn = false},
 }
 
 func _process(delta: float) -> void:
@@ -39,21 +41,36 @@ func _process(delta: float) -> void:
 		modulate = Color(brightness, brightness, brightness, 1.0)
 
 func _ready() -> void:
-	var sprite_sheet = load("res://art/cell_animations/%s.png" % [sprite_name])
+	setup()
+
+func setup():
+	for shdw in shadow_instances:
+		if shdw:
+			shdw.queue_free()
+	shadow_instances.clear()
 	var frames = SpriteFrames.new()
-	frames.add_animation(sprite_name)
-	frames.set_animation_loop(sprite_name, animation_dictionary[sprite_name].loop)
-	if animation_dictionary[sprite_name].despawn:
-		animation_finished.connect(_on_animation_finished)
-	var image = sprite_sheet.get_image()
-	for y in range(animation_dictionary[sprite_name].rows):
-		for x in range(animation_dictionary[sprite_name].used_columns):
-			var rect = Rect2(x * frame_width, y * frame_height, frame_width, frame_height)
-			var frame_image = image.get_region(rect)
-			var frame_tex = ImageTexture.create_from_image(frame_image)
-			frames.add_frame(sprite_name, frame_tex)
+	var data
+	if sprite_name == 'bogman_idle' or sprite_name == 'bogman_attack':
+		data = load("res://resources/entities/enemies/bogman.tres" % sprite_name) as Enemy
+		frames = data.animations['idle' if sprite_name.contains('idle') else 'attack'].to_sprite_frames(sprite_name)
+	elif sprite_name.contains('player'):
+		data = load("res://resources/entities/player.tres") as Player
+		frames = data.animations['idle' if sprite_name.contains('idle') else 'move' if sprite_name.contains('move') else 'attack'].to_sprite_frames(sprite_name)
+	else:
+		var sprite_sheet = load("res://art/cell_animations/%s.png" % [sprite_name])
+		frames.add_animation(sprite_name)
+		frames.set_animation_loop(sprite_name, animation_dictionary[sprite_name].loop)
+		if animation_dictionary[sprite_name].despawn:
+			animation_finished.connect(_on_animation_finished)
+		var image = sprite_sheet.get_image()
+		for y in range(animation_dictionary[sprite_name].rows):
+			for x in range(animation_dictionary[sprite_name].used_columns):
+				var rect = Rect2(x * frame_width, y * frame_height, frame_width, frame_height)
+				var frame_image = image.get_region(rect)
+				var frame_tex = ImageTexture.create_from_image(frame_image)
+				frames.add_frame(sprite_name, frame_tex)
 	sprite_frames = frames
-	animation = sprite_name
+	animation =  sprite_name
 	if not paused:
 		play()
 	for light in point_lights:
@@ -68,12 +85,15 @@ func _ready() -> void:
 		if not paused:
 			shadow_instance.play()
 		#shadow_instance.animation_finished.connect(_on_animation_finished)
-		shadow_instance.offset = animation_dictionary[sprite_name].offset
-		shadow_instance.position = Vector2(animation_dictionary[sprite_name].offset.x, -animation_dictionary[sprite_name].offset.y)
+		var base_offset_change = Vector2i(0,-11)
+		if data and data.animations.has('idle' if sprite_name.contains('idle') else 'attack'):
+			shadow_instance.offset = data.animations['idle' if sprite_name.contains('idle') else 'attack'].offset
+		else:
+			shadow_instance.offset = base_offset_change
+		shadow_instance.position = Vector2(base_offset_change.x, -base_offset_change.y)
 		add_child(shadow_instance)
 		shadow_instances.append(shadow_instance)
 	shadow.visible = false
-	#affected_cells.append(Vector2i(position)/32)
 
 func _on_animation_finished():
 	var weapon = InventoryManager.equipped[8].value.item_name

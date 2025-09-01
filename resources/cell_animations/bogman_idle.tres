@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CellAnimation" load_steps=3 format=3 uid="uid://dhex1pqf7dnwf"]
+
+[ext_resource type="Script" uid="uid://u2cgrgmqpa0e" path="res://scripts/classnames/cell_animation.gd" id="1_neqpm"]
+[ext_resource type="Texture2D" uid="uid://8p3beh4qxnjf" path="res://art/cell_animations/bogman.png" id="2_neqpm"]
+
+[resource]
+script = ExtResource("1_neqpm")
+animation_name = "bogman_idle"
+texture = ExtResource("2_neqpm")
+offset = Vector2(0, -11)
+columns = 3
+rows = 1
+used_columns = 3
+time_per_frame = Array[float]([0.5, 0.4, 0.2])
+loop = true
+despawn = false
+metadata/_custom_type_script = "uid://u2cgrgmqpa0e"

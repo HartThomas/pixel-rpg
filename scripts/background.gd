@@ -19,12 +19,6 @@ func resize() -> void:
 		for y in range(height):
 			tile_map_layer.set_cell(Vector2i(x,y), source_id, grass_atlas_arr.pick_random())
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if mouse_entered:
-		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-			var cell_clicked = (get_local_mouse_position()/ 32).floor()
-			map_clicked.emit(cell_clicked)
-
 func _on_area_2d_mouse_entered() -> void:
 	mouse_entered = true
 

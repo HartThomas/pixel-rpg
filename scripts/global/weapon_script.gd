@@ -6,7 +6,7 @@ extends Node
 signal attack_attempt_failed
 
 var error_tooltip_showing: bool = false
-
+var player_node
 var paused : bool = false
 
 var current_attack: Array = []
@@ -30,6 +30,7 @@ func hammer(target: Vector2i, player_world_position, mouse_world_position,audio_
 			new_animated_sprite.paused = true
 		current_attack.append(new_animated_sprite)
 		get_tree().current_scene.add_child(new_animated_sprite)
+	player_node.set_state(player_node.States.ATTACK)
 
 func sword(target: Vector2i,player_world_position, mouse_world_position, audio_stream_player, lights):
 	var sword_scene = load("res://scenes/sword.tscn") as PackedScene
@@ -70,6 +71,7 @@ func sword(target: Vector2i,player_world_position, mouse_world_position, audio_s
 		get_tree().current_scene.add_child(new_animated_sprite)
 	audio_stream_player.pitch_scale = randf_range(0.85,1.15)
 	audio_stream_player.play()
+	player_node.set_state(player_node.States.ATTACK)
 
 func bow(target: Vector2i, player_world_position, mouse_world_position, audio_stream_player, lights):
 	var mouse_pos = mouse_world_position
@@ -85,6 +87,7 @@ func bow(target: Vector2i, player_world_position, mouse_world_position, audio_st
 	new_projectile.damage = weapon.final_damage
 	projectiles.append(new_projectile)
 	get_tree().current_scene.add_child(new_projectile)
+	#player_node.set_state(player_node.States.ATTACK)
 
 var coords_array = [
 	Vector2(1,0),Vector2(1,1),Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1),Vector2(0,-1),Vector2(1,-1)
@@ -116,6 +119,7 @@ func on_weapon_animation_finished(cells: Array[Vector2i]):
 		if entity and entity.has_method('take_damage'):
 			var weapon: Weapon = InventoryManager.equipped[8].value
 			entity.take_damage(weapon.final_damage)
+	player_node.set_state(player_node.States.IDLE)
 
 func get_sword_affected_cells(player_cell: Vector2i, direction: Vector2i) -> Array[Vector2i]:
 	var affected : Array[Vector2i] = []

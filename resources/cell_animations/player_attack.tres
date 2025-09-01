@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CellAnimation" load_steps=3 format=3 uid="uid://dnajcfsg8tosp"]
+
+[ext_resource type="Script" uid="uid://u2cgrgmqpa0e" path="res://scripts/classnames/cell_animation.gd" id="1_mykgj"]
+[ext_resource type="Texture2D" uid="uid://dygvg7tvil7yg" path="res://art/cell_animations/player_attack.png" id="2_mykgj"]
+
+[resource]
+script = ExtResource("1_mykgj")
+animation_name = "player_attack"
+texture = ExtResource("2_mykgj")
+offset = Vector2(0, -11)
+columns = 1
+rows = 1
+used_columns = 1
+time_per_frame = Array[float]([])
+loop = true
+despawn = false
+metadata/_custom_type_script = "uid://u2cgrgmqpa0e"

@@ -98,10 +98,18 @@ func drop():
 	var current = get_tree().current_scene
 	reparent(current)
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if not click_cooldown:
-			click_cooldown = true
-			ItemManager.item_clicked(self)
-	elif event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		click_cooldown = false
+func on_click() -> void:
+	click_cooldown = true
+	ItemManager.item_clicked(self)
+
+#func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	#if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		#if not click_cooldown:
+			#click_cooldown = true
+			#ItemManager.item_clicked(self)
+			#ItemManager.pickup_this_click = true
+		#get_viewport().set_input_as_handled()
+	#elif event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		#click_cooldown = false
+		#ItemManager.pickup_this_click = false
+		#get_viewport().set_input_as_handled()
