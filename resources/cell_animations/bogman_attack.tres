@@ -12,6 +12,6 @@ columns = 3
 rows = 1
 used_columns = 3
 time_per_frame = Array[float]([0.5, 0.4, 0.2])
-loop = true
+loop = false
 despawn = false
 metadata/_custom_type_script = "uid://u2cgrgmqpa0e"

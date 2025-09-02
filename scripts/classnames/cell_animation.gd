@@ -25,3 +25,6 @@ func to_sprite_frames(name: String = animation_name, frame_size: Vector2i = Vect
 			var frame_tex = ImageTexture.create_from_image(frame_image)
 			frames.add_frame(name, frame_tex)
 	return frames
+
+func on_animation_end():
+	pass

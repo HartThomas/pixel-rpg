@@ -12,6 +12,7 @@ script = ExtResource("1_qabgw")
 health = 20
 speed = 5.0
 loot_table = ExtResource("1_0fp3g")
+attack_damage = 3
 name = "bogman"
 texture = ExtResource("2_1reuu")
 position = Vector2i(6, 6)

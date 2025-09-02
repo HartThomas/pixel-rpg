@@ -53,9 +53,11 @@ func setup():
 	if sprite_name == 'bogman_idle' or sprite_name == 'bogman_attack':
 		data = load("res://resources/entities/enemies/bogman.tres" % sprite_name) as Enemy
 		frames = data.animations['idle' if sprite_name.contains('idle') else 'attack'].to_sprite_frames(sprite_name)
+		animation_finished.connect(data.animations['idle' if sprite_name.contains('idle') else 'attack'].on_animation_end)
 	elif sprite_name.contains('player'):
 		data = load("res://resources/entities/player.tres") as Player
 		frames = data.animations['idle' if sprite_name.contains('idle') else 'move' if sprite_name.contains('move') else 'attack'].to_sprite_frames(sprite_name)
+		animation_finished.connect(data.animations['idle' if sprite_name.contains('idle') else 'move' if sprite_name.contains('move') else 'attack'].on_animation_end)
 	else:
 		var sprite_sheet = load("res://art/cell_animations/%s.png" % [sprite_name])
 		frames.add_animation(sprite_name)

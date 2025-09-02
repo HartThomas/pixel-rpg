@@ -113,3 +113,7 @@ func paused_button_pressed():
 	paused = !paused
 	for enemy in enemies:
 		enemy.pause_animation()
+
+func enemy_attack(enemy : Enemy, enemy_position):
+	if player_scene.position.distance_to(enemy_position) <= 64:
+		PlayerManager.player_takes_damage(enemy.attack_damage)

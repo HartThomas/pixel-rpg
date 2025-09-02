@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("2_10qb1")
-health = 20
+health = 100
 speed = 5.0
 name = "player"
 position = Vector2i(5, 5)

@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 			if recalc_path_timer >= 0.5: # recalc path twice every second
 				recalc_path_timer = 0.0
 				recalculate_path()
-			if distance_to_player < 64:
+			if distance_to_player < 64 and not CooldownManager.is_on_cooldown(self, 'attack'):
 				set_state(States.ATTACK)
 		States.ATTACK:
 			if distance_to_player >= 64:
@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
 		var move_delay = 1.0 / move_speed
 		CooldownManager.start_cooldown(self, "move", move_delay)
 
-func set_state(new_state):
+func set_state(new_state : States):
 	if new_state == state:
 		return # already in this state
 	prev_state = state
@@ -69,6 +69,16 @@ func _on_state_enter(new_state):
 		States.ATTACK:
 			sprite_name = "bogman_attack"
 			setup()
+			CooldownManager.start_cooldown(self, 'attack', 1.0)
+
+func setup():
+	super.setup()
+	if state == States.ATTACK:
+		animation_finished.connect(post_attack_idle)
+
+func post_attack_idle() :
+	EnemyManager.enemy_attack(sprite_data, position)
+	set_state(States.AGGRO)
 
 func recalculate_path():
 	var from = Vector2i(position / 32)

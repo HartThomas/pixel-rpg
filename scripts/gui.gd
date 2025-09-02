@@ -7,6 +7,10 @@ extends CanvasLayer
 @onready var cooldown_texture: TextureRect = $CooldownBorder/CooldownTexture
 @onready var inventory_panel_3: Panel = $Control/Container/Equipment/GridContainer2/InventoryPanel3
 @onready var cooldown_error: TextureRect = $CooldownBorder/CooldownError
+@onready var _25: TextureRect = $"DamageBorder/25"
+@onready var _50: TextureRect = $"DamageBorder/50"
+@onready var _75: TextureRect = $"DamageBorder/75"
+@onready var _100: TextureRect = $"DamageBorder/100"
 
 var cooldown_showing
 
@@ -24,6 +28,10 @@ func _ready():
 	inventory_panel_3.connect('weapon_changed', change_cooldown)
 	if InventoryManager.equipped[8].value is Weapon:
 		WeaponScript.connect("attack_attempt_failed", show_cooldown_error)
+	_25.modulate.a = 0
+	_50.modulate.a = 0
+	_75.modulate.a = 0
+	_100.modulate.a = 0
 
 func show_gui():
 	if is_shown: return
@@ -76,3 +84,18 @@ func show_cooldown_error():
 	cooldown_error.modulate.a = 1
 	cooldown_tween = get_tree().create_tween()
 	cooldown_tween.tween_property(cooldown_error, "modulate:a", 0.0, 0.5)
+
+var tweens = {}
+
+func fade_out(node: Node):
+	if tweens.has(node) and tweens[node].is_running():
+		tweens[node].kill()
+	node.modulate.a = 1
+	var t = get_tree().create_tween()
+	t.tween_property(node, "modulate:a", 0.0, 0.5)
+	tweens[node] = t
+
+func after_damage_above_75(): fade_out(_25)
+func after_damage_above_50(): fade_out(_50)
+func after_damage_above_25(): fade_out(_75)
+func after_damage_above_0():  fade_out(_100)

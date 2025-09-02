@@ -23,6 +23,7 @@ WeaponScript="*res://scripts/global/weapon_script.gd"
 ItemManager="*res://scripts/global/item_manager.gd"
 InventoryManager="*res://scripts/global/inventory_manager.gd"
 CooldownManager="*res://scripts/global/cooldown_manager.gd"
+PlayerManager="*res://scripts/global/player_manager.gd"
 
 [display]
 

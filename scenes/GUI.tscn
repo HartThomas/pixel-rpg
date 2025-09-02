@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2st0v65jr2n6"]
+[gd_scene load_steps=16 format=3 uid="uid://d2st0v65jr2n6"]
 
 [ext_resource type="Texture2D" uid="uid://cq20vsmtp7b7s" path="res://art/sprites/healthbar_over.png" id="1_jbthi"]
 [ext_resource type="Script" uid="uid://cbo1u2c457dwp" path="res://scripts/gui.gd" id="1_tqy5q"]
@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://hr8guxs4vunb" path="res://art/sprites/gui.png" id="7_cws7i"]
 [ext_resource type="Texture2D" uid="uid://5mpyj70ub56w" path="res://art/sprites/bow.png" id="8_u3xxf"]
 [ext_resource type="Texture2D" uid="uid://bh8hbxdkng8iq" path="res://art/sprites/cooldown_error_flash.png" id="9_cekc3"]
+[ext_resource type="Texture2D" uid="uid://cmxil0goyhsdg" path="res://art/sprites/25%_damage.png" id="10_dcyui"]
+[ext_resource type="Texture2D" uid="uid://diltrghlfbk8" path="res://art/sprites/50%_damage.png" id="11_8inel"]
+[ext_resource type="Texture2D" uid="uid://gyurpcgwbaap" path="res://art/sprites/75%_damage.png" id="12_vjrnn"]
+[ext_resource type="Texture2D" uid="uid://bntyab8jlt1rp" path="res://art/sprites/100%_damage.png" id="13_8fbvn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cekc3"]
 bg_color = Color(0.360784, 0.356863, 0.360784, 1)
@@ -407,3 +411,36 @@ offset_top = 16.0
 offset_right = 624.0
 offset_bottom = 48.0
 texture = ExtResource("9_cekc3")
+
+[node name="DamageBorder" type="TextureRect" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+
+[node name="25" type="TextureRect" parent="DamageBorder"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("10_dcyui")
+
+[node name="50" type="TextureRect" parent="DamageBorder"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("11_8inel")
+
+[node name="75" type="TextureRect" parent="DamageBorder"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("12_vjrnn")
+
+[node name="100" type="TextureRect" parent="DamageBorder"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("13_8fbvn")
