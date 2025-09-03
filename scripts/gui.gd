@@ -11,7 +11,7 @@ extends CanvasLayer
 @onready var _50: TextureRect = $"DamageBorder/50"
 @onready var _75: TextureRect = $"DamageBorder/75"
 @onready var _100: TextureRect = $"DamageBorder/100"
-
+const TOOLTIP = preload("res://scenes/tooltip.tscn")
 var cooldown_showing
 
 var start_position: Vector2
@@ -99,3 +99,20 @@ func after_damage_above_75(): fade_out(_25)
 func after_damage_above_50(): fade_out(_50)
 func after_damage_above_25(): fade_out(_75)
 func after_damage_above_0():  fade_out(_100)
+
+var tooltips = []
+
+func _on_health_bar_mouse_entered() -> void:
+	print('entered')
+	var new_tt = TOOLTIP.instantiate()
+	new_tt.text = str(PlayerManager.player_stats.health) + '/' + str(PlayerManager.player_stats.max_health) 
+	new_tt.position = get_viewport().get_mouse_position() + Vector2(8,-25)
+	new_tt.parent_item = self
+	add_child(new_tt)
+	tooltips.append(new_tt)
+
+
+func _on_health_bar_mouse_exited() -> void:
+	for tooltip in tooltips:
+		if tooltip:
+			tooltip.queue_free()

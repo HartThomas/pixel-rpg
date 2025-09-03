@@ -444,3 +444,6 @@ offset_right = 640.0
 offset_bottom = 360.0
 mouse_filter = 2
 texture = ExtResource("13_8fbvn")
+
+[connection signal="mouse_entered" from="Control/HealthBar" to="." method="_on_health_bar_mouse_entered"]
+[connection signal="mouse_exited" from="Control/HealthBar" to="." method="_on_health_bar_mouse_exited"]
