@@ -17,6 +17,7 @@ var cooldown_showing
 var start_position: Vector2
 var target_position: Vector2
 var is_shown: bool = false
+var tt
 
 @onready var tween := create_tween()
 
@@ -32,6 +33,12 @@ func _ready():
 	_50.modulate.a = 0
 	_75.modulate.a = 0
 	_100.modulate.a = 0
+	var new_tt = TOOLTIP.instantiate()
+	new_tt.text = str(PlayerManager.player_stats.health) + '/' + str(PlayerManager.player_stats.max_health) 
+	new_tt.parent_item = self
+	new_tt.hide()
+	add_child(new_tt)
+	tt = new_tt
 
 func show_gui():
 	if is_shown: return
@@ -103,16 +110,12 @@ func after_damage_above_0():  fade_out(_100)
 var tooltips = []
 
 func _on_health_bar_mouse_entered() -> void:
-	print('entered')
-	var new_tt = TOOLTIP.instantiate()
-	new_tt.text = str(PlayerManager.player_stats.health) + '/' + str(PlayerManager.player_stats.max_health) 
-	new_tt.position = get_viewport().get_mouse_position() + Vector2(8,-25)
-	new_tt.parent_item = self
-	add_child(new_tt)
-	tooltips.append(new_tt)
-
+	tt.position = get_viewport().get_mouse_position() + Vector2(8,-25)
+	tt.show()
 
 func _on_health_bar_mouse_exited() -> void:
-	for tooltip in tooltips:
-		if tooltip:
-			tooltip.queue_free()
+	tt.hide()
+
+func update_healthbar_tooltip():
+	tt.text = str(PlayerManager.player_stats.health) + '/' + str(PlayerManager.player_stats.max_health) 
+	tt.update_text()

@@ -110,10 +110,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		# Run query
 		var space_state = get_world_2d().direct_space_state
 		var results = space_state.intersect_point(params, 32)
-		for result in results:
-			
-			print(result['collider'].get_parent())
-		print(results)
+		#for result in results:
+			#print(result['collider'].get_parent(), 'name',result['collider'].name, result['collider'].get_parent().has_method('on_click'))
+		#print(results)
 		if results.size() > 1:
 			# Sort so the topmost (highest z_index) gets priority
 			results.sort_custom(func(a, b): return a["collider"].z_index > b["collider"].z_index)
@@ -121,7 +120,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				if result['collider'].get_parent().has_method('on_click') and !result['collider'].name.begins_with('Background'):
 					result['collider'].get_parent().on_click()
 					get_viewport().set_input_as_handled()
-			return
+					return
 		cell_clicked((mouse_pos/32).floor())
 
 func _process(delta):

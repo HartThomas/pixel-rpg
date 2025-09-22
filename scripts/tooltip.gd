@@ -30,3 +30,6 @@ func _on_gui_input(event: InputEvent) -> void:
 			ItemManager.tooltip_clicked(self)
 	elif event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			click_cooldown = false
+
+func update_text():
+	label.text = text
