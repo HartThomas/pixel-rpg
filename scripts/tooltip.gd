@@ -33,3 +33,4 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func update_text():
 	label.text = text
+	size = label.size + Vector2(30,0)

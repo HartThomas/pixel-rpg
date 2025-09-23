@@ -9,6 +9,7 @@ var spin_angle := 0.0
 var paused: bool = false
 var picked_up: bool = false
 var click_cooldown : bool = false
+var in_inventory : bool = false
 
 @export var rise_height := 32.0
 @export var arc_duration := 0.4
@@ -32,6 +33,7 @@ func _ready() -> void:
 
 func drop_in_world(new_position = position):
 	position = new_position
+	on_ground = true
 	tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_OUT)
@@ -90,6 +92,7 @@ func pause():
 func pick_up():
 	if paused and not picked_up:
 		picked_up = true
+		on_ground = false
 		skew = 0
 		var canvas_layer = get_tree().current_scene.get_node('Gui')
 		reparent(canvas_layer)
@@ -99,6 +102,7 @@ func drop():
 	reparent(current)
 
 func on_click() -> void:
+	print('in on click')
 	click_cooldown = true
 	ItemManager.item_clicked(self)
 

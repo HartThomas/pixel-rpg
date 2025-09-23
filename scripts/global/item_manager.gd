@@ -53,31 +53,39 @@ func clear_tooltip_list(item):
 
 func tooltip_clicked(tooltip):
 	var index = created_items.find_custom(func(index): return index.tooltip_array.find(tooltip) != -1)
-	if created_items[index].item:
-		if not created_items[index].item.picked_up:
-			created_items[index].item.pick_up()
-			holding_item = created_items[index].item
-			clear_tooltip_list(created_items[index].item)
-		else:
-			created_items[index].item.picked_up = false
-			created_items[index].item.drop_in_world(GameScript.player_position)
-			created_items[index].item.drop()
-			holding_item = null
-	else:
-		tooltip.queue_free()
-
-func item_clicked(item):
-	var index = created_items.find_custom(func(index):return index.item == item)
-	if not created_items[index].item.picked_up:
-		created_items[index].item.pick_up()
-		holding_item = created_items[index].item
-		clear_tooltip_list(item)
-	else:
+	print('picked up', created_items[index].item.picked_up)
+	if created_items[index].item.picked_up:
 		created_items[index].item.picked_up = false
 		created_items[index].item.drop_in_world(GameScript.player_position)
 		created_items[index].item.drop()
 		holding_item = null
+	elif created_items[index].item.on_ground and is_item_close(created_items[index].item):
+		created_items[index].item.pick_up()
+		holding_item = created_items[index].item
+		clear_tooltip_list(created_items[index].item)
+	else:
+		tooltip.queue_free()
+		GameScript.create_pop_up_text(created_items[index].item.position, 'Too far')
+
+func item_clicked(item):
+	var index = created_items.find_custom(func(index):return index.item == item)
+	print('picked up', item.picked_up)
+	if item.picked_up:
+		created_items[index].item.picked_up = false
+		created_items[index].item.drop_in_world(GameScript.player_position)
+		created_items[index].item.drop()
+		holding_item = null
+	elif (item.on_ground and is_item_close(item)) or item.in_inventory:
+		created_items[index].item.pick_up()
+		holding_item = created_items[index].item
+		clear_tooltip_list(item)
+	else:
+		GameScript.create_pop_up_text(item.position, 'Too far')
 
 func remove_item_from_created_items_array(item):
 	var index = created_items.find_custom(func(index):return index.item == item)
 	created_items.remove_at(index)
+
+func is_item_close(item):
+	var distance = GameScript.player_position.distance_to(item.position)
+	return distance <= 64

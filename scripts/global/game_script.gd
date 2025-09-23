@@ -1,4 +1,6 @@
 extends Node
+const POP_UP_TEXT = preload("res://scenes/pop_up_text.tscn")
+
 
 var tile_defs = {
 	1: { "type": "tree", "size": Vector2i(1, 2),"walkable": false },
@@ -180,3 +182,10 @@ func _input(event: InputEvent) -> void:
 		if get_tree().current_scene.has_method('toggle_gui'):
 			get_tree().current_scene.toggle_gui()
 		paused = !paused
+
+func create_pop_up_text(position, text, color = Color('BLACK')):
+	var pop_up = POP_UP_TEXT.instantiate()
+	pop_up.new_text = text
+	pop_up.new_position = position
+	pop_up.new_color = color
+	get_tree().current_scene.add_child(pop_up)

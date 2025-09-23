@@ -100,8 +100,10 @@ func find_first_cell_toward_mouse_click():
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if ItemManager.holding_item:
+			ItemManager.item_clicked(ItemManager.holding_item)
+			return
 		var mouse_pos = get_global_mouse_position()
-
 		# Build query
 		var params := PhysicsPointQueryParameters2D.new()
 		params.position = mouse_pos

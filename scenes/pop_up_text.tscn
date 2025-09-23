@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn43begoa0j4x"]
+
+[ext_resource type="Script" uid="uid://bib5rpxvh4rcp" path="res://scenes/pop_up_text.gd" id="1_wiu1o"]
+
+[node name="PopUpText" type="Label"]
+offset_left = 74.0
+offset_top = 115.0
+offset_right = 75.0
+offset_bottom = 138.0
+theme_override_font_sizes/font_size = 30
+script = ExtResource("1_wiu1o")

@@ -31,6 +31,8 @@ func insert_item(new_item):
 		sprite.stretch_mode = TextureRect.STRETCH_SCALE
 		sprite.size = Vector2(16, 16)
 		add_child(sprite)
+		ItemManager.created_items[ItemManager.created_items.size() - 1].item.in_inventory = true
+		print(ItemManager.created_items[ItemManager.created_items.size() - 1].item,ItemManager.created_items[ItemManager.created_items.size() - 1].item.in_inventory, 'blsdjhfjhk')
 		ItemManager.item_clicked(ItemManager.created_items[ItemManager.created_items.size() - 1].item)
 		_on_mouse_exited()
 	else:
@@ -84,6 +86,8 @@ func _on_gui_input(event: InputEvent) -> void:
 				pass
 		elif item:
 			ItemManager.create_item(item, get_global_mouse_position())
+			ItemManager.created_items[ItemManager.created_items.size() - 1].item.in_inventory = true
+			print(ItemManager.created_items[ItemManager.created_items.size() - 1].item,ItemManager.created_items[ItemManager.created_items.size() - 1].item.in_inventory, 'blsdjhfjhk')
 			ItemManager.item_clicked(ItemManager.created_items[ItemManager.created_items.size() - 1].item)
 			_on_mouse_exited()
 			item = null
