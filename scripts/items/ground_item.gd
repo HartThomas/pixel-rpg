@@ -102,7 +102,6 @@ func drop():
 	reparent(current)
 
 func on_click() -> void:
-	print('in on click')
 	click_cooldown = true
 	ItemManager.item_clicked(self)
 

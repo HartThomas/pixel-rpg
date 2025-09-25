@@ -53,18 +53,26 @@ func clear_tooltip_list(item):
 
 func tooltip_clicked(tooltip):
 	var index = created_items.find_custom(func(index): return index.tooltip_array.find(tooltip) != -1)
-	if created_items[index].item.picked_up:
-		created_items[index].item.picked_up = false
-		created_items[index].item.drop_in_world(GameScript.player_position)
-		created_items[index].item.drop()
+	var item = created_items[index].item
+	if item.picked_up:
+		item.picked_up = false
+		item.drop_in_world(GameScript.player_position)
+		item.drop()
 		holding_item = null
-	elif created_items[index].item.on_ground and is_item_close(created_items[index].item):
-		created_items[index].item.pick_up()
-		holding_item = created_items[index].item
-		clear_tooltip_list(created_items[index].item)
+	elif item.paused:
+		if item.on_ground and is_item_close(item):
+			item.pick_up()
+			holding_item = item
+			clear_tooltip_list(item)
+		else:
+			tooltip.queue_free()
+			GameScript.create_pop_up_text(item.position, 'Too far')
+	elif not item.paused and is_item_close(item):
+		move_item_into_inventory(item)
+		clear_tooltip_list(item)
 	else:
-		tooltip.queue_free()
-		GameScript.create_pop_up_text(created_items[index].item.position, 'Too far')
+		GameScript.create_pop_up_text(item.position, 'Too far')
+		clear_tooltip_list(item)
 
 func item_clicked(item):
 	var index = created_items.find_custom(func(index):return index.item == item)
