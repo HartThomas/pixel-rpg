@@ -13,9 +13,24 @@ var equipped : Array = [
 	{name= "right_hand",value=null},
 ]
 
+var inventory_slots: Array = []
+
 func _ready() -> void:
 	for i in range(32):
 		equipped.append({name= 'slot%s' % [i],value=null})
 	var sword_resource = load("res://resources/items/sword.tres")
 	sword_resource.apply_modifiers()
 	equipped[8].value = sword_resource 
+	self.call_deferred('record_inventory_slots')
+
+func record_inventory_slots():
+	inventory_slots = get_tree().get_nodes_in_group('inventory_slots')
+	inventory_slots.sort_custom(func (a,b): return a.inventory_ref < b.inventory_ref)
+	for i in range(inventory_slots.size()):
+		equipped[i].slot = inventory_slots[i]
+
+func find_free_inventory_slot(item : Item):
+	for i in range(equipped.size()):
+		if (item.input_slots.has(equipped[i].name) and not equipped[i].value) or (equipped[i].slot.inventory_ref >= 10 and not equipped[i].value):
+			return equipped[i]
+	return null

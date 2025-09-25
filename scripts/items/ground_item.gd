@@ -5,7 +5,7 @@ var on_ground: bool = true
 var cell : Vector2
 var spinning: bool = false
 var spin_speed := 10.0 
-var spin_angle := 0.0 
+var spin_angle := 0.0
 var paused: bool = false
 var picked_up: bool = false
 var click_cooldown : bool = false

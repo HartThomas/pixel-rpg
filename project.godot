@@ -35,6 +35,10 @@ window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 window/stretch/scale_mode="integer"
 
+[global_group]
+
+inventory_slots="all inventory slot nodes"
+
 [input]
 
 ui_up={

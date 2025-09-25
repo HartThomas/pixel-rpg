@@ -18,6 +18,7 @@ var start_position: Vector2
 var target_position: Vector2
 var is_shown: bool = false
 var tt
+var inventory_slots = []
 
 @onready var tween := create_tween()
 
