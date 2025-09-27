@@ -7,26 +7,46 @@ var shadow_instances : Array[Sprite2D] = []
 
 var shadow_offset_dictionary : Dictionary = {tree= Vector2(0.0,-21.0), bush= Vector2(0.0, -1.0), rock=Vector2(0.0,-21.0), small_bush=Vector2(0.0,-11.0), signpost=Vector2(0.0,-11.0), ruin=Vector2(0.0,-9.0)}
 
-func _process(delta: float) -> void:
-	for i in point_lights.size():
-		var light = point_lights[i]
-		var found_shadow = shadow_instances[i]
-		var light_position = light.position
-		var light_dir = (global_position - light_position).normalized()
-		var shadow_angle = light_dir.angle() + PI * 0.5
-		var light_distance = global_position.distance_to(light_position)
-		var scale_y = clamp(light_distance / 100.0, 1.0, 1.5)
-		var alpha = clamp(1.0 - (light_distance / 200.0), 0.0, 1.0)
-		found_shadow.skew = shadow_angle
-		var shader = found_shadow.material as ShaderMaterial
-		if shader:
-			var color: Color = shader.get_shader_parameter("color")
-			color.a = alpha
-			shader.set_shader_parameter("color", color)
-		var up_vector = Vector2(0, 1)
-		var above_factor = clamp(up_vector.dot(light_dir), 0.0, 1.0)
-		var brightness = lerp(1.0, 0.7, above_factor)
-		self.modulate = Color(brightness, brightness, brightness, 1.0)
+#func _process(delta: float) -> void:
+	#for i in point_lights.size():
+		#var light = point_lights[i]
+		#var light_position = light.position
+		#var light_dir = (global_position - light_position).normalized()
+		#var light_distance = global_position.distance_to(light_position)
+		#if light_distance > 200:
+			#return
+		#var found_shadow = shadow_instances[i]
+		#var shadow_angle = light_dir.angle() + PI * 0.5
+		#var scale_y = clamp(light_distance / 100.0, 1.0, 1.5)
+		#var alpha = clamp(1.0 - (light_distance / 200.0), 0.0, 1.0)
+		#found_shadow.skew = shadow_angle
+		#var shader = found_shadow.material as ShaderMaterial
+		#if shader:
+			#var color: Color = shader.get_shader_parameter("color")
+			#color.a = alpha
+			#shader.set_shader_parameter("color", color)
+		#var up_vector = Vector2(0, 1)
+		#var above_factor = clamp(up_vector.dot(light_dir), 0.0, 1.0)
+		#var brightness = lerp(1.0, 0.7, above_factor)
+		#self.modulate = Color(brightness, brightness, brightness, 1.0)
+
+func light_source_moved(light):
+	var light_dir = (global_position - light.position).normalized()
+	var light_distance = global_position.distance_to(light.position)
+	var found_shadow = shadow_instances[0] # only currently works with 1 light
+	var shadow_angle = light_dir.angle() + PI * 0.5
+	var scale_y = clamp(light_distance / 100.0, 1.0, 1.5)
+	var alpha = clamp(1.0 - (light_distance / 200.0), 0.0, 1.0)
+	found_shadow.skew = shadow_angle
+	var shader = found_shadow.material as ShaderMaterial
+	if shader:
+		var color: Color = shader.get_shader_parameter("color")
+		color.a = alpha
+		shader.set_shader_parameter("color", color)
+	var up_vector = Vector2(0, 1)
+	var above_factor = clamp(up_vector.dot(light_dir), 0.0, 1.0)
+	var brightness = lerp(1.0, 0.7, above_factor)
+	modulate = Color(brightness, brightness, brightness, 1.0)
 
 func _ready() -> void:
 	texture = load("res://art/sprites/%s.png" % [sprite_name.to_lower()])

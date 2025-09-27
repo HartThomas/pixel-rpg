@@ -1,0 +1,291 @@
+[gd_scene load_steps=16 format=4 uid="uid://7ytqi2bs4thf"]
+
+[ext_resource type="Texture2D" uid="uid://dnufwnpxsnvj" path="res://art/tilesets/nature tileset.png" id="1_mfrrh"]
+[ext_resource type="Script" uid="uid://b4x16tyyfihmb" path="res://addons/gaea/nodes/renderers/tilemap_renderer.gd" id="2_jng85"]
+[ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/nodes/generator.gd" id="3_yub34"]
+[ext_resource type="Script" uid="uid://3qsmwhn2sk47" path="res://addons/gaea/resources/gaea_layer.gd" id="4_4kcwp"]
+[ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/resources/gaea_graph.gd" id="5_dkijx"]
+[ext_resource type="Script" uid="uid://e45byecr4gi6" path="res://addons/gaea/resources/materials/data/tilemap_material.gd" id="5_jng85"]
+
+[sub_resource type="Gradient" id="Gradient_yub34"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4kcwp"]
+gradient = SubResource("Gradient_yub34")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dkijx"]
+texture = ExtResource("1_mfrrh")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 2
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 1
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 1
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 1
+1:2/0/terrains_peering_bit/right_side = 1
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 1
+2:2/0/terrains_peering_bit/left_side = 1
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 2
+2:1/0/terrains_peering_bit/top_side = 2
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 2
+2:0/0/terrains_peering_bit/bottom_side = 2
+3:0/0 = 0
+3:0/0/terrain_set = 0
+3:0/0/terrain = 1
+3:0/0/terrains_peering_bit/bottom_side = 1
+3:1/0 = 0
+3:1/0/terrain_set = 0
+3:1/0/terrain = 1
+3:1/0/terrains_peering_bit/top_side = 1
+
+[sub_resource type="TileSet" id="TileSet_u2s1o"]
+tile_size = Vector2i(32, 32)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "grass"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+terrain_set_0/terrain_1/name = "vegetation"
+terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
+terrain_set_0/terrain_2/name = "rocks"
+terrain_set_0/terrain_2/color = Color(0.46875, 0.5, 0.25, 1)
+sources/2 = SubResource("TileSetAtlasSource_dkijx")
+
+[sub_resource type="Resource" id="Resource_yiatk"]
+script = ExtResource("4_4kcwp")
+enabled = true
+metadata/_custom_type_script = "uid://3qsmwhn2sk47"
+
+[sub_resource type="Resource" id="Resource_riylo"]
+script = ExtResource("5_jng85")
+type = 1
+terrain_set = 0
+terrain = 0
+preview_color = Color(0.799056, 0.475683, 0.417463, 1)
+metadata/_custom_type_script = "uid://e45byecr4gi6"
+
+[sub_resource type="Resource" id="Resource_jm0y2"]
+script = ExtResource("5_jng85")
+type = 1
+terrain_set = 0
+terrain = 1
+preview_color = Color(0.731722, 0.967476, 0.430471, 1)
+metadata/_custom_type_script = "uid://e45byecr4gi6"
+
+[sub_resource type="Resource" id="Resource_jng85"]
+script = ExtResource("5_jng85")
+type = 1
+terrain_set = 0
+terrain = 2
+preview_color = Color(0.775178, 0.424611, 0.467358, 1)
+metadata/_custom_type_script = "uid://e45byecr4gi6"
+
+[sub_resource type="Resource" id="Resource_ubiuc"]
+resource_local_to_scene = true
+script = ExtResource("5_dkijx")
+layers = Array[ExtResource("4_4kcwp")]([SubResource("Resource_yiatk")])
+logging = 0
+connections = Array[Dictionary]([{
+"from_node": 3,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 2,
+"to_port": 0
+}, {
+"from_node": 4,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 2,
+"to_port": 1
+}, {
+"from_node": 6,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 5,
+"to_port": 1
+}, {
+"from_node": 3,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 5,
+"to_port": 0
+}, {
+"from_node": 2,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 1,
+"to_port": 0
+}, {
+"from_node": 5,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 1,
+"to_port": 1
+}, {
+"from_node": 1,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 0,
+"to_port": 0
+}, {
+"from_node": 8,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 7,
+"to_port": 1
+}, {
+"from_node": 3,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 7,
+"to_port": 0
+}, {
+"from_node": 7,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 1,
+"to_port": 2
+}])
+resource_uids = Array[String](["uid://dol7xviglksx4", "uid://d2f6bjkxcn7jl", "uid://djjvx650evm0n", "uid://cgjyi804j05dy", "uid://cqs1w714pbfql", "uid://bjmyuomcmtwq6", "uid://cqs1w714pbfql", "uid://bjmyuomcmtwq6", "uid://cqs1w714pbfql"])
+node_data = Array[Dictionary]([{
+&"arguments": {},
+&"enums": [],
+"name": &"BaseNode",
+"position": Vector2(700, -20),
+"salt": 12913210
+}, {
+&"arguments": {},
+&"enums": [0],
+"name": &"_GraphNode_26708",
+"position": Vector2(480, -40),
+"salt": 3942470705
+}, {
+&"arguments": {
+&"range": {
+"max": 1.0,
+"min": 0.31
+}
+},
+&"enums": [],
+"name": &"_GraphNode_53321",
+"position": Vector2(160, -180),
+"salt": 1488086
+}, {
+&"arguments": {
+&"frequency": 0.13
+},
+&"enums": [1],
+"name": &"_GraphNode_53396",
+"position": Vector2(-400, -160),
+"salt": 987459092
+}, {
+&"arguments": {
+&"name": "grass"
+},
+&"enums": [],
+"name": &"_GraphNode_53498",
+"position": Vector2(-100, -20),
+"salt": 3460261128
+}, {
+&"arguments": {
+&"amount": 13
+},
+&"enums": [],
+"name": &"_GraphNode_53508",
+"position": Vector2(220, 120),
+"salt": 1533138126
+}, {
+&"arguments": {
+&"name": "vegetation"
+},
+&"enums": [],
+"name": &"_GraphNode_53561",
+"position": Vector2(-100, 220),
+"salt": 4077408668
+}, {
+&"arguments": {
+&"amount": 9
+},
+&"enums": [],
+"name": &"_GraphNode_68117",
+"position": Vector2(200, 360),
+"salt": 1371264642
+}, {
+&"arguments": {
+&"name": "MaterialParameter"
+},
+&"enums": [],
+"name": &"_GraphNode_68170",
+"position": Vector2(-80, 440),
+"salt": 3088212130
+}])
+parameters = Dictionary[StringName, Variant]({
+&"MaterialParameter": {
+"hint": 17,
+"hint_string": "GaeaMaterial",
+"name": "MaterialParameter",
+"type": 24,
+"usage": 4,
+"value": SubResource("Resource_jng85")
+},
+&"grass": {
+"hint": 17,
+"hint_string": "GaeaMaterial",
+"name": "grass",
+"type": 24,
+"usage": 4,
+"value": SubResource("Resource_riylo")
+},
+&"vegetation": {
+"hint": 17,
+"hint_string": "GaeaMaterial",
+"name": "vegetation",
+"type": 24,
+"usage": 4,
+"value": SubResource("Resource_jm0y2")
+}
+})
+other = {
+&"save_version": 3
+}
+metadata/_custom_type_script = "uid://dae6umbqb872e"
+
+[node name="GeneratedTerrain" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 4193.0
+offset_bottom = 4263.0
+texture = SubResource("GradientTexture1D_4kcwp")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAATAAoAAgAAAAEAAAATAAkAAgAAAAEAAAATAAgAAgAAAAAAAAATAAcAAgAAAAAAAAATAAYAAgAAAAAAAAATAAUAAgAAAAEAAAATAAQAAgAAAAEAAAATAAMAAgAAAAAAAAATAAIAAgAAAAAAAAATAAEAAgAAAAAAAAASAAoAAgAAAAAAAAASAAkAAgAAAAAAAAASAAgAAgAAAAEAAAASAAcAAgAAAAAAAAASAAYAAgAAAAEAAAASAAQAAgAAAAEAAAASAAMAAgAAAAAAAAASAAIAAgAAAAAAAAASAAEAAgAAAAEAAAASAAAAAgAAAAEAAAARAAoAAgAAAAEAAAARAAgAAgAAAAEAAAARAAYAAgAAAAEAAAARAAUAAgAAAAEAAAARAAQAAgAAAAEAAAARAAMAAgAAAAAAAAARAAIAAgAAAAAAAAARAAEAAgAAAAEAAAARAAAAAgAAAAAAAAAQAAoAAgAAAAAAAAAQAAgAAgAAAAAAAAAQAAcAAgAAAAAAAAAQAAYAAgAAAAAAAAAQAAUAAgAAAAAAAAAQAAQAAgAAAAAAAAAQAAIAAgAAAAAAAAAQAAEAAgAAAAEAAAAQAAAAAgAAAAEAAAAPAAoAAgAAAAAAAAAPAAkAAgAAAAAAAAAPAAgAAgAAAAEAAAAPAAcAAgAAAAAAAAAPAAYAAgAAAAEAAAAPAAUAAgAAAAAAAAAPAAQAAgAAAAAAAAAPAAMAAgAAAAAAAAAPAAEAAgAAAAEAAAAPAAAAAgAAAAEAAAAOAAoAAgAAAAAAAAAOAAkAAgAAAAAAAAAOAAgAAgAAAAEAAAAOAAcAAgAAAAEAAAAOAAYAAgAAAAEAAAAOAAUAAgAAAAEAAAAOAAQAAgAAAAAAAAAOAAMAAgAAAAAAAAAOAAEAAgAAAAAAAAAOAAAAAgAAAAAAAAANAAoAAgAAAAAAAAANAAkAAgAAAAAAAAANAAcAAgAAAAEAAAANAAYAAgAAAAEAAAANAAUAAgAAAAEAAAANAAQAAgAAAAEAAAANAAMAAgAAAAAAAAANAAIAAgAAAAEAAAANAAEAAgAAAAEAAAANAAAAAgAAAAAAAAAMAAoAAgAAAAAAAAAMAAkAAgAAAAAAAAAMAAgAAgAAAAEAAAAMAAcAAgAAAAEAAAAMAAYAAgAAAAEAAAAMAAUAAgAAAAEAAAAMAAQAAgAAAAAAAAAMAAMAAgAAAAAAAAAMAAIAAgAAAAAAAAAMAAEAAgAAAAEAAAAMAAAAAgAAAAEAAAALAAkAAgAAAAEAAAALAAgAAgAAAAEAAAALAAcAAgAAAAEAAAALAAYAAgAAAAEAAAALAAUAAgAAAAAAAAALAAMAAgAAAAEAAAALAAIAAgAAAAAAAAALAAEAAgAAAAEAAAALAAAAAgAAAAEAAAAKAAoAAgAAAAAAAAAKAAkAAgAAAAEAAAAKAAgAAgAAAAEAAAAKAAUAAgAAAAEAAAAKAAQAAgAAAAEAAAAKAAMAAgAAAAAAAAAKAAIAAgAAAAEAAAAKAAEAAgAAAAAAAAAJAAoAAgAAAAEAAAAJAAgAAgAAAAAAAAAJAAUAAgAAAAAAAAAJAAQAAgAAAAEAAAAJAAMAAgAAAAEAAAAJAAIAAgAAAAEAAAAJAAEAAgAAAAEAAAAJAAAAAgAAAAAAAAAIAAoAAgAAAAEAAAAIAAkAAgAAAAEAAAAIAAgAAgAAAAEAAAAIAAMAAgAAAAAAAAAIAAIAAgAAAAAAAAAIAAEAAgAAAAAAAAAIAAAAAgAAAAAAAAAHAAoAAgAAAAEAAAAHAAkAAgAAAAEAAAAHAAgAAgAAAAEAAAAHAAYAAgAAAAEAAAAHAAMAAgAAAAEAAAAHAAIAAgAAAAAAAAAHAAEAAgAAAAAAAAAHAAAAAgAAAAEAAAAGAAoAAgAAAAAAAAAGAAkAAgAAAAAAAAAGAAgAAgAAAAEAAAAGAAYAAgAAAAAAAAAGAAUAAgAAAAEAAAAGAAQAAgAAAAEAAAAGAAMAAgAAAAAAAAAGAAIAAgAAAAEAAAAGAAEAAgAAAAAAAAAGAAAAAgAAAAEAAAAFAAkAAgAAAAAAAAAFAAcAAgAAAAEAAAAFAAYAAgAAAAAAAAAFAAUAAgAAAAEAAAAFAAQAAgAAAAEAAAAFAAMAAgAAAAAAAAAFAAIAAgAAAAEAAAAFAAEAAgAAAAEAAAAFAAAAAgAAAAAAAAAEAAoAAgAAAAAAAAAEAAkAAgAAAAEAAAAEAAcAAgAAAAEAAAAEAAUAAgAAAAEAAAAEAAQAAgAAAAAAAAAEAAMAAgAAAAEAAAAEAAIAAgAAAAAAAAAEAAEAAgAAAAAAAAAEAAAAAgAAAAAAAAADAAoAAgAAAAEAAAADAAkAAgAAAAAAAAADAAgAAgAAAAEAAAADAAcAAgAAAAAAAAADAAYAAgAAAAEAAAADAAUAAgAAAAAAAAADAAQAAgAAAAEAAAADAAMAAgAAAAEAAAADAAIAAgAAAAEAAAADAAEAAgAAAAAAAAADAAAAAgAAAAAAAAACAAoAAgAAAAEAAAACAAkAAgAAAAEAAAACAAgAAgAAAAEAAAACAAYAAgAAAAEAAAACAAUAAgAAAAEAAAACAAQAAgAAAAAAAAACAAMAAgAAAAEAAAACAAIAAgAAAAAAAAACAAEAAgAAAAEAAAACAAAAAgAAAAAAAAABAAoAAgAAAAEAAAABAAkAAgAAAAAAAAABAAgAAgAAAAAAAAABAAcAAgAAAAEAAAABAAYAAgAAAAEAAAABAAUAAgAAAAAAAAABAAQAAgAAAAEAAAABAAMAAgAAAAAAAAABAAIAAgAAAAEAAAABAAAAAgAAAAEAAAAAAAoAAgAAAAEAAAAAAAkAAgAAAAAAAAAAAAgAAgAAAAEAAAAAAAcAAgAAAAAAAAAAAAUAAgAAAAAAAAAAAAQAAgAAAAAAAAAAAAMAAgAAAAEAAAAAAAIAAgAAAAAAAAAAAAEAAgAAAAEAAAAAAAAAAgAAAAAAAAARAAcAAgABAAEAAAAPAAIAAgABAAEAAAANAAgAAgABAAEAAAALAAoAAgAAAAIAAAALAAQAAgAAAAIAAAAJAAkAAgABAAEAAAAHAAQAAgAAAAIAAAAFAAoAAgABAAEAAAAFAAgAAgACAAIAAAAEAAgAAgABAAIAAAACAAcAAgAAAAIAAAAAAAYAAgABAAEAAAATAAAAAgABAAAAAAASAAUAAgABAAAAAAAQAAkAAgABAAAAAAAQAAMAAgABAAAAAAAOAAIAAgABAAAAAAAKAAAAAgABAAAAAAAGAAcAAgABAAAAAAAEAAYAAgABAAAAAAABAAEAAgABAAAAAAA=")
+tile_set = SubResource("TileSet_u2s1o")
+
+[node name="TileMapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map_layers", "generator")]
+script = ExtResource("2_jng85")
+tile_map_layers = [NodePath("../TileMapLayer")]
+generator = NodePath("../GaeaGenerator")
+metadata/_custom_type_script = "uid://b4x16tyyfihmb"
+
+[node name="GaeaGenerator" type="Node" parent="."]
+script = ExtResource("3_yub34")
+data = SubResource("Resource_ubiuc")
+seed = 1984327770
+world_size = Vector3i(20, 11, 1)
+cell_size = Vector3i(32, 32, 1)
+metadata/_custom_type_script = "uid://d4feanreabm81"

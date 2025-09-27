@@ -12,7 +12,7 @@ var state = States.IDLE
 var prev_state = null
 
 func _process(delta: float) -> void:
-	super._process(delta)
+	#super._process(delta)
 	# If we have a path and are NOT on cooldown, move to next tile
 	if path.size() > 0 and not CooldownManager.is_on_cooldown(self, "move"):
 		set_state(States.MOVE)

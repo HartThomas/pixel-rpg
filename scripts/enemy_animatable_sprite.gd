@@ -24,7 +24,7 @@ func _ready() -> void:
 	position = ((sprite_data.position * 32) + Vector2i(16,16))
 
 func _process(delta: float) -> void:
-	super._process(delta)
+	#super._process(delta)
 	var distance_to_player = position.distance_to(GameScript.player_position)
 	match state: 
 		States.AGGRO:

@@ -14,8 +14,8 @@ const generic_scenery_scene = preload("res://scenes/sprite.tscn")
 var light_source = preload("res://scenes/light.tscn")
 
 var lights = []
-const width = 40
-const height = 40
+const width = 150
+const height = 150
 const cell_size = 32
 
 var player_node
@@ -23,6 +23,7 @@ var player_node
 func _ready():
 	var light = light_source.instantiate()
 	lights.append(light)
+	light.light_moved.connect(light_moved)
 	add_child(light)
 	_generate_level_from_data(GameScript.level_data)
 	background.width = width
@@ -34,6 +35,9 @@ func _ready():
 	EnemyManager.create_enemies(5)
 	gui.change_cooldown(InventoryManager.equipped[8].value)
 
+func light_moved(light):
+	background.light_moved(light)
+
 func _generate_level_from_data(level_data):
 	for y in level_data.size():
 		for x in level_data[y].size():
@@ -44,16 +48,18 @@ func _generate_level_from_data(level_data):
 			var instance = generic_scenery_scene.instantiate()
 			instance.position = Vector2i(x, y) * cell_size + Vector2i(16,16)
 			instance.sprite_name = tile_data["type"] 
+			instance.add_to_group('shaded')
 			for i in lights.size():
 				instance.point_lights.append(lights[i])
 			add_child(instance)
 
 func create_player() ->void:
 	var new_player = player_scene.instantiate()
-	new_player.position = Vector2i(5, 5) * cell_size + Vector2i(16,16)
+	new_player.position = Vector2i(GameScript.height/2, GameScript.width/2) * cell_size + Vector2i(16,16)
 	new_player.sprite_name = "player_idle"
 	for i in lights.size():
 		new_player.point_lights.append(lights[i])
+	new_player.add_to_group('shaded')
 	add_child(new_player)
 	player_node = new_player
 	GameScript.player_position = player_node.position

@@ -16,6 +16,7 @@ func create_enemies(amount:int, enemy_name:String = 'bogman'):
 		new_enemy.sprite_data = enemy_stats
 		for j in get_tree().current_scene.lights.size():
 			new_enemy.point_lights.append(get_tree().current_scene.lights[j])
+		new_enemy.add_to_group('shaded')
 		enemies.append(new_enemy)
 		GameScript.add_entity_to_cell(enemy_stats.position, new_enemy)
 		GameScript.astar_grid.set_point_solid(enemy_stats.position, true)

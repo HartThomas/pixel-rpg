@@ -2,6 +2,8 @@ extends PointLight2D
 
 var light_position = Vector2.ZERO
 @export var light_speed = 200.0
+signal light_moved(light)
+var light_moved_bool : bool = false
 
 func _process(delta: float) -> void:
 	var input = Vector2.ZERO
@@ -13,10 +15,13 @@ func _process(delta: float) -> void:
 		input.y += 1.0
 	if Input.is_action_pressed("ui_up"):
 		input.y -= 1.0
-
 	light_position += input * light_speed * delta
+	if position != light_position:
+		light_moved_bool = true
 	position = light_position
-
+	if light_moved_bool:
+		light_moved.emit(self)
+		light_moved_bool = false
 
 @export_range(0.5, 2.0, 0.01) var min_energy = 0.8
 @export_range(0.5, 2.0, 0.01) var max_energy = 1.2

@@ -24,3 +24,9 @@ func _on_area_2d_mouse_entered() -> void:
 
 func _on_area_2d_mouse_exited() -> void:
 	mouse_entered = false
+
+func light_moved(light):
+	var shaded_nodes =  get_tree().get_nodes_in_group('shaded')
+	for node in shaded_nodes:
+		if node.position.distance_to(light.position) < 200:
+			node.light_source_moved(light)

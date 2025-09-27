@@ -3,7 +3,7 @@ extends AnimatedSprite2D
 @onready var shadow: AnimatedSprite2D = $Shadow
 @onready var point_lights: Array[PointLight2D]
 var sprite_name: String
-var shadow_instances : Array[AnimatedSprite2D] = []
+var shadow_instances : Array = []
 @export var frame_width = 32
 @export var frame_height = 32
 var affected_cells: Array[Vector2i]= []
@@ -19,34 +19,54 @@ var animation_dictionary : Dictionary = {
 	bogman_attack= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=true, despawn = false},
 }
 
-func _process(delta: float) -> void:
-	for i in point_lights.size():
-		var light = point_lights[i]
-		var found_shadow = shadow_instances[i]
-		var light_position = light.position
-		var light_dir = (global_position - light_position).normalized()
-		var shadow_angle = light_dir.angle() + PI * 0.5
-		var light_distance = global_position.distance_to(light_position)
-		var scale_y = clamp(light_distance / 100.0, 1.0, 1.5)
-		var alpha = clamp(1.0 - (light_distance / 200.0), 0.0, 1.0)
-		found_shadow.skew = shadow_angle
-		var shader = found_shadow.material as ShaderMaterial
-		if shader:
-			var color: Color = shader.get_shader_parameter("color")
-			color.a = alpha
-			shader.set_shader_parameter("color", color)
-		var up_vector = Vector2(0, 1)
-		var above_factor = clamp(up_vector.dot(light_dir), 0.0, 1.0)
-		var brightness = lerp(1.0, 0.7, above_factor)
-		modulate = Color(brightness, brightness, brightness, 1.0)
+#func _process(delta: float) -> void:
+	#for i in point_lights.size():
+		#var light = point_lights[i]
+		#var light_position = light.position
+		#var light_dir = (global_position - light_position).normalized()
+		#var light_distance = global_position.distance_to(light_position)
+		#if light_distance > 200:
+			#return
+		#var found_shadow = shadow_instances[i]
+		#var shadow_angle = light_dir.angle() + PI * 0.5
+		#var scale_y = clamp(light_distance / 100.0, 1.0, 1.5)
+		#var alpha = clamp(1.0 - (light_distance / 200.0), 0.0, 1.0)
+		#found_shadow.skew = shadow_angle
+		#var shader = found_shadow.material as ShaderMaterial
+		#if shader:
+			#var color: Color = shader.get_shader_parameter("color")
+			#color.a = alpha
+			#shader.set_shader_parameter("color", color)
+		#var up_vector = Vector2(0, 1)
+		#var above_factor = clamp(up_vector.dot(light_dir), 0.0, 1.0)
+		#var brightness = lerp(1.0, 0.7, above_factor)
+		#modulate = Color(brightness, brightness, brightness, 1.0)
+
+func light_source_moved(light):
+	var light_dir = (global_position - light.position).normalized()
+	var light_distance = global_position.distance_to(light.position)
+	var found_shadow = shadow_instances[shadow_instances.find_custom(func (shadow) : return shadow[1] == light)]
+	var shadow_angle = light_dir.angle() + PI * 0.5
+	var scale_y = clamp(light_distance / 100.0, 1.0, 1.5)
+	var alpha = clamp(1.0 - (light_distance / 200.0), 0.0, 1.0)
+	found_shadow[0].skew = shadow_angle
+	var shader = found_shadow[0].material as ShaderMaterial
+	if shader:
+		var color: Color = shader.get_shader_parameter("color")
+		color.a = alpha
+		shader.set_shader_parameter("color", color)
+	var up_vector = Vector2(0, 1)
+	var above_factor = clamp(up_vector.dot(light_dir), 0.0, 1.0)
+	var brightness = lerp(1.0, 0.7, above_factor)
+	modulate = Color(brightness, brightness, brightness, 1.0)
 
 func _ready() -> void:
 	setup()
 
 func setup():
 	for shdw in shadow_instances:
-		if shdw:
-			shdw.queue_free()
+		if shdw[0]:
+			shdw[0].queue_free()
 	shadow_instances.clear()
 	var frames = SpriteFrames.new()
 	var data
@@ -94,7 +114,7 @@ func setup():
 			shadow_instance.offset = base_offset_change
 		shadow_instance.position = Vector2(base_offset_change.x, -base_offset_change.y)
 		add_child(shadow_instance)
-		shadow_instances.append(shadow_instance)
+		shadow_instances.append([shadow_instance, light])
 	shadow.visible = false
 
 func _on_animation_finished():
