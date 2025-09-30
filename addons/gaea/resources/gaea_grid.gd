@@ -15,7 +15,6 @@ func add_layer(idx: int, grid: Dictionary, resource: GaeaLayer) -> void:
 	if resource.enabled == false:
 		_grid[idx] = {}
 		return
-
 	_grid[idx] = grid
 
 ## Get the grid at layer [param idx],
