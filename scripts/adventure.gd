@@ -14,13 +14,15 @@ const generic_scenery_scene = preload("res://scenes/sprite.tscn")
 var light_source = preload("res://scenes/light.tscn")
 
 var lights = []
-const width = 150
-const height = 150
+var width = 40
+var height = 40
 const cell_size = 32
 
 var player_node
 
 func _ready():
+	width = GameScript.width
+	height = GameScript.height
 	var light = light_source.instantiate()
 	lights.append(light)
 	light.light_moved.connect(light_moved)
@@ -32,30 +34,31 @@ func _ready():
 	background.map_clicked.connect(cell_clicked)
 	highlight_cell.load_texture()
 	create_player()
-	EnemyManager.create_enemies(5)
+	EnemyManager.create_enemies(0)
 	gui.change_cooldown(InventoryManager.equipped[8].value)
 
 func light_moved(light):
 	background.light_moved(light)
 
 func _generate_level_from_data(level_data):
-	for y in level_data.size():
-		for x in level_data[y].size():
-			var id = level_data[y][x].terrain
-			if id <= 0 or not GameScript.tile_defs.has(id) or id == 4:
-				continue
-			var tile_data = GameScript.tile_defs[id]
-			var instance = generic_scenery_scene.instantiate()
-			instance.position = Vector2i(x, y) * cell_size + Vector2i(16,16)
-			instance.sprite_name = tile_data["type"] 
-			instance.add_to_group('shaded')
-			for i in lights.size():
-				instance.point_lights.append(lights[i])
-			add_child(instance)
+	#for y in level_data.size():
+		#for x in level_data[y].size():
+			#var id = level_data[y][x].terrain
+			#if id <= 0 or not GameScript.tile_defs.has(id) or id == 4:
+				#continue
+			#var tile_data = GameScript.tile_defs[id]
+			#var instance = generic_scenery_scene.instantiate()
+			#instance.position = Vector2i(x, y) * cell_size + Vector2i(16,16)
+			#instance.sprite_name = tile_data["type"] 
+			#instance.add_to_group('shaded')
+			#for i in lights.size():
+				#instance.point_lights.append(lights[i])
+			#add_child(instance)
+	pass
 
 func create_player() ->void:
 	var new_player = player_scene.instantiate()
-	new_player.position = Vector2i(GameScript.height/2, GameScript.width/2) * cell_size + Vector2i(16,16)
+	new_player.position = Vector2i(5, 0) * cell_size + Vector2i(16,16)
 	new_player.sprite_name = "player_idle"
 	for i in lights.size():
 		new_player.point_lights.append(lights[i])

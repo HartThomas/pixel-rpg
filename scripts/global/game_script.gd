@@ -15,17 +15,18 @@ var paused: bool = false
 var tile_weights = {
 	1: 5,  # common
 	2: 2,  # uncommon
-	3: 1,   # rare
+	3: 1,  # rare
 	4: 6,
 }
 
 var player_position: Vector2
 
 var level_data = []
-const width = 150
-const height = 150
+const width = 100
+const height = 100
 const cell_size = 32
 var astar_grid : AStarGrid2D
+var start_tile :Vector2i = Vector2i(5,0)
 
 func can_place_tile(id: int, x: int, y: int, occupied: Array) -> bool:
 	if not tile_defs.has(id):
@@ -51,33 +52,43 @@ func mark_occupied(id: int, x: int, y: int, occupied: Array):
 
 func generate_level_data():
 	level_data.clear()
+	for i in range(height):
+		var y = []
+		y.resize(width)
+		y.fill({
+				"terrain": 5,
+				"entity": null
+			})
+		level_data.append(y)
 	var occupied = []
 	for y in range(height):
 		occupied.append([])
 		for x in range(width):
 			occupied[y].append(false)
-	var rows_top_down = []
-	for y in range(height):
-		var row = []
-		for x in range(width):
-			var tile_id: int
-			if x == 0 or y == 0 or x == width - 1 or y == height - 1:
-				tile_id = 5  
-			elif occupied[y][x]:
-				tile_id = 4  
-			else:
-				var id = _pick_random_tile_id()
-				if can_place_tile(id, x, y, occupied):
-					tile_id = id
-					mark_occupied(id, x, y, occupied)
-				else:
-					tile_id = 0 
-			row.append({
-				"terrain": tile_id,
-				"entity": null
-			})
-		rows_top_down.append(row)
-	level_data = rows_top_down
+	
+	create_path([start_tile, Vector2i(width - 6, height -1)])
+	#var rows_top_down = []
+	#for y in range(height):
+		#var row = []
+		#for x in range(width):
+			#var tile_id: int
+			#if x == 0 or y == 0 or x == width - 1 or y == height - 1:
+				#tile_id = 5  
+			#elif occupied[y][x]:
+				#tile_id = 4  
+			#else:
+				#var id = _pick_random_tile_id()
+				#if can_place_tile(id, x, y, occupied):
+					#tile_id = id
+					#mark_occupied(id, x, y, occupied)
+				#else:
+					#tile_id = 0 
+			#row.append({
+				#"terrain": tile_id,
+				#"entity": null
+			#})
+		#rows_top_down.append(row)
+	#level_data = rows_top_down
 	var astar = AStarGrid2D.new()
 	astar.region = Rect2i(0, 0, width, height)
 	astar.cell_size = Vector2(1, 1)
@@ -91,6 +102,52 @@ func generate_level_data():
 				#solid = true
 			astar.set_point_solid(pos, solid)
 	astar_grid = astar
+
+func create_path(points: Array[Vector2i]) -> void:
+	level_data[points[0].y][points[0].x] = {
+				"terrain": 4,
+				"entity": null
+			}
+	path(points[0], points[points.size() - 1])
+
+func path(next : Vector2i, end_tile: Vector2i) -> void:
+	var stack :  Array[Vector2i] = [next]
+	while stack.size() > 0:
+		var coords_array : Array[Vector2i]= [Vector2i(1,0),Vector2i(0,1),Vector2i(-1,0),Vector2i(0,-1)]
+		var next_tile = check_surrounding_tiles(coords_array, stack.back(), end_tile)
+		if next_tile == Vector2i(-1,-1):
+			stack.pop_back()
+		elif next_tile == end_tile:
+			level_data[next_tile.y][next_tile.x] = {
+				"terrain": 4,
+				"entity": null
+			}
+			return
+		else:
+			level_data[next_tile.y][next_tile.x] = {
+				"terrain": 4,
+				"entity": null
+			}
+			stack.append(next_tile)
+	print('no path found')
+
+func check_surrounding_tiles(coords: Array[Vector2i], centre: Vector2i, end_tile: Vector2i) :
+	coords.shuffle()
+	var new_tile = centre + coords[0]
+	if new_tile == end_tile:
+		return end_tile
+	if new_tile.x < width -1 and new_tile.x >= 1 and new_tile.y < height -1 and new_tile.y >= 1:
+		if level_data[new_tile.y] and level_data[new_tile.y][new_tile.x].terrain == 5:
+			return new_tile
+		else:
+			coords.pop_front()
+			if coords.size() > 0:
+				return check_surrounding_tiles(coords, centre, end_tile)
+	else:
+		coords.remove_at(0)
+		if coords.size() > 0:
+			return check_surrounding_tiles(coords, centre, end_tile)
+	return Vector2i(-1,-1)
 
 func _pick_random_tile_id() -> int:
 	var total_weight = 0
@@ -165,7 +222,7 @@ func add_entity_to_cell(cell: Vector2i, entity):
 	if not level_data[cell.y][cell.x].entity:
 		level_data[cell.y][cell.x].entity = entity
 	else:
-		print('Trying to add ' + entity + 'to ' + str(cell) + 'but it is not empty')
+		print('Trying to add ' + str(entity) + 'to ' + str(cell) + 'but it is not empty')
 
 func remove_entity_from_cell(cell: Vector2i):
 	if level_data[cell.y][cell.x].entity:

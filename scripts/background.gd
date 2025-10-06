@@ -15,9 +15,15 @@ func resize() -> void:
 	color_rect.size = Vector2i(width * cell_size, height * cell_size)
 	collision_shape_2d.shape.size = Vector2i(width * cell_size, height * cell_size)
 	collision_shape_2d.position = Vector2i(collision_shape_2d.shape.size.x / 2, collision_shape_2d.shape.size.y / 2)
+	var ruined_tiles : Array[Vector2i] = []
 	for x in range(width):
 		for y in range(height):
-			tile_map_layer.set_cell(Vector2i(x,y), source_id, grass_atlas_arr.pick_random())
+			if GameScript.level_data[y][x].terrain == 4:
+				tile_map_layer.set_cell(Vector2i(x,y), source_id, grass_atlas_arr.pick_random())
+			elif GameScript.level_data[y][x].terrain == 5:
+				tile_map_layer.set_cell(Vector2i(x,y), 1, Vector2i(0,3))
+				ruined_tiles.append(Vector2i(x,y))
+	tile_map_layer.set_cells_terrain_connect(ruined_tiles,0,0)
 
 func _on_area_2d_mouse_entered() -> void:
 	mouse_entered = true

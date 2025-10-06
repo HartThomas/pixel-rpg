@@ -29,8 +29,9 @@ func update_healthbar() -> int:
 	return (healthbar.value / healthbar.max_value) * 100
 
 func setup_healthbar() -> int:
-	#var healthbar = get_tree().current_scene.get_node("Gui/Control/HealthBar") as TextureProgressBar
-	#healthbar.max_value = player_stats.max_health
-	#healthbar.value = player_stats.health
-	#return (healthbar.value / healthbar.max_value) * 100
+	var healthbar = get_tree().current_scene.get_node("Gui/Control/HealthBar") as TextureProgressBar
+	if healthbar:
+		healthbar.max_value = player_stats.max_health
+		healthbar.value = player_stats.health
+		return (healthbar.value / healthbar.max_value) * 100
 	return 100
