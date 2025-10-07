@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=2 format=3 uid="uid://b5uuim0cwplu8"]
+
+[ext_resource type="Script" uid="uid://i7bkxapfd37t" path="res://scripts/classnames/level_data.gd" id="1_5i2lm"]
+
+[resource]
+script = ExtResource("1_5i2lm")
+enemy_number = 5
+totem_number = 1
+metadata/_custom_type_script = "uid://i7bkxapfd37t"

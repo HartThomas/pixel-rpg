@@ -11,10 +11,12 @@ func _ready() -> void:
 	call_deferred('_finalize_layout')
 
 func _finalize_layout() -> void:
+	await(get_tree().process_frame)
+	label.queue_redraw()
 	await get_tree().process_frame
-	size = label.size + Vector2(30,0)
-	var global_position = position
-	position = Vector2(global_position.x-size.x/2,global_position.y)
+	var label_size = label.get_minimum_size()
+	size = label_size + Vector2(11, 8)
+	#position -= Vector2(size.x / 2, size.y)
 	modulate.a = 0.75
 
 func _on_mouse_entered() -> void:
@@ -33,4 +35,5 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func update_text():
 	label.text = text
-	size = label.size + Vector2(30,0)
+	var label_size = label.get_minimum_size()
+	size = label_size + Vector2(11, 8)

@@ -127,8 +127,8 @@ func pause_animation():
 	if is_playing():
 		pause()
 		for shadow in shadow_instances:
-			shadow.pause()
+			shadow[0].pause()
 	else:
 		play()
 		for shadow in shadow_instances:
-			shadow.play()
+			shadow[0].play()

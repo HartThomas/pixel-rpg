@@ -22,11 +22,12 @@ var tile_weights = {
 var player_position: Vector2
 
 var level_data = []
-const width = 100
-const height = 100
+const width = 50
+const height = 50
 const cell_size = 32
 var astar_grid : AStarGrid2D
 var start_tile :Vector2i = Vector2i(5,0)
+var free_cells: Array[Vector2i] = []
 
 func can_place_tile(id: int, x: int, y: int, occupied: Array) -> bool:
 	if not tile_defs.has(id):
@@ -65,7 +66,6 @@ func generate_level_data():
 		occupied.append([])
 		for x in range(width):
 			occupied[y].append(false)
-	
 	create_path([start_tile, Vector2i(width - 6, height -1)])
 	#var rows_top_down = []
 	#for y in range(height):
@@ -129,6 +129,7 @@ func path(next : Vector2i, end_tile: Vector2i) -> void:
 				"entity": null
 			}
 			stack.append(next_tile)
+			free_cells.append(next_tile)
 	print('no path found')
 
 func check_surrounding_tiles(coords: Array[Vector2i], centre: Vector2i, end_tile: Vector2i) :
@@ -246,3 +247,18 @@ func create_pop_up_text(position, text, color = Color('BLACK')):
 	pop_up.new_position = position
 	pop_up.new_color = color
 	get_tree().current_scene.add_child(pop_up)
+
+func random_free_cell(amount: int) -> Array[Vector2i]:
+	free_cells.shuffle()
+	var tiles : Array[Vector2i] = []
+	for i in range(amount):
+		tiles.append(free_cells.pop_front())
+	return tiles
+
+func get_random_cells_around(center: Vector2i, radius: int, count: int) -> Array[Vector2i]:
+	var nearby : Array[Vector2i] = []
+	for cell in free_cells:
+		if cell.distance_to(center) <= radius:
+			nearby.append(cell)
+	nearby.shuffle()
+	return nearby.slice(0, min(count, nearby.size()))

@@ -17,7 +17,7 @@ var lights = []
 var width = 40
 var height = 40
 const cell_size = 32
-
+@onready var level_info : LevelData = preload("res://resources/level_data/swamp.tres")
 var player_node
 
 func _ready():
@@ -34,7 +34,14 @@ func _ready():
 	background.map_clicked.connect(cell_clicked)
 	highlight_cell.load_texture()
 	create_player()
-	EnemyManager.create_enemies(0)
+	var totem_locations : Array[Vector2i] = []
+	if level_info.totem_number > 0:
+		var random_tile = GameScript.random_free_cell(1)
+		for i in range(level_info.totem_number):
+			totem_locations.append(random_tile[i])
+			background.edit_tile(random_tile[i], 0, Vector2i(3,2))
+	for i in totem_locations:
+		EnemyManager.create_enemies(level_info, i)
 	gui.change_cooldown(InventoryManager.equipped[8].value)
 
 func light_moved(light):

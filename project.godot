@@ -43,6 +43,11 @@ enabled=PackedStringArray("res://addons/gaea/plugin.cfg")
 
 inventory_slots="all inventory slot nodes"
 
+[gui]
+
+theme/custom_font="uid://3cgcw4acqhll"
+theme/default_font_generate_mipmaps=true
+
 [input]
 
 ui_up={

@@ -7,20 +7,37 @@ var claimed_tiles = {}
 
 var paused: bool = false
 
-func create_enemies(amount:int, enemy_name:String = 'bogman'):
-	for i in range(amount):
-		var enemy = load('res://resources/entities/enemies/%s.tres' % [enemy_name]) as Enemy
-		var enemy_stats = enemy.duplicate()
-		var new_enemy = enemy_scene.instantiate()
-		enemy_stats.position = Vector2i(enemy.position.x+i, enemy.position.y)
-		new_enemy.sprite_data = enemy_stats
-		for j in get_tree().current_scene.lights.size():
-			new_enemy.point_lights.append(get_tree().current_scene.lights[j])
-		new_enemy.add_to_group('shaded')
-		enemies.append(new_enemy)
-		GameScript.add_entity_to_cell(enemy_stats.position, new_enemy)
-		GameScript.astar_grid.set_point_solid(enemy_stats.position, true)
-		get_tree().current_scene.add_child(new_enemy)
+func create_enemies(data: LevelData, totem_tile: Vector2i, enemy_name:String = 'bogman') -> void:
+	var surrounding_tiles = GameScript.get_random_cells_around(totem_tile, 4, data.enemy_number)
+	if surrounding_tiles.size() == data.enemy_number:
+		for i in range(data.enemy_number):
+			var enemy = load('res://resources/entities/enemies/%s.tres' % [enemy_name]) as Enemy
+			var enemy_stats = enemy.duplicate()
+			var new_enemy = enemy_scene.instantiate()
+			enemy_stats.position = surrounding_tiles[i]
+			new_enemy.sprite_data = enemy_stats
+			for j in get_tree().current_scene.lights.size():
+				new_enemy.point_lights.append(get_tree().current_scene.lights[j])
+			new_enemy.add_to_group('shaded')
+			enemies.append(new_enemy)
+			GameScript.add_entity_to_cell(surrounding_tiles[i], new_enemy)
+			GameScript.astar_grid.set_point_solid(surrounding_tiles[i], true)
+			get_tree().current_scene.add_child(new_enemy)
+	else:
+		surrounding_tiles.append_array(GameScript.random_free_cell(data.enemy_number - surrounding_tiles.size()))
+		for i in range(data.enemy_number):
+			var enemy = load('res://resources/entities/enemies/%s.tres' % [enemy_name]) as Enemy
+			var enemy_stats = enemy.duplicate()
+			var new_enemy = enemy_scene.instantiate()
+			enemy_stats.position = surrounding_tiles[i]
+			new_enemy.sprite_data = enemy_stats
+			for j in get_tree().current_scene.lights.size():
+				new_enemy.point_lights.append(get_tree().current_scene.lights[j])
+			new_enemy.add_to_group('shaded')
+			enemies.append(new_enemy)
+			GameScript.add_entity_to_cell(surrounding_tiles[i], new_enemy)
+			GameScript.astar_grid.set_point_solid(surrounding_tiles[i], true)
+			get_tree().current_scene.add_child(new_enemy)
 
 func move_enemy(entity, direction: Vector2, current: Vector2):
 	if entity:

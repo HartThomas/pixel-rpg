@@ -25,6 +25,9 @@ func resize() -> void:
 				ruined_tiles.append(Vector2i(x,y))
 	tile_map_layer.set_cells_terrain_connect(ruined_tiles,0,0)
 
+func edit_tile(tile: Vector2i, source : int, atlas_coords: Vector2i) -> void:
+	tile_map_layer.set_cell(tile, source, atlas_coords)
+
 func _on_area_2d_mouse_entered() -> void:
 	mouse_entered = true
 
