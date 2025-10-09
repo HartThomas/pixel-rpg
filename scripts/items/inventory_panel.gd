@@ -57,12 +57,13 @@ func _on_mouse_entered() -> void:
 	hovering = true
 	if item:
 		var tooltip = tooltip_scene.instantiate()
-		tooltip.text = item.item_name
-		tooltip.position = global_position + Vector2(8,-25)
-		tooltip.parent_item = self
+		tooltip.position = global_position + Vector2(30,-25)
+		#tooltip.parent_item = self
 		tooltip_array.append(tooltip)
 		tooltip_showing = true
 		get_tree().current_scene.get_node('Gui').add_child(tooltip)
+		var tooltip_info = item.create_tooltip_info()
+		tooltip.call_deferred("set_item_data", tooltip_info)
 	if ItemManager.holding_item and inventory_ref < 10 and not ItemManager.holding_item.item_info.input_slots.has(InventoryManager.equipped[inventory_ref].name):
 		modulate = Color.RED
 

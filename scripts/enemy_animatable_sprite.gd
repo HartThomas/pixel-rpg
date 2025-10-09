@@ -109,7 +109,7 @@ func generate_loot() -> Item:
 	var loot = loot_gen.generate_loot(sprite_data.loot_table)
 	print("Loot dropped: %s" % loot.item_name)
 	for ability in loot.abilities:
-		print("- Ability: %s" % ability.name + ' - ' + ability.description)
+		print("- Ability: %s" % ability.ability_name + ' - ' + ability.description)
 	if loot is Weapon:
 		loot.apply_modifiers()
 	return loot 

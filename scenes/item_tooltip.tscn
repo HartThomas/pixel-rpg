@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7tpsri861v5f"]
+
+[ext_resource type="Script" uid="uid://cv3l20sfmbley" path="res://scripts/item_tooltip.gd" id="1_3gh8j"]
+[ext_resource type="Texture2D" uid="uid://d3kcouudss18l" path="res://art/sprites/item_tooltop.png" id="1_704uw"]
+[ext_resource type="Texture2D" uid="uid://dskt3x2b2fg7f" path="res://art/sprites/icon_container.png" id="3_5ii76"]
+
+[node name="ItemTooltip" type="NinePatchRect"]
+texture_filter = 1
+offset_right = 50.0
+offset_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture = ExtResource("1_704uw")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+script = ExtResource("1_3gh8j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 45.0
+offset_bottom = 67.0
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.839332, 0.723488, 0.468686, 1)
+theme_override_font_sizes/font_size = 8
+
+[node name="Type" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.839216, 0.721569, 0.470588, 1)
+
+[node name="IconContainer" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_5ii76")
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/HBoxContainer/IconContainer"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="Stats" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.839216, 0.721569, 0.470588, 1)
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Affixes" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.839216, 0.721569, 0.470588, 1)
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Description" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.839216, 0.721569, 0.470588, 1)
