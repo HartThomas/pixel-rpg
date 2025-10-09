@@ -1,12 +1,16 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://beumy7iayrlx0"]
+[gd_resource type="Resource" script_class="Armour" load_steps=4 format=3 uid="uid://beumy7iayrlx0"]
 
-[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_usf5b"]
+[ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_d3ncv"]
+[ext_resource type="Script" uid="uid://pceiqm13d0xp" path="res://scripts/classnames/armour.gd" id="2_dkks3"]
 [ext_resource type="Texture2D" uid="uid://c5jjwkb1on8qs" path="res://art/sprites/plate_mail.png" id="2_mtpwv"]
 
 [resource]
-script = ExtResource("1_usf5b")
+script = ExtResource("2_dkks3")
+base_armour = 2
 texture = ExtResource("2_mtpwv")
 item_name = "plate mail"
 type = "torso"
 input_slots = Array[String](["torso"])
+abilities = Array[ExtResource("1_d3ncv")]([])
+description = ""
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

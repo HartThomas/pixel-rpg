@@ -14,7 +14,7 @@ func generate_loot(table: LootTable) -> Item:
 		var chosen = pick_weighted(valid_abilities)
 		if chosen and chosen not in new_item.abilities:
 			new_item.abilities.append(chosen)
-	if new_item is Weapon:
+	if new_item is Weapon or new_item is Armour:
 		new_item.apply_modifiers()
 	return new_item
 

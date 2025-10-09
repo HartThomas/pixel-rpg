@@ -8,7 +8,8 @@ func _ready():
 	setup_healthbar()
 
 func player_takes_damage(amount: int) -> void:
-	player_stats.health -= amount
+	var amount_after_armour = amount - player_stats.armour if amount - player_stats.armour > 0 else 0
+	player_stats.health -= amount_after_armour
 	var amount_after_damage = update_healthbar()
 	if amount_after_damage > 75:
 		get_tree().current_scene.get_node("Gui").after_damage_above_75()

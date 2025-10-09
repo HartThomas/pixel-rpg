@@ -15,14 +15,10 @@ func set_item_data(data: Dictionary) -> void:
 	stats_label.text = data.get("stats", "")
 	affix_label.text = data.get("affixes", "")
 	description_label.text = data.get("description", "")
-	
-	# hide empty sections
 	stats_label.visible = stats_label.text != ""
 	affix_label.visible = affix_label.text != ""
 	if description_label.text == "":
 		description_label.queue_free()
-	#description_label.visible = description_label.text != ""
-	
 	await get_tree().process_frame
 	custom_minimum_size = $VBoxContainer.get_combined_minimum_size() + Vector2(16, 16)
 	size = custom_minimum_size

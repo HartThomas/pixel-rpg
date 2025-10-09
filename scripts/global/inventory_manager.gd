@@ -34,3 +34,10 @@ func find_free_inventory_slot(item : Item):
 		if (item.input_slots.has(equipped[i].name) and not equipped[i].value) or (equipped[i].slot.inventory_ref >= 10 and not equipped[i].value):
 			return equipped[i]
 	return null
+
+func equipped_items() -> Array[Item]:
+	var item_array : Array[Item] = []
+	for i in range(9): 
+		if equipped[i].value:
+			item_array.append(equipped[i].value)
+	return item_array

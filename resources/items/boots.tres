@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://bul4coobk7lrr"]
+[gd_resource type="Resource" script_class="Armour" load_steps=4 format=3 uid="uid://bul4coobk7lrr"]
 
 [ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_a1iwn"]
-[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_qi7fi"]
+[ext_resource type="Script" uid="uid://pceiqm13d0xp" path="res://scripts/classnames/armour.gd" id="2_a1iwn"]
 [ext_resource type="Texture2D" uid="uid://bofdhh0cs7bog" path="res://art/sprites/boots.png" id="2_tywqi"]
 
 [resource]
-script = ExtResource("1_qi7fi")
+script = ExtResource("2_a1iwn")
+base_armour = 1
 texture = ExtResource("2_tywqi")
 item_name = "boots"
 type = "feet"
 input_slots = Array[String](["feet"])
 abilities = Array[ExtResource("1_a1iwn")]([])
+description = ""
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

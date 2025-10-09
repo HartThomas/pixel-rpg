@@ -35,6 +35,7 @@ func insert_item(new_item):
 		#print(ItemManager.created_items[ItemManager.created_items.size() - 1].item,ItemManager.created_items[ItemManager.created_items.size() - 1].item.in_inventory, 'blsdjhfjhk')
 		ItemManager.item_clicked(ItemManager.created_items[ItemManager.created_items.size() - 1].item)
 		_on_mouse_exited()
+		PlayerManager.player_stats.update_armour()
 	else:
 		item = new_item
 		InventoryManager.equipped[inventory_ref].value = new_item
@@ -50,6 +51,7 @@ func insert_item(new_item):
 		if ItemManager.holding_item:
 			ItemManager.holding_item.queue_free()
 		ItemManager.holding_item = null
+		PlayerManager.player_stats.update_armour()
 	if new_item is Weapon:
 		weapon_changed.emit(new_item)
 

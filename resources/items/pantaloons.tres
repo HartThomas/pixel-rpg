@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dmyj7olrh2x7"]
+[gd_resource type="Resource" script_class="Armour" load_steps=4 format=3 uid="uid://dmyj7olrh2x7"]
 
-[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="1_kxkum"]
 [ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_wrj00"]
 [ext_resource type="Texture2D" uid="uid://oc83bfhrlpmk" path="res://art/sprites/pantaloons.png" id="2_fjj7t"]
+[ext_resource type="Script" uid="uid://pceiqm13d0xp" path="res://scripts/classnames/armour.gd" id="2_wrj00"]
 
 [resource]
-script = ExtResource("1_kxkum")
+script = ExtResource("2_wrj00")
+base_armour = 1
 texture = ExtResource("2_fjj7t")
 item_name = "pantaloons"
 type = "legs"
 input_slots = Array[String](["legs"])
 abilities = Array[ExtResource("1_wrj00")]([])
+description = ""
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"
