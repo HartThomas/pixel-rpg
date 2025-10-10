@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_5i2lm")
-enemy_number = 5
-totem_number = 1
+enemy_number = 10
+totem_number = 2
 metadata/_custom_type_script = "uid://i7bkxapfd37t"

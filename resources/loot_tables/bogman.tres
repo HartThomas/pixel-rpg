@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LootTable" load_steps=12 format=3 uid="uid://dnl4tbw6pp5xt"]
+[gd_resource type="Resource" script_class="LootTable" load_steps=21 format=3 uid="uid://dnl4tbw6pp5xt"]
 
 [ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_ohjdv"]
 [ext_resource type="Resource" uid="uid://dn7mfsnq3y3gb" path="res://resources/abilities/heavy.tres" id="2_66cnp"]
@@ -6,15 +6,60 @@
 [ext_resource type="Script" uid="uid://nrvpdo0v0rin" path="res://scripts/classnames/loot_table.gd" id="3_nregt"]
 [ext_resource type="Resource" uid="uid://utk1aiwenf57" path="res://resources/abilities/sharp.tres" id="3_rk755"]
 [ext_resource type="Resource" uid="uid://bul4coobk7lrr" path="res://resources/items/boots.tres" id="3_w4m3v"]
+[ext_resource type="Script" uid="uid://d0hxnx5rljujb" path="res://scripts/classnames/weighted_item.gd" id="4_0c6f8"]
 [ext_resource type="Resource" uid="uid://dd0vx7kos2o37" path="res://resources/items/cap.tres" id="4_662ml"]
 [ext_resource type="Resource" uid="uid://dh452t53c5j5g" path="res://resources/items/bow.tres" id="5_66cnp"]
 [ext_resource type="Resource" uid="uid://r35smygqg3vn" path="res://resources/items/cape.tres" id="6_rk755"]
 [ext_resource type="Resource" uid="uid://c43esnpqse78w" path="res://resources/items/mittens.tres" id="7_0c6f8"]
 [ext_resource type="Resource" uid="uid://dmyj7olrh2x7" path="res://resources/items/pantaloons.tres" id="8_65hty"]
+[ext_resource type="Resource" uid="uid://3bjthuiew0nv" path="res://resources/items/wooden_sword.tres" id="11_rk755"]
+
+[sub_resource type="Resource" id="Resource_65hty"]
+script = ExtResource("4_0c6f8")
+weight = 0.2
+item = ExtResource("3_w4m3v")
+metadata/_custom_type_script = "uid://d0hxnx5rljujb"
+
+[sub_resource type="Resource" id="Resource_0c6f8"]
+script = ExtResource("4_0c6f8")
+weight = 0.2
+item = ExtResource("5_66cnp")
+metadata/_custom_type_script = "uid://d0hxnx5rljujb"
+
+[sub_resource type="Resource" id="Resource_fi2dr"]
+script = ExtResource("4_0c6f8")
+weight = 0.2
+item = ExtResource("4_662ml")
+metadata/_custom_type_script = "uid://d0hxnx5rljujb"
+
+[sub_resource type="Resource" id="Resource_evogr"]
+script = ExtResource("4_0c6f8")
+weight = 0.2
+item = ExtResource("6_rk755")
+metadata/_custom_type_script = "uid://d0hxnx5rljujb"
+
+[sub_resource type="Resource" id="Resource_r6t8k"]
+script = ExtResource("4_0c6f8")
+weight = 0.2
+item = ExtResource("7_0c6f8")
+metadata/_custom_type_script = "uid://d0hxnx5rljujb"
+
+[sub_resource type="Resource" id="Resource_sphnb"]
+script = ExtResource("4_0c6f8")
+weight = 0.2
+item = ExtResource("8_65hty")
+metadata/_custom_type_script = "uid://d0hxnx5rljujb"
+
+[sub_resource type="Resource" id="Resource_2jkgu"]
+script = ExtResource("4_0c6f8")
+weight = 0.05
+item = ExtResource("11_rk755")
+metadata/_custom_type_script = "uid://d0hxnx5rljujb"
 
 [resource]
 script = ExtResource("3_nregt")
-base_items = Array[ExtResource("2_bk718")]([ExtResource("3_w4m3v"), ExtResource("4_662ml"), ExtResource("5_66cnp"), ExtResource("6_rk755"), ExtResource("7_0c6f8"), ExtResource("8_65hty")])
+base_items = Array[ExtResource("2_bk718")]([ExtResource("3_w4m3v"), ExtResource("4_662ml"), ExtResource("5_66cnp"), ExtResource("6_rk755"), ExtResource("7_0c6f8"), ExtResource("8_65hty"), ExtResource("11_rk755")])
+base_item_weights = [SubResource("Resource_65hty"), SubResource("Resource_0c6f8"), SubResource("Resource_fi2dr"), SubResource("Resource_evogr"), SubResource("Resource_r6t8k"), SubResource("Resource_sphnb"), SubResource("Resource_2jkgu")]
 ability_pool = Array[ExtResource("1_ohjdv")]([ExtResource("2_66cnp"), ExtResource("3_rk755")])
 min_abilities = 0
 max_abilities = 2

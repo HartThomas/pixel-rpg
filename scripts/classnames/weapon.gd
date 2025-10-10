@@ -5,6 +5,7 @@ class_name Weapon
 @export var base_damage: int
 @export var cooldown: float
 var final_damage : int
+@export_enum('sword', 'hammer', 'bow') var animation_type  = ''
 
 func apply_modifiers():
 	final_damage = base_damage
@@ -33,4 +34,5 @@ func create_tooltip_info() -> Dictionary:
 		if not info.stats:
 			info.stats = ''
 		info.stats += '\nCooldown: ' + str(cooldown)
+	info.unique = unique
 	return info

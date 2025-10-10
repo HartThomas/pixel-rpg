@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=5 format=3 uid="uid://3bjthuiew0nv"]
+
+[ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_aohy4"]
+[ext_resource type="Resource" uid="uid://utk1aiwenf57" path="res://resources/abilities/sharp.tres" id="2_4yei1"]
+[ext_resource type="Script" uid="uid://d1yfffylnx8y4" path="res://scripts/classnames/weapon.gd" id="2_fti4b"]
+[ext_resource type="Texture2D" uid="uid://b208juiqweh1" path="res://art/sprites/wooden_sword.png" id="3_fti4b"]
+
+[resource]
+script = ExtResource("2_fti4b")
+base_damage = 3
+cooldown = 0.3
+animation_type = "sword"
+texture = ExtResource("3_fti4b")
+item_name = "wooden sword"
+type = "weapon"
+input_slots = Array[String](["left_hand", "right_hand"])
+abilities = Array[ExtResource("1_aohy4")]([ExtResource("2_4yei1")])
+description = ""
+unique = true
+metadata/_custom_type_script = "uid://d1yfffylnx8y4"

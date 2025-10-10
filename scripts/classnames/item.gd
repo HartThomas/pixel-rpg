@@ -8,6 +8,7 @@ class_name Item
 @export var input_slots: Array[String] = []
 @export var abilities: Array[Ability] = []
 @export var description : String
+@export var unique : bool = false
 
 #func _init(name, tex):
 	#texture = tex
@@ -27,4 +28,5 @@ func create_tooltip_info() -> Dictionary:
 		info.description = description
 	if texture:
 		info.icon = texture
+	info.unique = unique
 	return info

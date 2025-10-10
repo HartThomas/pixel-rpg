@@ -13,6 +13,7 @@ class_name Ability
 
 func apply_to_weapon(weapon: Weapon):
 	weapon.final_damage += damage_bonus
+	weapon.cooldown -= attack_speed_bonus
 
 func apply_to_armour(armour: Armour):
 	armour.final_armour += armour_bonus

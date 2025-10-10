@@ -11,6 +11,7 @@ extends NinePatchRect
 func set_item_data(data: Dictionary) -> void:
 	icon.texture = data.get("icon", null)
 	name_label.text = data.get("name", "Unknown Item")
+	name_label.add_theme_color_override("font_color", Color('GREEN') if data.unique else Color('d6b878'))
 	type_label.text = data.get("type", "")
 	stats_label.text = data.get("stats", "")
 	affix_label.text = data.get("affixes", "")

@@ -20,5 +20,5 @@ func _process(delta: float) -> void:
 	self_modulate.a = transparency
 
 func load_texture() :
-	var attack_texture = load("res://art/sprites/%s_attack.png" % [InventoryManager.equipped[8].value.item_name])
+	var attack_texture = load("res://art/sprites/%s_attack.png" % [InventoryManager.equipped[8].value.animation_type])
 	attack.texture = attack_texture

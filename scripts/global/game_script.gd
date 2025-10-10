@@ -22,8 +22,8 @@ var tile_weights = {
 var player_position: Vector2
 
 var level_data = []
-const width = 50
-const height = 50
+const width = 30
+const height = 30
 const cell_size = 32
 var astar_grid : AStarGrid2D
 var start_tile :Vector2i = Vector2i(5,0)

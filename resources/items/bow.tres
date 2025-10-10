@@ -8,9 +8,12 @@
 script = ExtResource("2_lt2mt")
 base_damage = 5
 cooldown = 0.6
+animation_type = "bow"
 texture = ExtResource("3_p7rkd")
 item_name = "bow"
 type = "weapon"
 input_slots = Array[String](["left_hand", "right_hand"])
 abilities = Array[ExtResource("1_61e7b")]([])
+description = ""
+unique = false
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

@@ -8,9 +8,12 @@
 script = ExtResource("2_uvpse")
 base_damage = 10
 cooldown = 0.8
+animation_type = "hammer"
 texture = ExtResource("2_7khx6")
 item_name = "hammer"
 type = "weapon"
 input_slots = Array[String](["left_hand", "right_hand"])
 abilities = Array[ExtResource("1_f063l")]([])
+description = ""
+unique = false
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

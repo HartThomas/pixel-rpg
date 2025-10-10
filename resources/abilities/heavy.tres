@@ -4,11 +4,12 @@
 
 [resource]
 script = ExtResource("1_m7f7w")
-name = "Heavy"
+ability_name = "Heavy"
 description = "Adds 3 damage but increases cooldown by 0.5"
 special_effect = ""
 damage_bonus = 3
 attack_speed_bonus = -0.5
 weight = 1
+armour_bonus = 0
 target_type = "Weapon"
 metadata/_custom_type_script = "uid://ba3mc6fdm3aqu"

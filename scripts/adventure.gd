@@ -36,7 +36,7 @@ func _ready():
 	create_player()
 	var totem_locations : Array[Vector2i] = []
 	if level_info.totem_number > 0:
-		var random_tile = GameScript.random_free_cell(1)
+		var random_tile = GameScript.random_free_cell(level_info.totem_number)
 		for i in range(level_info.totem_number):
 			totem_locations.append(random_tile[i])
 			background.edit_tile(random_tile[i], 0, Vector2i(3,2))
@@ -88,7 +88,7 @@ var coords_array = [
 
 func highlight_best_cell():
 	var target_cell :Vector2i
-	if InventoryManager.equipped[8].value.item_name == 'bow':
+	if InventoryManager.equipped[8].value.animation_type == 'bow':
 		var mouse_pos = camera_2d.get_global_mouse_position()
 		target_cell = Vector2(
 			floor(mouse_pos.x / 32.0) * 32.0 + 16,

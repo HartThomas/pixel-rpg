@@ -110,7 +110,7 @@ func cell_clicked(target, player_node, camera_2d, audio_stream_player, lights):
 	if CooldownManager.is_on_cooldown(weapon, "attack"):
 		attack_attempt_failed.emit()
 	else:
-		call(weapon.item_name, target, player_node, camera_2d, audio_stream_player, lights)
+		call(weapon.animation_type, target, player_node, camera_2d, audio_stream_player, lights)
 		CooldownManager.start_cooldown(weapon, "attack", weapon.cooldown)
 
 func on_weapon_animation_finished(cells: Array[Vector2i]):

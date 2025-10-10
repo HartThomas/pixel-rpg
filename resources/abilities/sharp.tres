@@ -4,11 +4,12 @@
 
 [resource]
 script = ExtResource("1_ns2od")
-name = "Sharp"
+ability_name = "Sharp"
 description = "Adds 2 extra damage"
 special_effect = ""
 damage_bonus = 2
 attack_speed_bonus = 0.0
 weight = 1
+armour_bonus = 0
 target_type = "Weapon"
 metadata/_custom_type_script = "uid://ba3mc6fdm3aqu"

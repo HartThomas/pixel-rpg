@@ -7,7 +7,7 @@ class_name Player
 @export var speed: float = 5.0
 @export var armour: int = 0
 
-func update_armour() -> void:
+func update_armour_value() -> void:
 	var new_armour_value : int = 0
 	var items = InventoryManager.equipped_items()
 	for item in items:

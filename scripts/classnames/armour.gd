@@ -28,4 +28,5 @@ func create_tooltip_info() -> Dictionary:
 		info.stats = 'Base armour: ' + str(base_armour)
 	if final_armour != base_armour and info.stats:
 		info.stats += '\nFinal armour: ' + str(final_armour)
+	info.unique = unique
 	return info
