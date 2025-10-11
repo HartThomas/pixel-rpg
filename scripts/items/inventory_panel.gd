@@ -19,6 +19,8 @@ func insert_item(new_item):
 		ItemManager.holding_item.queue_free()
 		ItemManager.holding_item = null
 		var item_in_inventory = item.duplicate()
+		if item is Weapon or item is Armour:
+			item_in_inventory.apply_modifiers()
 		ItemManager.create_item(item_in_inventory, get_global_mouse_position())
 		item = new_item
 		InventoryManager.equipped[inventory_ref].value = new_item
