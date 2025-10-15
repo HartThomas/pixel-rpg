@@ -10,23 +10,23 @@ func apply_modifiers():
 	for ability in abilities:
 		ability.apply_to_armour(self)
 
-func create_tooltip_info() -> Dictionary:
+func create_tooltip_info(data: what_to_show = what_to_show.full_items) -> Dictionary:
 	var info: Dictionary = {}
-	if item_name:
+	if (data == 0 or data == 1) and item_name :
 		info.name = item_name.capitalize()
-	if type:
+	if (data == 0 or data == 1) and type:
 		info.type = type.capitalize()
-	if abilities.size() > 0:
+	if (data == 0 or data == 2) and abilities.size() > 0:
 		info.affixes = ''
 		for ability in abilities:
 			info.affixes += ability.create_tooltip_info() + '\n'
-	if description:
+	if data == 0 and description:
 		info.description = description
 	if texture:
 		info.icon = texture
-	if base_armour:
-		info.stats = 'Base armour: ' + str(base_armour)
-	if final_armour != base_armour and info.stats:
-		info.stats += '\nFinal armour: ' + str(final_armour)
+	if (data == 0 or data == 3) and base_armour:
+		info.stats = 'Base damage: ' + str(base_armour)
+	if (data == 0 or data == 3) and final_armour != base_armour and info.stats:
+		info.stats += '\nFinal damage: ' + str(final_armour)
 	info.unique = unique
 	return info

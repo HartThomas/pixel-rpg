@@ -102,6 +102,7 @@ func die():
 	GameScript.astar_grid.set_point_solid((position/32).floor(), false)
 	EnemyManager.enemies.erase(self)
 	ItemManager.create_item(generate_loot(), position)
+	PlayerManager.enemy_killed(sprite_data)
 	queue_free()
 
 func generate_loot() -> Item:

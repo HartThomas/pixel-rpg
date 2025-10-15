@@ -21,8 +21,16 @@ func set_item_data(data: Dictionary) -> void:
 	if description_label.text == "":
 		description_label.queue_free()
 	await get_tree().process_frame
+	#set_scale_of_text()
 	custom_minimum_size = $VBoxContainer.get_combined_minimum_size() + Vector2(16, 16)
 	size = custom_minimum_size
+
+func set_scale_of_text() ->  void:
+	name_label.scale = Vector2(0.5, 0.5)
+	type_label.scale = Vector2(0.5, 0.5)
+	stats_label.scale = Vector2(0.5, 0.5)
+	affix_label.scale = Vector2(0.5, 0.5)
+	#description_label.scale = Vector2(0.05, 0.05)
 
 func _ready() -> void:
 	pass

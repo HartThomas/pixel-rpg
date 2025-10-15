@@ -2,6 +2,10 @@ extends Node
 
 var player_stats : Player
 
+var enemy_knowledge := {
+	
+}
+
 func _ready():
 	var player = load("res://resources/entities/player.tres") as Player
 	player_stats = player
@@ -36,3 +40,12 @@ func setup_healthbar() -> int:
 		healthbar.value = player_stats.health
 		return (healthbar.value / healthbar.max_value) * 100
 	return 100
+
+func enemy_killed (enemy: Enemy) -> void:
+	if enemy_knowledge.has(enemy.name):
+		enemy_knowledge[enemy.name] += 1
+	else:
+		enemy_knowledge[enemy.name] = 1
+	var loot_info = get_tree().current_scene.get_node("LootInfo")
+	if loot_info:
+		loot_info.refresh(enemy, enemy_knowledge[enemy.name])

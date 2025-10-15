@@ -46,6 +46,9 @@ inventory_slots="all inventory slot nodes"
 [gui]
 
 theme/custom_font="uid://3cgcw4acqhll"
+theme/default_font_hinting=2
+theme/default_font_subpixel_positioning=0
+theme/default_font_multichannel_signed_distance_field=true
 theme/default_font_generate_mipmaps=true
 
 [input]

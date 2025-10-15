@@ -7,6 +7,7 @@ extends Node2D
 @onready var highlight_cell: Sprite2D = $HighlightCell
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var gui: CanvasLayer = $Gui
+@onready var loot_info: CanvasLayer = $LootInfo
 
 signal weapon_change
 

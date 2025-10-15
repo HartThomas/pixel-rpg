@@ -12,25 +12,25 @@ func apply_modifiers():
 	for ability in abilities:
 		ability.apply_to_weapon(self)
 
-func create_tooltip_info() -> Dictionary:
+func create_tooltip_info(data: what_to_show = what_to_show.full_items) -> Dictionary:
 	var info: Dictionary = {}
-	if item_name:
+	if (data == 0 or data == 1) and item_name :
 		info.name = item_name.capitalize()
-	if type:
+	if (data == 0 or data == 1) and type:
 		info.type = type.capitalize()
-	if abilities.size() > 0:
+	if (data == 0 or data == 2) and abilities.size() > 0:
 		info.affixes = ''
 		for ability in abilities:
 			info.affixes += ability.create_tooltip_info() + '\n'
-	if description:
+	if data == 0 and description:
 		info.description = description
 	if texture:
 		info.icon = texture
-	if base_damage:
+	if (data == 0 or data == 3) and base_damage:
 		info.stats = 'Base damage: ' + str(base_damage)
-	if final_damage != base_damage and info.stats:
+	if (data == 0 or data == 3) and final_damage != base_damage and info.stats:
 		info.stats += '\nFinal damage: ' + str(final_damage)
-	if cooldown:
+	if (data == 0 or data == 3) and cooldown:
 		if not info.stats:
 			info.stats = ''
 		info.stats += '\nCooldown: ' + str(cooldown)

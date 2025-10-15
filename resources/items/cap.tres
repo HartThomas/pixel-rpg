@@ -13,4 +13,5 @@ type = "head"
 input_slots = Array[String](["head"])
 abilities = Array[ExtResource("1_0j4wk")]([])
 description = ""
+unique = false
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

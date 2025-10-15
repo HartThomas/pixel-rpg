@@ -13,4 +13,5 @@ type = "shoulders"
 input_slots = Array[String](["shoulders"])
 abilities = Array[ExtResource("1_b104d")]([])
 description = ""
+unique = false
 metadata/_custom_type_script = "uid://bmnsjevp0nwsv"

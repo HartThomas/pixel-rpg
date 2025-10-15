@@ -1,8 +1,7 @@
-[gd_resource type="Resource" script_class="LootTable" load_steps=21 format=3 uid="uid://dnl4tbw6pp5xt"]
+[gd_resource type="Resource" script_class="LootTable" load_steps=29 format=3 uid="uid://dnl4tbw6pp5xt"]
 
 [ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_ohjdv"]
 [ext_resource type="Resource" uid="uid://dn7mfsnq3y3gb" path="res://resources/abilities/heavy.tres" id="2_66cnp"]
-[ext_resource type="Script" uid="uid://bmnsjevp0nwsv" path="res://scripts/classnames/item.gd" id="2_bk718"]
 [ext_resource type="Script" uid="uid://nrvpdo0v0rin" path="res://scripts/classnames/loot_table.gd" id="3_nregt"]
 [ext_resource type="Resource" uid="uid://utk1aiwenf57" path="res://resources/abilities/sharp.tres" id="3_rk755"]
 [ext_resource type="Resource" uid="uid://bul4coobk7lrr" path="res://resources/items/boots.tres" id="3_w4m3v"]
@@ -13,6 +12,8 @@
 [ext_resource type="Resource" uid="uid://c43esnpqse78w" path="res://resources/items/mittens.tres" id="7_0c6f8"]
 [ext_resource type="Resource" uid="uid://dmyj7olrh2x7" path="res://resources/items/pantaloons.tres" id="8_65hty"]
 [ext_resource type="Resource" uid="uid://3bjthuiew0nv" path="res://resources/items/wooden_sword.tres" id="11_rk755"]
+[ext_resource type="Script" uid="uid://bo7tmu1rvrefd" path="res://scripts/classnames/loot_discovery_data.gd" id="12_0c6f8"]
+[ext_resource type="Script" uid="uid://c0uxbngdmb0ab" path="res://scripts/classnames/threshold.gd" id="12_65hty"]
 
 [sub_resource type="Resource" id="Resource_65hty"]
 script = ExtResource("4_0c6f8")
@@ -56,11 +57,58 @@ weight = 0.05
 item = ExtResource("11_rk755")
 metadata/_custom_type_script = "uid://d0hxnx5rljujb"
 
+[sub_resource type="Resource" id="Resource_s216c"]
+script = ExtResource("12_65hty")
+amount_needed = 1
+revealed_data = 1
+number_of_items = 1
+metadata/_custom_type_script = "uid://c0uxbngdmb0ab"
+
+[sub_resource type="Resource" id="Resource_s2j03"]
+script = ExtResource("12_65hty")
+amount_needed = 3
+revealed_data = 1
+number_of_items = 2
+metadata/_custom_type_script = "uid://c0uxbngdmb0ab"
+
+[sub_resource type="Resource" id="Resource_vsiqi"]
+script = ExtResource("12_65hty")
+amount_needed = 7
+revealed_data = 3
+number_of_items = 4
+metadata/_custom_type_script = "uid://c0uxbngdmb0ab"
+
+[sub_resource type="Resource" id="Resource_lef04"]
+script = ExtResource("12_65hty")
+amount_needed = 10
+revealed_data = 0
+number_of_items = 4
+metadata/_custom_type_script = "uid://c0uxbngdmb0ab"
+
+[sub_resource type="Resource" id="Resource_wj1g3"]
+script = ExtResource("12_65hty")
+amount_needed = 15
+revealed_data = 0
+number_of_items = 4
+metadata/_custom_type_script = "uid://c0uxbngdmb0ab"
+
+[sub_resource type="Resource" id="Resource_1kq1j"]
+script = ExtResource("12_65hty")
+amount_needed = 20
+revealed_data = 0
+number_of_items = 7
+metadata/_custom_type_script = "uid://c0uxbngdmb0ab"
+
+[sub_resource type="Resource" id="Resource_dwk75"]
+script = ExtResource("12_0c6f8")
+reveal_thresholds = Array[ExtResource("12_65hty")]([SubResource("Resource_s216c"), SubResource("Resource_s2j03"), SubResource("Resource_vsiqi"), SubResource("Resource_lef04"), SubResource("Resource_wj1g3"), SubResource("Resource_1kq1j")])
+metadata/_custom_type_script = "uid://bo7tmu1rvrefd"
+
 [resource]
 script = ExtResource("3_nregt")
-base_items = Array[ExtResource("2_bk718")]([ExtResource("3_w4m3v"), ExtResource("4_662ml"), ExtResource("5_66cnp"), ExtResource("6_rk755"), ExtResource("7_0c6f8"), ExtResource("8_65hty"), ExtResource("11_rk755")])
-base_item_weights = [SubResource("Resource_65hty"), SubResource("Resource_0c6f8"), SubResource("Resource_fi2dr"), SubResource("Resource_evogr"), SubResource("Resource_r6t8k"), SubResource("Resource_sphnb"), SubResource("Resource_2jkgu")]
+base_item_weights = Array[ExtResource("4_0c6f8")]([SubResource("Resource_65hty"), SubResource("Resource_0c6f8"), SubResource("Resource_fi2dr"), SubResource("Resource_evogr"), SubResource("Resource_r6t8k"), SubResource("Resource_sphnb"), SubResource("Resource_2jkgu")])
 ability_pool = Array[ExtResource("1_ohjdv")]([ExtResource("2_66cnp"), ExtResource("3_rk755")])
 min_abilities = 0
 max_abilities = 2
+discovery_data = SubResource("Resource_dwk75")
 metadata/_custom_type_script = "uid://nrvpdo0v0rin"
