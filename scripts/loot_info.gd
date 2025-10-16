@@ -39,18 +39,29 @@ func hide_gui():
 func refresh(enemy: Enemy, number_killed:int) -> void:
 	var table = load("res://resources/loot_tables/%s.tres" % [enemy.name]) as LootTable
 	var new_items = table.get_revealed_loot_items(number_killed) as Array[WeightedItem]
-	print(new_items)
+	var reveal_amount = table.how_much_info_to_reveal(number_killed)
 	if arrays_equal(items, new_items):
 		return
 	items = new_items
 	var children = v_box_container.get_children()
 	for child in children:
 		child.queue_free()
-	for item in items:
+	var percentages : Array = []
+	if reveal_amount == 2:
+		percentages = table.get_loot_drop_percentages()
+	for i in range(items.size()):
+		var hbox = HBoxContainer.new()
+		if reveal_amount == 2:
+			var new_label = Label.new()
+			new_label.add_theme_color_override('font_color', Color('d6b878'))
+			new_label.add_theme_font_size_override('font_size', 8)
+			new_label.text = str(percentages[i].chance) + '%: '
+			hbox.add_child(new_label)
 		var tooltip = tooltip_scene.instantiate()
 		#tooltip.parent_item = self
-		v_box_container.add_child(tooltip)
-		var tooltip_info = item.item.create_tooltip_info(2)
+		hbox.add_child(tooltip)
+		v_box_container.add_child(hbox)
+		var tooltip_info = items[i].item.create_tooltip_info(reveal_amount)
 		tooltip.call_deferred("set_item_data", tooltip_info)
 
 func _on_button_button_down() -> void:

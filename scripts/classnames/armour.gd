@@ -12,9 +12,9 @@ func apply_modifiers():
 
 func create_tooltip_info(data: what_to_show = what_to_show.full_items) -> Dictionary:
 	var info: Dictionary = {}
-	if (data == 0 or data == 1) and item_name :
+	if (data == 0 or data == 1 or data == 2) and item_name :
 		info.name = item_name.capitalize()
-	if (data == 0 or data == 1) and type:
+	if (data == 0 or data == 1 or data == 2) and type:
 		info.type = type.capitalize()
 	if (data == 0 or data == 2) and abilities.size() > 0:
 		info.affixes = ''
@@ -24,9 +24,9 @@ func create_tooltip_info(data: what_to_show = what_to_show.full_items) -> Dictio
 		info.description = description
 	if texture:
 		info.icon = texture
-	if (data == 0 or data == 3) and base_armour:
+	if (data == 0 or data == 3 or data == 2) and base_armour:
 		info.stats = 'Base damage: ' + str(base_armour)
-	if (data == 0 or data == 3) and final_armour != base_armour and info.stats:
+	if (data == 0 or data == 3 or data == 2) and final_armour != base_armour and info.stats:
 		info.stats += '\nFinal damage: ' + str(final_armour)
 	info.unique = unique
 	return info
