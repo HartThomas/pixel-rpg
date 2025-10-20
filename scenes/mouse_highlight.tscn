@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyanaaux5kmo0"]
+
+[ext_resource type="Texture2D" uid="uid://dovy2uvs3t3pk" path="res://art/sprites/bland_highlight_cell.png" id="1_fytwk"]
+[ext_resource type="Script" uid="uid://ddfkahktu4xr7" path="res://scripts/mouse_highlight.gd" id="2_qesn8"]
+
+[node name="MouseHighlight" type="Sprite2D"]
+texture = ExtResource("1_fytwk")
+script = ExtResource("2_qesn8")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c044v515k678n"]
+[gd_scene load_steps=11 format=3 uid="uid://c044v515k678n"]
 
 [ext_resource type="Script" uid="uid://dsth2afje2gfl" path="res://scripts/adventure.gd" id="1_ndsq8"]
 [ext_resource type="PackedScene" uid="uid://b3rccb8jjuwwm" path="res://scenes/background.tscn" id="2_8junk"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bxa1ormqssq83" path="res://art/sounds/shwick.ogg" id="6_ibhji"]
 [ext_resource type="PackedScene" uid="uid://d2st0v65jr2n6" path="res://scenes/GUI.tscn" id="8_kbce5"]
 [ext_resource type="PackedScene" uid="uid://ko0n7ifguk6k" path="res://scenes/loot_info.tscn" id="9_18mqq"]
+[ext_resource type="PackedScene" uid="uid://dyanaaux5kmo0" path="res://scenes/mouse_highlight.tscn" id="10_e77xe"]
 
 [node name="Adventure" type="Node2D"]
 script = ExtResource("1_ndsq8")
@@ -30,3 +31,5 @@ stream = ExtResource("6_ibhji")
 [node name="Gui" parent="." instance=ExtResource("8_kbce5")]
 
 [node name="LootInfo" parent="." instance=ExtResource("9_18mqq")]
+
+[node name="MouseHighlight" parent="." instance=ExtResource("10_e77xe")]

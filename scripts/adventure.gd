@@ -8,6 +8,7 @@ extends Node2D
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var gui: CanvasLayer = $Gui
 @onready var loot_info: CanvasLayer = $LootInfo
+@onready var mouse_highlight: Sprite2D = $MouseHighlight
 
 signal weapon_change
 
@@ -87,19 +88,30 @@ var coords_array = [
 	Vector2(1,0),Vector2(1,1),Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1),Vector2(0,-1),Vector2(1,-1)
 ]
 
-func highlight_best_cell():
+func highlight_cell_nearest_mouse():
 	var target_cell :Vector2i
-	if InventoryManager.equipped[8].value.animation_type == 'bow':
+	if Input.is_action_pressed("shift"):
+		mouse_highlight.visible = false
+		if InventoryManager.equipped[8].value.animation_type == 'bow':
+			var mouse_pos = camera_2d.get_global_mouse_position()
+			target_cell = Vector2(
+				floor(mouse_pos.x / 32.0) * 32.0 + 16,
+				floor(mouse_pos.y / 32.0) * 32.0 + 16
+			)
+		else:
+			target_cell = find_first_cell_toward_mouse_click()
+		highlight_cell.global_position = target_cell
+		highlight_cell.load_texture()
+		highlight_cell.visible = true
+	else:
+		highlight_cell.visible = false
+		mouse_highlight.visible = true
 		var mouse_pos = camera_2d.get_global_mouse_position()
 		target_cell = Vector2(
 			floor(mouse_pos.x / 32.0) * 32.0 + 16,
 			floor(mouse_pos.y / 32.0) * 32.0 + 16
 		)
-	else:
-		target_cell = find_first_cell_toward_mouse_click()
-	highlight_cell.global_position = target_cell
-	highlight_cell.load_texture()
-	highlight_cell.visible = true
+		mouse_highlight.global_position = target_cell
 
 func find_first_cell_toward_mouse_click():
 	var player_world_position = player_node.position
@@ -143,10 +155,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		cell_clicked((mouse_pos/32).floor())
 
 func _process(delta):
-	if Input.is_action_pressed("shift"):
-		highlight_best_cell()
-	else:
-		highlight_cell.visible = false
+	highlight_cell_nearest_mouse()
 
 func toggle_gui():
 	if not gui.is_shown:
