@@ -31,7 +31,7 @@ func record_inventory_slots():
 
 func find_free_inventory_slot(item : Item):
 	for i in range(equipped.size()):
-		if (item.input_slots.has(equipped[i].name) and not equipped[i].value) or (equipped[i].slot.inventory_ref >= 10 and not equipped[i].value):
+		if (item.input_slots.has(equipped[i].name) and not equipped[i].value) or (i >= 10 and not equipped[i].value):
 			return equipped[i]
 	return null
 

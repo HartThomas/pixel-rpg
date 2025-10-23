@@ -19,7 +19,8 @@ var lights = []
 var width = 40
 var height = 40
 const cell_size = 32
-@onready var level_info : LevelData = preload("res://resources/level_data/swamp.tres")
+var level_name : String = 'swamp'
+@onready var level_info : LevelData = load("res://resources/level_data/%s.tres" % [level_name])
 var player_node
 
 func _ready():
@@ -45,6 +46,8 @@ func _ready():
 	for i in totem_locations:
 		EnemyManager.create_enemies(level_info, i)
 	gui.change_cooldown(InventoryManager.equipped[8].value)
+	InventoryManager.call_deferred('record_inventory_slots')
+	PlayerManager.setup_healthbar()
 
 func light_moved(light):
 	background.light_moved(light)

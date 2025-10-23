@@ -8,6 +8,7 @@ var claimed_tiles = {}
 var paused: bool = false
 
 func create_enemies(data: LevelData, totem_tile: Vector2i, enemy_name:String = 'bogman') -> void:
+	await get_tree().process_frame
 	var surrounding_tiles = GameScript.get_random_cells_around(totem_tile, 4, data.enemy_number)
 	if surrounding_tiles.size() == data.enemy_number:
 		for i in range(data.enemy_number):
@@ -82,6 +83,8 @@ func move_player() -> void:
 				claimed_tiles[next_tile] = true
 				player_scene.position = next_tile * 32 + Vector2i(16,16)
 				GameScript.update_cells_based_on_player_movement(player_scene.position,player_scene)
+				if next_tile == GameScript.end_tile:
+					GameScript.end_level()
 
 func _process(delta: float) -> void:
 	if not paused:

@@ -28,6 +28,7 @@ const cell_size = 32
 var astar_grid : AStarGrid2D
 var start_tile :Vector2i = Vector2i(5,0)
 var free_cells: Array[Vector2i] = []
+var end_tile: Vector2i 
 
 func can_place_tile(id: int, x: int, y: int, occupied: Array) -> bool:
 	if not tile_defs.has(id):
@@ -104,6 +105,7 @@ func generate_level_data():
 	astar_grid = astar
 
 func create_path(points: Array[Vector2i]) -> void:
+	end_tile = points[points.size() - 1]
 	level_data[points[0].y][points[0].x] = {
 				"terrain": 4,
 				"entity": null
@@ -262,3 +264,6 @@ func get_random_cells_around(center: Vector2i, radius: int, count: int) -> Array
 			nearby.append(cell)
 	nearby.shuffle()
 	return nearby.slice(0, min(count, nearby.size()))
+
+func end_level() -> void:
+	print('ending level')
