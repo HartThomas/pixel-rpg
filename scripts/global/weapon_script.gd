@@ -1,5 +1,5 @@
 extends Node
-@onready var projectile_scene : PackedScene = load("res://scenes/arrow.tscn")
+@onready var projectile_scene : PackedScene = load("res://scenes/projectile.tscn")
 @onready var animatable_sprite_scene :PackedScene = load("res://scenes/animatable_sprite.tscn")
 @onready var tooltip_scene : PackedScene = load("res://scenes/tooltip.tscn")
 
@@ -80,8 +80,28 @@ func bow(target: Vector2i, player_world_position, mouse_world_position, audio_st
 		floor(mouse_pos.y / 32.0) * 32.0 + 16
 	)
 	var new_projectile = projectile_scene.instantiate()
+	new_projectile.start_cell = player_world_position
 	new_projectile.target_cell = target_cell
 	new_projectile.projectile_name = 'arrow'
+	new_projectile.position = player_world_position
+	var weapon : Weapon = InventoryManager.equipped[8].value
+	new_projectile.damage = weapon.final_damage
+	projectiles.append(new_projectile)
+	get_tree().current_scene.add_child(new_projectile)
+	#player_node.set_state(player_node.States.ATTACK)
+
+func bomb(target: Vector2i, player_world_position, mouse_world_position, audio_stream_player, lights):
+	var mouse_pos = mouse_world_position
+	var target_cell = Vector2(
+		floor(mouse_pos.x / 32.0) * 32.0 + 16,
+		floor(mouse_pos.y / 32.0) * 32.0 + 16
+	)
+	var new_projectile = projectile_scene.instantiate()
+	new_projectile.start_cell = player_world_position
+	new_projectile.vertical_velocity = -200.0
+	new_projectile.vertical_offset = 0
+	new_projectile.target_cell = target_cell
+	new_projectile.projectile_name = 'bomb'
 	new_projectile.position = player_world_position
 	var weapon : Weapon = InventoryManager.equipped[8].value
 	new_projectile.damage = weapon.final_damage
@@ -150,11 +170,66 @@ func paused_button_pressed():
 func _process(delta: float) -> void:
 	if not paused:
 		for projectile in projectiles:
-			var distance_to_target = projectile.global_position.distance_to(projectile.target_cell)
-			var step = projectile.speed * delta
-			if step >= distance_to_target:
-				projectile.global_position = projectile.target_cell
-				projectiles.erase(projectile)
-				projectile.queue_free()
+			if projectile.projectile_name == "bomb":
+				_update_bomb_projectile(projectile, delta)
 			else:
-				projectile.global_position += projectile.velocity * delta
+				_update_linear_projectile(projectile, delta)
+			#var distance_to_target = projectile.global_position.distance_to(projectile.target_cell)
+			#var step = projectile.speed * delta
+			#if step >= distance_to_target:
+				#projectile.global_position = projectile.target_cell
+				#projectiles.erase(projectile)
+				#projectile.queue_free()
+			#else:
+				#projectile.global_position += projectile.velocity * delta
+
+func _update_linear_projectile(projectile, delta):
+	var distance_to_target = projectile.global_position.distance_to(projectile.target_cell)
+	var step = projectile.speed * delta
+	if step >= distance_to_target:
+		projectile.global_position = projectile.target_cell
+		projectiles.erase(projectile)
+		projectile.queue_free()
+	else:
+		projectile.global_position += projectile.velocity * delta
+
+func _update_bomb_projectile(projectile: ThrownProjectile, delta):
+	var gravity = 800.0
+	var bounce_loss = 0.6
+	var min_bounce_velocity = 60.0
+	var damping = 0.98
+
+	# Direction of main travel (flat path)
+	var dir = (projectile.target_cell - projectile.start_cell).normalized()
+	projectile.velocity = dir * projectile.velocity.length() * damping
+
+	# Move along path (the bomb’s projected ground position)
+	projectile.progress += projectile.velocity.length() * delta
+	var path_length = projectile.start_cell.distance_to(projectile.target_cell)
+	var t = clamp(projectile.progress / path_length, 0.0, 1.0)
+	
+	var base_pos = projectile.start_cell.lerp(projectile.target_cell, t)
+	
+	# Perpendicular direction for bounce
+	var perp = Vector2(-dir.y, dir.x)
+	var screen_up = Vector2(0, -1)
+	if perp.dot(screen_up) < 0:
+		perp = -perp
+	# Apply vertical (bounce) motion along the perpendicular
+	projectile.vertical_velocity += gravity * delta
+	projectile.vertical_offset += projectile.vertical_velocity * delta
+	
+	# Bounce when passing below baseline
+	if projectile.vertical_offset > 0:
+		projectile.vertical_offset = 0
+		projectile.vertical_velocity = -projectile.vertical_velocity * bounce_loss
+		if abs(projectile.vertical_velocity) < min_bounce_velocity:
+			projectile.vertical_velocity = 0
+	
+	# Combine path position + bounce offset
+	projectile.global_position = base_pos + perp * -projectile.vertical_offset
+	
+	# Remove when finished
+	if t >= 1.0 and projectile.vertical_velocity == 0:
+		projectiles.erase(projectile)
+		projectile.queue_free()

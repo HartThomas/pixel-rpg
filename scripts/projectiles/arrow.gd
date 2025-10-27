@@ -1,7 +1,15 @@
 extends Projectile
 
+class_name ThrownProjectile
+
 var speed :float = 300.0
 var velocity
+var vertical_velocity
+var vertical_position
+var ground_y
+var vertical_offset
+var start_cell
+var progress = 0.0
 var paused: bool = false
 var damage: int = 0
 
