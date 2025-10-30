@@ -7,7 +7,7 @@ var cell_size : int = 32
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
 var mouse_entered : bool = false
-signal map_clicked(cell: Vector2i)
+#signal map_clicked(cell: Vector2i)
 var source_id = 0
 var grass_atlas_arr = [Vector2i(0,0),Vector2i(0,1)]
 

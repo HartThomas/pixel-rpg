@@ -5,7 +5,7 @@ class_name Weapon
 @export var base_damage: int
 @export var cooldown: float
 var final_damage : int
-@export_enum('sword', 'hammer', 'bow') var animation_type  = ''
+@export_enum('sword', 'hammer', 'bow', 'bomb') var animation_type  = ''
 
 func apply_modifiers():
 	final_damage = base_damage

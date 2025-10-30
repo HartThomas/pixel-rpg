@@ -54,7 +54,7 @@ func clear_tooltip_list(item):
 func tooltip_clicked(tooltip):
 	var index = created_items.find_custom(func(index): return index.tooltip_array.find(tooltip) != -1)
 	var item = created_items[index].item
-	if item.picked_up:
+	if item and item.picked_up:
 		item.picked_up = false
 		item.drop_in_world(GameScript.player_position)
 		item.drop()

@@ -34,7 +34,7 @@ func _ready():
 	background.width = width
 	background.height = height
 	background.resize()
-	background.map_clicked.connect(cell_clicked)
+	#background.map_clicked.connect(cell_clicked)
 	highlight_cell.load_texture()
 	create_player()
 	var totem_locations : Array[Vector2i] = []
@@ -101,6 +101,8 @@ func highlight_cell_nearest_mouse():
 				floor(mouse_pos.x / 32.0) * 32.0 + 16,
 				floor(mouse_pos.y / 32.0) * 32.0 + 16
 			)
+		elif InventoryManager.equipped[8].value.animation_type == 'bomb':
+			target_cell = find_bomb_cell_to_target()
 		else:
 			target_cell = find_first_cell_toward_mouse_click()
 		highlight_cell.global_position = target_cell
@@ -115,6 +117,42 @@ func highlight_cell_nearest_mouse():
 			floor(mouse_pos.y / 32.0) * 32.0 + 16
 		)
 		mouse_highlight.global_position = target_cell
+
+func  find_bomb_cell_to_target() -> Vector2:
+	var mouse_pos = camera_2d.get_global_mouse_position()
+	var cell_size = 32.0
+	var half_cell = cell_size / 2.0
+
+	# Snap mouse to nearest cell center
+	var highlighted_cell = Vector2(
+		floor(mouse_pos.x / cell_size) * cell_size + half_cell,
+		floor(mouse_pos.y / cell_size) * cell_size + half_cell
+	)
+	# Compute cell offset (in whole cells)
+	var dx = int(round((highlighted_cell.x - player_node.position.x) / cell_size))
+	var dy = int(round((highlighted_cell.y - player_node.position.y) / cell_size))
+
+	# Clamp to 3 cells in each direction
+	dx = clamp(dx, -3, 3)
+	dy = clamp(dy, -3, 3)
+
+	# --- remove corners ---
+	# If both |dx| and |dy| are large enough, shift inward
+	if (abs(dx) == 3 and abs(dy) >= 2) or (abs(dy) == 3 and abs(dx) >= 2):
+		#print('inside corner region', dx, dy)
+		if abs(dx) == 3 and abs(dy) == 3:
+			# true diagonal corner → pull both inward
+			dx = sign(dx) * 2
+			dy = sign(dy) * 2
+		else:
+			# otherwise, pull the dominant axis inward
+			if abs(dx) > abs(dy):
+				dx = sign(dx) * 2
+			else:
+				dy = sign(dy) * 2
+
+	# Convert back to world coordinates
+	return player_node.position + Vector2(dx * cell_size, dy * cell_size)
 
 func find_first_cell_toward_mouse_click():
 	var player_world_position = player_node.position
@@ -155,7 +193,7 @@ func _unhandled_input(event: InputEvent) -> void:
 					result['collider'].get_parent().on_click()
 					get_viewport().set_input_as_handled()
 					return
-		cell_clicked((mouse_pos/32).floor())
+		cell_clicked( (mouse_pos/32).floor() if InventoryManager.equipped[8].value.item_name != 'bomb' else (find_bomb_cell_to_target()/32).floor())
 
 func _process(delta):
 	highlight_cell_nearest_mouse()

@@ -93,8 +93,8 @@ func bow(target: Vector2i, player_world_position, mouse_world_position, audio_st
 func bomb(target: Vector2i, player_world_position, mouse_world_position, audio_stream_player, lights):
 	var mouse_pos = mouse_world_position
 	var target_cell = Vector2(
-		floor(mouse_pos.x / 32.0) * 32.0 + 16,
-		floor(mouse_pos.y / 32.0) * 32.0 + 16
+		target.x * 32.0 + 16,
+		target.y * 32.0 + 16
 	)
 	var new_projectile = projectile_scene.instantiate()
 	new_projectile.start_cell = player_world_position
@@ -197,7 +197,7 @@ func _update_bomb_projectile(projectile: ThrownProjectile, delta):
 	var gravity = 800.0
 	var bounce_loss = 0.6
 	var min_bounce_velocity = 60.0
-	var damping = 0.98
+	var damping = 0.982
 
 	# Direction of main travel (flat path)
 	var dir = (projectile.target_cell - projectile.start_cell).normalized()
