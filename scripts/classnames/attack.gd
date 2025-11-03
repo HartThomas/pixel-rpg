@@ -9,4 +9,4 @@ func execute():
 	pass
 
 func get_affected_cells() -> Array[Vector2i]:
-	return []
+	return [target_cell]

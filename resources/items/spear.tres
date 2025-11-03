@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://4mjmp2tbpier"]
+
+[ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_tle4d"]
+[ext_resource type="Script" uid="uid://d1yfffylnx8y4" path="res://scripts/classnames/weapon.gd" id="2_wofl6"]
+
+[resource]
+script = ExtResource("2_wofl6")
+base_damage = 8
+cooldown = 0.6
+animation_type = "spear"
+item_name = "spear"
+type = "weapon"
+input_slots = Array[String](["left_hand", "right_hand"])
+abilities = Array[ExtResource("1_tle4d")]([])
+description = ""
+unique = false
+metadata/_custom_type_script = "uid://d1yfffylnx8y4"

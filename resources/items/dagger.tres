@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://bpgodgehat66x"]
+
+[ext_resource type="Script" uid="uid://ba3mc6fdm3aqu" path="res://scripts/classnames/ability.gd" id="1_25keo"]
+[ext_resource type="Script" uid="uid://d1yfffylnx8y4" path="res://scripts/classnames/weapon.gd" id="2_fgw4y"]
+[ext_resource type="Texture2D" uid="uid://cuqnjx0xgxj56" path="res://art/sprites/dagger.png" id="3_fgw4y"]
+
+[resource]
+script = ExtResource("2_fgw4y")
+base_damage = 2
+cooldown = 0.2
+animation_type = "dagger"
+texture = ExtResource("3_fgw4y")
+item_name = "dagger"
+type = "weapon"
+input_slots = Array[String](["left_hand", "right_hand"])
+abilities = Array[ExtResource("1_25keo")]([])
+description = ""
+unique = false
+metadata/_custom_type_script = "uid://d1yfffylnx8y4"

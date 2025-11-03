@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpoy6dpekv2qs"]
+
+[ext_resource type="Script" uid="uid://ddcqyhek1sb0x" path="res://scripts/attacks/dagger.gd" id="1_qwa6k"]
+
+[node name="Dagger" type="Node"]
+script = ExtResource("1_qwa6k")
+metadata/_custom_type_script = "uid://defodif0fansc"

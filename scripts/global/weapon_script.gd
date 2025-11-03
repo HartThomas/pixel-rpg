@@ -32,7 +32,7 @@ func hammer(target: Vector2i, player_world_position, mouse_world_position,audio_
 		get_tree().current_scene.add_child(new_animated_sprite)
 	player_node.set_state(player_node.States.ATTACK)
 
-func sword(target: Vector2i,player_world_position, mouse_world_position, audio_stream_player, lights):
+func sword(target: Vector2i, player_world_position, mouse_world_position, audio_stream_player, lights):
 	var sword_scene = load("res://scenes/sword.tscn") as PackedScene
 	var attack_instance = sword_scene.instantiate()
 	var target_cell = find_first_cell_toward_mouse_click(player_world_position, mouse_world_position)
@@ -108,6 +108,51 @@ func bomb(target: Vector2i, player_world_position, mouse_world_position, audio_s
 	projectiles.append(new_projectile)
 	get_tree().current_scene.add_child(new_projectile)
 	#player_node.set_state(player_node.States.ATTACK)
+
+func dagger(target: Vector2i, player_world_position, mouse_world_position, audio_stream_player, lights):
+	var dagger_scene = load("res://scenes/dagger.tscn") as PackedScene
+	var attack_instance = dagger_scene.instantiate()
+	var target_cell = find_first_cell_toward_mouse_click(player_world_position, mouse_world_position)
+	attack_instance.player_cell = player_world_position/32
+	attack_instance.target_cell = target_cell / 32
+	var offset : Vector2 =  attack_instance.target_cell - attack_instance.player_cell
+	var is_corner = abs(offset.x) == 1 and abs(offset.y) == 1
+	var affected_cells = attack_instance.execute()
+	var new_animated_sprite = animatable_sprite_scene.instantiate()
+	if is_corner:
+		new_animated_sprite.sprite_name = 'dagger_diagonal'
+		new_animated_sprite.frame_width = 32
+		new_animated_sprite.frame_height = 32
+		#new_animated_sprite.centered = false
+		var base_dir = Vector2(1, -1).normalized()
+		var current_dir = offset.normalized()
+		var angle_difference = current_dir.angle_to(base_dir)
+		new_animated_sprite.rotation = -angle_difference
+		var new_offset = Vector2(16,16).rotated(-angle_difference)
+		new_animated_sprite.position = target_cell 
+		new_animated_sprite.affected_cells = attack_instance.execute()
+		if paused:
+			new_animated_sprite.paused = true
+		current_attack.append(new_animated_sprite)
+		get_tree().current_scene.add_child(new_animated_sprite)
+	else:
+		var base_dir = Vector2(0, -1).normalized()
+		var current_dir = offset.normalized()
+		var angle_difference = current_dir.angle_to(base_dir)
+		new_animated_sprite.sprite_name = 'dagger_parallel'
+		new_animated_sprite.position = target_cell 
+		new_animated_sprite.frame_width = 32
+		new_animated_sprite.frame_height = 32
+		new_animated_sprite.rotation = -angle_difference
+		new_animated_sprite.affected_cells = attack_instance.execute()
+		if paused:
+			new_animated_sprite.paused = true
+		current_attack.append(new_animated_sprite)
+		get_tree().current_scene.add_child(new_animated_sprite)
+	player_node.set_state(player_node.States.ATTACK)
+
+func spear(target: Vector2i, player_world_position, mouse_world_position, audio_stream_player, lights):
+	pass
 
 var coords_array = [
 	Vector2(1,0),Vector2(1,1),Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1),Vector2(0,-1),Vector2(1,-1)
