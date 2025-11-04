@@ -19,6 +19,7 @@ var animation_dictionary : Dictionary = {
 	bogman_attack= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=true, despawn = false},
 	dagger_diagonal= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true},
 	dagger_parallel= {offset = Vector2(0.0,-11.0),columns= 3, rows = 1, used_columns = 3, loop=false, despawn = true},
+	spear= {offset = Vector2(0.0,-11.0),columns= 4, rows = 1, used_columns = 4, loop=false, despawn = true},
 }
 
 #func _process(delta: float) -> void:

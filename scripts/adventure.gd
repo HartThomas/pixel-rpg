@@ -9,6 +9,7 @@ extends Node2D
 @onready var gui: CanvasLayer = $Gui
 @onready var loot_info: CanvasLayer = $LootInfo
 @onready var mouse_highlight: Sprite2D = $MouseHighlight
+@onready var highlight_cell_2: Sprite2D = $HighlightCell2
 
 signal weapon_change
 
@@ -36,6 +37,7 @@ func _ready():
 	background.resize()
 	#background.map_clicked.connect(cell_clicked)
 	highlight_cell.load_texture()
+	highlight_cell_2.load_texture()
 	create_player()
 	var totem_locations : Array[Vector2i] = []
 	if level_info.totem_number > 0:
@@ -103,6 +105,20 @@ func highlight_cell_nearest_mouse():
 			)
 		elif InventoryManager.equipped[8].value.animation_type == 'bomb':
 			target_cell = find_bomb_cell_to_target()
+		elif InventoryManager.equipped[8].value.animation_type == 'spear':
+			target_cell = find_first_cell_toward_mouse_click()
+			var player_cell = Vector2(
+				floor(player_node.position.x / 32.0),
+				floor(player_node.position.y / 32.0)
+			)
+			var target_cell_2i = Vector2(
+				floor(target_cell.x / 32.0),
+				floor(target_cell.y / 32.0)
+			)
+			var extra_highlight_cell =target_cell_2i - player_cell
+			highlight_cell_2.position = (player_cell* 32) + Vector2(16,16) + ((extra_highlight_cell * 32) * 2 )
+			highlight_cell_2.load_texture()
+			highlight_cell_2.visible = true
 		else:
 			target_cell = find_first_cell_toward_mouse_click()
 		highlight_cell.global_position = target_cell
@@ -110,6 +126,7 @@ func highlight_cell_nearest_mouse():
 		highlight_cell.visible = true
 	else:
 		highlight_cell.visible = false
+		highlight_cell_2.visible = false
 		mouse_highlight.visible = true
 		var mouse_pos = camera_2d.get_global_mouse_position()
 		target_cell = Vector2(

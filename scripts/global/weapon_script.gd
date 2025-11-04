@@ -152,7 +152,29 @@ func dagger(target: Vector2i, player_world_position, mouse_world_position, audio
 	player_node.set_state(player_node.States.ATTACK)
 
 func spear(target: Vector2i, player_world_position, mouse_world_position, audio_stream_player, lights):
-	pass
+	var spear_scene = load("res://scenes/spear.tscn") as PackedScene
+	var attack_instance = spear_scene.instantiate()
+	var target_cell = find_first_cell_toward_mouse_click(player_world_position, mouse_world_position)
+	attack_instance.player_cell = player_world_position/32
+	attack_instance.target_cell = target_cell / 32
+	var affected_cells = attack_instance.execute()
+	var new_animated_sprite = animatable_sprite_scene.instantiate()
+	new_animated_sprite.sprite_name = 'spear'
+	new_animated_sprite.frame_width = 64
+	new_animated_sprite.frame_height = 32
+	#new_animated_sprite.centered = false
+	var base_dir = Vector2(1, 0).normalized()
+	var offset : Vector2 =  attack_instance.target_cell - attack_instance.player_cell
+	var current_dir = offset.normalized()
+	var angle_difference = current_dir.angle_to(base_dir)
+	new_animated_sprite.rotation = -angle_difference
+	var new_offset = Vector2(16,16).rotated(-angle_difference)
+	new_animated_sprite.position = target_cell 
+	new_animated_sprite.affected_cells = attack_instance.execute()
+	if paused:
+		new_animated_sprite.paused = true
+	current_attack.append(new_animated_sprite)
+	get_tree().current_scene.add_child(new_animated_sprite)
 
 var coords_array = [
 	Vector2(1,0),Vector2(1,1),Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1),Vector2(0,-1),Vector2(1,-1)
@@ -179,6 +201,7 @@ func cell_clicked(target, player_node, camera_2d, audio_stream_player, lights):
 		CooldownManager.start_cooldown(weapon, "attack", weapon.cooldown)
 
 func on_weapon_animation_finished(cells: Array[Vector2i]):
+	print(cells)
 	for cell in cells:
 		var entity = GameScript.get_entity_from_cell(cell)
 		if entity and entity.has_method('take_damage'):

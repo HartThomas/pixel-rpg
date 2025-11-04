@@ -18,7 +18,7 @@ var inventory_slots: Array = []
 func _ready() -> void:
 	for i in range(32):
 		equipped.append({name= 'slot%s' % [i],value=null})
-	var sword_resource = load("res://resources/items/dagger.tres")
+	var sword_resource = load("res://resources/items/spear.tres")
 	sword_resource.apply_modifiers()
 	equipped[8].value = sword_resource 
 	self.call_deferred('record_inventory_slots')

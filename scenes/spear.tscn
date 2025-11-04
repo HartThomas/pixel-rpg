@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0movvedwbtda"]
+
+[ext_resource type="Script" uid="uid://y47m1qt6dtlf" path="res://scripts/attacks/spear.gd" id="1_43rot"]
+
+[node name="Spear" type="Node"]
+script = ExtResource("1_43rot")
+metadata/_custom_type_script = "uid://defodif0fansc"
