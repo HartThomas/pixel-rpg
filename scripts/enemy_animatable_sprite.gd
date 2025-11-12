@@ -7,6 +7,7 @@ var move_delay: float
 var cell_size: int = 32
 var recalc_path_timer: float = 0.0
 var move_speed : float = 5.0
+var dead : bool = false
 
 enum States {
 	IDLE,
@@ -94,7 +95,8 @@ func recalculate_path():
 
 func take_damage(amount:int):
 	sprite_data.health -= amount
-	if sprite_data.health <=0:
+	if sprite_data.health <=0 and not dead:
+		dead = true
 		die()
 
 func die():

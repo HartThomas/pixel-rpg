@@ -176,6 +176,26 @@ func spear(target: Vector2i, player_world_position, mouse_world_position, audio_
 	current_attack.append(new_animated_sprite)
 	get_tree().current_scene.add_child(new_animated_sprite)
 
+func fan_of_knives(target: Vector2i, player_world_position, mouse_world_position, audio_stream_player, lights):
+	var mouse_pos = mouse_world_position
+	var target_cell = Vector2(
+		floor(mouse_pos.x / 32.0) * 32.0 + 16,
+		floor(mouse_pos.y / 32.0) * 32.0 + 16
+	)
+	var dir = (target_cell - player_world_position).normalized()
+	var perpendicular = Vector2(-dir.y, dir.x) * 32.0 
+	for i in range(-1, 2): # -1, 0, 1
+		var new_projectile = projectile_scene.instantiate()
+		new_projectile.start_cell = player_world_position
+		new_projectile.target_cell = target_cell + (perpendicular * i)
+		new_projectile.projectile_name = 'knife'
+		new_projectile.position = player_world_position
+		var weapon : Weapon = InventoryManager.equipped[8].value
+		new_projectile.damage = weapon.final_damage
+		projectiles.append(new_projectile)
+		get_tree().current_scene.add_child(new_projectile)
+	#player_node.set_state(player_node.States.ATTACK)
+
 var coords_array = [
 	Vector2(1,0),Vector2(1,1),Vector2(0,1),Vector2(-1,1),Vector2(-1,0),Vector2(-1,-1),Vector2(0,-1),Vector2(1,-1)
 ]

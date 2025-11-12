@@ -115,7 +115,7 @@ func highlight_cell_nearest_mouse():
 				floor(target_cell.x / 32.0),
 				floor(target_cell.y / 32.0)
 			)
-			var extra_highlight_cell =target_cell_2i - player_cell
+			var extra_highlight_cell = target_cell_2i - player_cell
 			highlight_cell_2.position = (player_cell* 32) + Vector2(16,16) + ((extra_highlight_cell * 32) * 2 )
 			highlight_cell_2.load_texture()
 			highlight_cell_2.visible = true
