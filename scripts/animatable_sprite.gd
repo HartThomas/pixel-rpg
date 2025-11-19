@@ -49,15 +49,16 @@ func light_source_moved(light):
 	var light_dir = (global_position - light.position).normalized()
 	var light_distance = global_position.distance_to(light.position)
 	var found_shadow = shadow_instances[shadow_instances.find_custom(func (shadow) : return shadow[1] == light)]
-	var shadow_angle = light_dir.angle() + PI * 0.5
+	var shadow_angle = light_dir.angle() - PI * 0.5
 	var scale_y = clamp(light_distance / 100.0, 1.0, 1.5)
 	var alpha = clamp(1.0 - (light_distance / 200.0), 0.0, 1.0)
 	found_shadow[0].skew = shadow_angle
 	var shader = found_shadow[0].material as ShaderMaterial
 	if shader:
-		var color: Color = shader.get_shader_parameter("color")
+		print(alpha)
+		var color: Color = shader.get_shader_parameter("shadow_color")
 		color.a = alpha
-		shader.set_shader_parameter("color", color)
+		shader.set_shader_parameter("shadow_color", color)
 	var up_vector = Vector2(0, 1)
 	var above_factor = clamp(up_vector.dot(light_dir), 0.0, 1.0)
 	var brightness = lerp(1.0, 0.7, above_factor)

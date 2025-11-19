@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c044v515k678n"]
+[gd_scene load_steps=13 format=3 uid="uid://c044v515k678n"]
 
 [ext_resource type="Script" uid="uid://dsth2afje2gfl" path="res://scripts/adventure.gd" id="1_ndsq8"]
 [ext_resource type="PackedScene" uid="uid://b3rccb8jjuwwm" path="res://scenes/background.tscn" id="2_8junk"]
@@ -10,6 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://d2st0v65jr2n6" path="res://scenes/GUI.tscn" id="8_kbce5"]
 [ext_resource type="PackedScene" uid="uid://ko0n7ifguk6k" path="res://scenes/loot_info.tscn" id="9_18mqq"]
 [ext_resource type="PackedScene" uid="uid://dyanaaux5kmo0" path="res://scenes/mouse_highlight.tscn" id="10_e77xe"]
+[ext_resource type="Shader" uid="uid://cx3mfgn7j8i55" path="res://shaders/adventure.gdshader" id="11_u0dqm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i13t4"]
+shader = ExtResource("11_u0dqm")
+shader_parameter/stripe = 0.76
+shader_parameter/scan = 1.0
+shader_parameter/speed = 75.4
 
 [node name="Adventure" type="Node2D"]
 script = ExtResource("1_ndsq8")
@@ -36,3 +43,14 @@ stream = ExtResource("6_ibhji")
 [node name="LootInfo" parent="." instance=ExtResource("9_18mqq")]
 
 [node name="MouseHighlight" parent="." instance=ExtResource("10_e77xe")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_i13t4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

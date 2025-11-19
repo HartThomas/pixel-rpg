@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ba53lf43w3b7o" path="res://art/cell_animations/player.png" id="1_dp4fn"]
 [ext_resource type="Script" uid="uid://c8venspi5fnav" path="res://scripts/animatable_sprite.gd" id="2_dp4fn"]
-[ext_resource type="Shader" uid="uid://domgyyb6o7cq2" path="res://shaders/shade.gdshader" id="3_ubu22"]
+[ext_resource type="Shader" uid="uid://b5tmp004faiiv" path="res://shaders/spriteshadow.gdshader" id="3_dp4fn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jlo60"]
 atlas = ExtResource("1_dp4fn")
@@ -34,8 +34,10 @@ animations = [{
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_05i0m"]
-shader = ExtResource("3_ubu22")
-shader_parameter/color = Color(0, 0, 0, 0.5)
+shader = ExtResource("3_dp4fn")
+shader_parameter/shadow_length = 50.0
+shader_parameter/shadow_angle_deg = 90.0
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qtkho"]
 atlas = ExtResource("1_dp4fn")

@@ -184,7 +184,7 @@ func fan_of_knives(target: Vector2i, player_world_position, mouse_world_position
 	)
 	var dir = (target_cell - player_world_position).normalized()
 	var perpendicular = Vector2(-dir.y, dir.x) * 32.0 
-	for i in range(-1, 2): # -1, 0, 1
+	for i in range(-1, 2):
 		var new_projectile = projectile_scene.instantiate()
 		new_projectile.start_cell = player_world_position
 		new_projectile.target_cell = target_cell + (perpendicular * i)

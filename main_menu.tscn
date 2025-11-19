@@ -1,11 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqt2iegat88pr"]
+[gd_scene load_steps=8 format=3 uid="uid://cqt2iegat88pr"]
 
 [ext_resource type="Texture2D" uid="uid://c4f145jpsyvhb" path="res://art/sprites/main_menu_background.png" id="1_7vrkn"]
 [ext_resource type="Script" uid="uid://cd8e2cchs0smc" path="res://scripts/main_menu.gd" id="1_fu7sn"]
 [ext_resource type="Texture2D" uid="uid://do1k3xiqua1qh" path="res://art/sprites/start_button.png" id="2_fu7sn"]
 [ext_resource type="Texture2D" uid="uid://n6oul248o8ca" path="res://art/sprites/loading.png" id="4_jix8l"]
+[ext_resource type="Shader" uid="uid://cx3mfgn7j8i55" path="res://shaders/adventure.gdshader" id="5_glbon"]
 
 [sub_resource type="Theme" id="Theme_glbon"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nlkkf"]
+shader = ExtResource("5_glbon")
+shader_parameter/stripe = 0.76
+shader_parameter/scan = 1.0
+shader_parameter/speed = 47.7
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -49,5 +56,16 @@ offset_right = 60.0
 offset_bottom = 59.0
 theme = SubResource("Theme_glbon")
 theme_override_colors/font_color = Color(0.345098, 0.2, 0.172549, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_nlkkf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]

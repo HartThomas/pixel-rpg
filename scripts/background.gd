@@ -21,7 +21,7 @@ func resize() -> void:
 			if GameScript.level_data[y][x].terrain == 4:
 				tile_map_layer.set_cell(Vector2i(x,y), source_id, grass_atlas_arr.pick_random())
 			elif GameScript.level_data[y][x].terrain == 5:
-				tile_map_layer.set_cell(Vector2i(x,y), 1, Vector2i(0,3))
+				tile_map_layer.set_cell(Vector2i(x,y), 2, Vector2i(0,3))
 				ruined_tiles.append(Vector2i(x,y))
 	tile_map_layer.set_cells_terrain_connect(ruined_tiles,0,0)
 
